@@ -1,0 +1,4634 @@
+[
+  {
+    "value": "Abfall",
+    "meaning": ["rubbish"],
+    "articleId": "1",
+    "pluralForm": "Abfälle",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Abflug",
+    "meaning": ["departure"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Absage",
+    "meaning": ["cancellation"],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "aktiv",
+    "meaning": ["active"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Alkohol",
+    "meaning": ["alcohol"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "angenehm",
+    "meaning": ["pleasant"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "annulliert",
+    "meaning": ["cancelled"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Anzeigetafel",
+    "meaning": ["bulletin board"],
+    "articleId": "2",
+    "pluralForm": "Anzeigetafeln",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Aufruf",
+    "meaning": ["call"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Ausgang",
+    "meaning": ["exit"],
+    "articleId": "1",
+    "pluralForm": "Ausgänge",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Ausstattung",
+    "meaning": ["equipment"],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Behälter",
+    "meaning": ["container"],
+    "articleId": "1",
+    "pluralForm": "Behälter",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "betreten",
+    "meaning": ["to enter"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Bewohner/in",
+    "meaning": ["resident"],
+    "articleId": "2",
+    "pluralForm": "Bewohner/innen",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Bordkarte",
+    "meaning": ["boarding pass"],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Camper/in",
+    "meaning": ["camper"],
+    "articleId": "2",
+    "pluralForm": "Camper/innen",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Campingplatz",
+    "meaning": ["campsite"],
+    "articleId": "1",
+    "pluralForm": "Campingplätze",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Check-in-Schalter",
+    "meaning": ["check-in desk"],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Container",
+    "meaning": ["container"],
+    "articleId": "3",
+    "pluralForm": "Container",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Dienstreise",
+    "meaning": ["business trip"],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Doppelbett",
+    "meaning": ["double bed"],
+    "articleId": "3",
+    "pluralForm": "Doppelbetten",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Doppelzimmer",
+    "meaning": ["double room"],
+    "articleId": "3",
+    "pluralForm": "Doppelzimmer",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "einchecken",
+    "meaning": ["to check-in"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Einsteigezeit",
+    "meaning": ["boarding time"],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Einzelzimmer",
+    "meaning": ["single room"],
+    "articleId": "3",
+    "pluralForm": "Einzelzimmer",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "erleben",
+    "meaning": ["to experience"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Flug",
+    "meaning": ["flight"],
+    "articleId": "1",
+    "pluralForm": "Flüge",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Flugbegleiter/in",
+    "meaning": ["flight attendant"],
+    "articleId": "2",
+    "pluralForm": "Flugbegleiter/innen",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Fluggast",
+    "meaning": ["passenger"],
+    "articleId": "1",
+    "pluralForm": "Fluggäste",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Fluggesellschaft",
+    "meaning": ["airline"],
+    "articleId": "2",
+    "pluralForm": "Fluggesellschaften",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "führen",
+    "meaning": ["to lead"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "füttern",
+    "meaning": ["to feed"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Gate",
+    "meaning": ["gate"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Gepäck",
+    "meaning": ["luggage"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Gepäckausgabe",
+    "meaning": ["baggage reclaim"],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Gepäckband",
+    "meaning": ["luggage belt"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "gestattet sein",
+    "meaning": ["to be permitted"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Halbpension",
+    "meaning": ["half-board"],
+    "articleId": "2",
+    "pluralForm": "(HP)",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Handgepäck",
+    "meaning": ["hand luggage"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "historisch",
+    "meaning": ["historical"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Hostel",
+    "meaning": ["hostel"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "hygienisch",
+    "meaning": ["hygienic"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Inlineskaten",
+    "meaning": ["inline skating"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Jugendherberge",
+    "meaning": ["youth hostel"],
+    "articleId": "2",
+    "pluralForm": "Jugendherbergen",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Katalog",
+    "meaning": ["catalogue"],
+    "articleId": "1",
+    "pluralForm": "Kataloge",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "klettern",
+    "meaning": ["to climb"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "komfortabel",
+    "meaning": ["comfortable"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Lage",
+    "meaning": ["site"],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Lagerfeuer",
+    "meaning": ["campfire"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "landen",
+    "meaning": ["to land"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Lärm",
+    "meaning": ["noise"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Lautsprecherdurchsage",
+    "meaning": ["tannoy announcement"],
+    "articleId": "2",
+    "pluralForm": "Lautsprecherdurchsagen",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "lebhaft",
+    "meaning": ["lively"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Leine",
+    "meaning": ["rope"],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Leuchtturm",
+    "meaning": ["lighthouse"],
+    "articleId": "1",
+    "pluralForm": "Leuchttürme",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Meerblick",
+    "meaning": ["seaview"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "mitten",
+    "meaning": ["middle"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Nebel",
+    "meaning": ["fog"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "neblig",
+    "meaning": ["foggy"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Paradies",
+    "meaning": ["paradise"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Passagier/in",
+    "meaning": ["passenger"],
+    "articleId": "2",
+    "pluralForm": "Passagiere",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Passkontrolle",
+    "meaning": ["passport control"],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Pilotenstreik",
+    "meaning": ["pilot strike"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Pool",
+    "meaning": ["pool"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "rechtzeitig",
+    "meaning": ["on time"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Reisebüro",
+    "meaning": ["travel agency"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Reiseplan",
+    "meaning": ["itinerary"],
+    "articleId": "1",
+    "pluralForm": "Reisepläne",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Reiseplanung",
+    "meaning": ["travel planning"],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "reiten",
+    "meaning": ["to ride"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Ruhezeit",
+    "meaning": ["rest period"],
+    "articleId": "2",
+    "pluralForm": "Ruhezeiten",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "sauber",
+    "meaning": ["clean"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Sauberkeit",
+    "meaning": ["cleanliness"],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Schalter",
+    "meaning": ["desk"],
+    "articleId": "1",
+    "pluralForm": "Schalter",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Schlange",
+    "meaning": ["snake"],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Sonnenschirm",
+    "meaning": ["parasol"],
+    "articleId": "1",
+    "pluralForm": "Sonnenschirme",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Sonnenterrasse",
+    "meaning": ["sun terrace"],
+    "articleId": "2",
+    "pluralForm": "Sonnenterrassen",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Sonnenuntergang",
+    "meaning": ["sunset"],
+    "articleId": "1",
+    "pluralForm": "Sonnenuntergänge",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Stern",
+    "meaning": ["star"],
+    "articleId": "1",
+    "pluralForm": "Sterne",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "stören",
+    "meaning": ["to disturb"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Streichholz",
+    "meaning": ["match"],
+    "articleId": "3",
+    "pluralForm": "Streichhölzer",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "streiken",
+    "meaning": ["to strike"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Taschenlampe",
+    "meaning": ["torch"],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Taschenmesser",
+    "meaning": ["pocket knife"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "traumhaft",
+    "meaning": ["wonderful"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "übernachten",
+    "meaning": ["to stay overnight"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Übernachtung",
+    "meaning": ["overnight stay"],
+    "articleId": "2",
+    "pluralForm": "Übernachtungen",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Übernachtung mit Frühstück",
+    "meaning": ["overnight stay with breakfast"],
+    "articleId": "2",
+    "pluralForm": "ÜF",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Umgebung",
+    "meaning": ["surroundings"],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "umgehend",
+    "meaning": ["immediately"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "verärgert",
+    "meaning": ["annoyed"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "verreisen",
+    "meaning": ["to travel"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "verschieben",
+    "meaning": ["to postpone"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Wanderer",
+    "meaning": ["hiker"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Wandertour",
+    "meaning": ["walking tour"],
+    "articleId": "2",
+    "pluralForm": "Wandertouren",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Waschraum",
+    "meaning": ["laundry room"],
+    "articleId": "1",
+    "pluralForm": "Waschräume",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Wohnwagen",
+    "meaning": ["caravan"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Zelt",
+    "meaning": ["tent"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Zoll",
+    "meaning": ["customs"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "Zuschlag",
+    "meaning": ["fees"],
+    "articleId": "1",
+    "pluralForm": "Zuschläge",
+    "levelId": "3",
+    "topicId": "2"
+  },
+  {
+    "value": "absprechen",
+    "meaning": ["to arrange"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "der Abstellplatz",
+    "meaning": ["parking space"],
+    "articleId": "1",
+    "pluralForm": "Abstellplätze",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "akzeptieren",
+    "meaning": ["to accept"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "anstreichen",
+    "meaning": ["to paint"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "der Ärger",
+    "meaning": ["trouble"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "ärgerlich",
+    "meaning": ["annoying"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "die Aufregung",
+    "meaning": ["commotion"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "die Ausnahme",
+    "meaning": ["exception"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "das Balkongeländer",
+    "meaning": ["balcony railing"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "befestigen",
+    "meaning": ["to secure"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "behalten",
+    "meaning": ["to keep"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "beleidigen",
+    "meaning": ["to offend"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "die Beleidigung",
+    "meaning": ["insult"],
+    "articleId": "1",
+    "pluralForm": "Beleidigungen",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "berechtigt",
+    "meaning": ["justified"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "beschimpfen",
+    "meaning": ["to insult"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "die Beschimpfung",
+    "meaning": ["swear"],
+    "articleId": "1",
+    "pluralForm": "Beschimpfungen",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "beschweren",
+    "meaning": ["to complain"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "der Blumentopf",
+    "meaning": ["flower pot"],
+    "articleId": "1",
+    "pluralForm": "Blumentöpfe",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "bohren",
+    "meaning": ["to drill"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "deswegen",
+    "meaning": ["that is why"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "dumm",
+    "meaning": ["stupid"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "eilig",
+    "meaning": ["urgent"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "einhalten",
+    "meaning": ["to comply"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "einlegen",
+    "meaning": ["to insert"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "einstellen",
+    "meaning": ["to set up"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "enden",
+    "meaning": ["to end"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "die Entscheidung",
+    "meaning": ["decision"],
+    "articleId": "1",
+    "pluralForm": "Entscheidungen",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "entspannend",
+    "meaning": ["relaxing"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "entsprechen",
+    "meaning": ["to correspond to"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "erhöhen",
+    "meaning": ["to increase"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "erleichtern",
+    "meaning": ["to relieve"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "erwähnen",
+    "meaning": ["to mention"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "eskalieren",
+    "meaning": ["to escalate"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "exotisch",
+    "meaning": ["exotic"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "fair",
+    "meaning": ["fair"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "festkleben",
+    "meaning": ["to stick"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "die Freude",
+    "meaning": ["joy"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "die Frist",
+    "meaning": ["deadline"],
+    "articleId": "1",
+    "pluralForm": "Fristen",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "fristgerecht",
+    "meaning": ["punctual"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "fristlos",
+    "meaning": ["without notice"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "der Gemeinschaftsraum",
+    "meaning": ["common room"],
+    "articleId": "1",
+    "pluralForm": "Gemeinschaftsräume",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "gesetzlich",
+    "meaning": ["legal"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "hämmern",
+    "meaning": ["to hammer"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "heizen",
+    "meaning": ["to heat"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "die Instandhaltung",
+    "meaning": ["maintenance"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "klug",
+    "meaning": ["clever"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "der Konflikt",
+    "meaning": ["conflict"],
+    "articleId": "1",
+    "pluralForm": "Konflikte",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "die Kündigung",
+    "meaning": ["termination"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "lüften",
+    "meaning": ["to air"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "massiv",
+    "meaning": ["solid"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "meckern",
+    "meaning": ["to whinge"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "das Meerschweinchen",
+    "meaning": ["guinea pig"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "die Mieterhöhung",
+    "meaning": ["rent increase"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "der Mietspiegel",
+    "meaning": ["rent index"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "der Mietvertrag",
+    "meaning": ["rental contract"],
+    "articleId": "1",
+    "pluralForm": "Mietverträge",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "die Modernisierung",
+    "meaning": ["modernisation"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "nachsehen",
+    "meaning": ["to check"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "neugierig",
+    "meaning": ["curious"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "obwohl",
+    "meaning": ["although"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "offenbar",
+    "meaning": ["obvious"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "protestieren",
+    "meaning": ["to protest"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "der/die Richter/in",
+    "meaning": ["judge"],
+    "articleId": "1",
+    "pluralForm": "Richter/innen",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "die Rücksicht",
+    "meaning": ["consideration"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "sammeln",
+    "meaning": ["to collect"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "sauer",
+    "meaning": ["sour"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "der Schaden",
+    "meaning": ["damages"],
+    "articleId": "1",
+    "pluralForm": "Schäden",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "schmutzig",
+    "meaning": ["dirty"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "selbstverständlich",
+    "meaning": ["of course"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "sinnlos",
+    "meaning": ["meaningless"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "sinnvoll",
+    "meaning": ["meaningful"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "sortieren",
+    "meaning": ["to sort"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "stinken",
+    "meaning": ["to stink"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "streiten",
+    "meaning": ["to argue"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "total",
+    "meaning": ["totally"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "treu",
+    "meaning": ["faithful"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "überlegen",
+    "meaning": ["to think about"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "üblich",
+    "meaning": ["normal"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "unglaublich",
+    "meaning": ["unbelievable"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "das Unrecht",
+    "meaning": ["unjust"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "das Urteil",
+    "meaning": ["judgement"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "vergleichbar",
+    "meaning": ["comparable"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "verpflichten",
+    "meaning": ["to compel"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "das Verständnis",
+    "meaning": ["understanding"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "der Verstoß",
+    "meaning": ["violation"],
+    "articleId": "1",
+    "pluralForm": "Verstöße",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "verstoßen",
+    "meaning": ["to violate"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "völlig",
+    "meaning": ["completely"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "vorher",
+    "meaning": ["before"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "wegräumen",
+    "meaning": ["to clear away"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "der Widerspruch",
+    "meaning": ["contradiction"],
+    "articleId": "1",
+    "pluralForm": "Widersprüche",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "wütend",
+    "meaning": ["angry"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "der Zeitraum",
+    "meaning": ["time frame"],
+    "articleId": "1",
+    "pluralForm": "Zeiträume",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "ziemlich",
+    "meaning": ["rather"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "die Zimmerlautstärke",
+    "meaning": ["room volume"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "zugeben",
+    "meaning": ["to admit"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "zurücklassen",
+    "meaning": ["to leave behind"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "das Zusammenleben",
+    "meaning": ["life together"],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "zustimmen",
+    "meaning": ["to agree"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "der Zutritt",
+    "meaning": ["access"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "3"
+  },
+  {
+    "value": "das Abgas",
+    "meaning": ["exhaust gas"],
+    "articleId": "1",
+    "pluralForm": "Abgase",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "das Abwasser",
+    "meaning": ["sewage"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "das Altöl",
+    "meaning": ["waste oil"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "das Altpapier",
+    "meaning": ["waste paper"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "das Aluminium",
+    "meaning": ["aluminium"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "andauernd",
+    "meaning": ["lasting"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "ankündigen",
+    "meaning": ["to announce"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "anstatt",
+    "meaning": ["instead"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Begleitperson",
+    "meaning": ["acbasicUsering person"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "belasten",
+    "meaning": ["to pollute"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Belastung",
+    "meaning": ["pollution"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "beobachten",
+    "meaning": ["to observe"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Beutel",
+    "meaning": ["bag"],
+    "articleId": "1",
+    "pluralForm": "Beutel",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "biologisch",
+    "meaning": ["biological"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Chemikalie",
+    "meaning": ["chemicals"],
+    "articleId": "1",
+    "pluralForm": "Chemikalien",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Deckel",
+    "meaning": ["lid"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "doof",
+    "meaning": ["stupid"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Eierkarton",
+    "meaning": ["egg box"],
+    "articleId": "1",
+    "pluralForm": "Eierkartons",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Eierschale",
+    "meaning": ["egg shell"],
+    "articleId": "1",
+    "pluralForm": "Eierschalen",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "einfallen",
+    "meaning": ["to occur"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "das Elektroauto",
+    "meaning": ["electric car"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "das Energiesparhaus",
+    "meaning": ["energy efficient house"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Energiesparlampe",
+    "meaning": ["energy efficient bulb"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "das Erdbeben",
+    "meaning": ["earthquake"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Erde",
+    "meaning": ["earth"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Erderwärmung",
+    "meaning": ["global warming"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Erlaubnis",
+    "meaning": ["permission"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der/die Förster/in",
+    "meaning": ["woodsman"],
+    "articleId": "1",
+    "pluralForm": "Förster/innen",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Gegenstand",
+    "meaning": ["object"],
+    "articleId": "1",
+    "pluralForm": "Gegenstände",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Gegenvorschlag",
+    "meaning": ["counterproposal"],
+    "articleId": "1",
+    "pluralForm": "Gegenvorschläge",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "giftig",
+    "meaning": ["toxic"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Haushalt",
+    "meaning": ["household"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "das Hochwasser",
+    "meaning": ["high-tide"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der/die Hörer/in",
+    "meaning": ["listener"],
+    "articleId": "1",
+    "pluralForm": "Hörer/innen",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Kaffeefilter",
+    "meaning": ["coffee filter"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "das Klima",
+    "meaning": ["climate"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Klimawandel",
+    "meaning": ["climate change"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Konservendose",
+    "meaning": ["preserving jars"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Kunststoff",
+    "meaning": ["synthetic material"],
+    "articleId": "1",
+    "pluralForm": "Kunststoffe",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Luft",
+    "meaning": ["air"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Matratze",
+    "meaning": ["mattress"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "das Metall",
+    "meaning": ["metal"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Milchkarton",
+    "meaning": ["milk carton"],
+    "articleId": "1",
+    "pluralForm": "Milchkartons",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Mülltonne",
+    "meaning": ["rubbish bin"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Mülltrennung",
+    "meaning": ["waste separation"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Naturkatastrophe",
+    "meaning": ["natural disaster"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "das Naturprodukt",
+    "meaning": ["natural product"],
+    "articleId": "1",
+    "pluralForm": "Naturprodukte",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Obstschale",
+    "meaning": ["fruit skin"],
+    "articleId": "1",
+    "pluralForm": "Obstschalen",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Papiermüll",
+    "meaning": ["paper waste"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Pappe",
+    "meaning": ["cardboard"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "das Picknick",
+    "meaning": ["picnic"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Planet",
+    "meaning": ["planet"],
+    "articleId": "1",
+    "pluralForm": "Planeten",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "das Plastik",
+    "meaning": ["plastic"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "recyceln",
+    "meaning": ["to recycle"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Sack",
+    "meaning": ["bag"],
+    "articleId": "1",
+    "pluralForm": "Säcke",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Sammelstelle",
+    "meaning": ["collection point"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "schädigen",
+    "meaning": ["to damage"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "schädlich",
+    "meaning": ["harmful"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Schadstoff",
+    "meaning": ["hazardous substance"],
+    "articleId": "1",
+    "pluralForm": "Schadstoffe",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "schützen",
+    "meaning": ["to protect"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Solarenergie",
+    "meaning": ["solar energy"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Sondermüll",
+    "meaning": ["hazardous waste"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Sonnenschein",
+    "meaning": ["sunshine"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Sorge",
+    "meaning": ["worry"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "sparsam",
+    "meaning": ["economical"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Sperrmüll",
+    "meaning": ["bulky waste"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "stattfinden",
+    "meaning": ["to take place"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Tierschutz",
+    "meaning": ["animal protection"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "das Trinkwasser",
+    "meaning": ["drinking water"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "trüb",
+    "meaning": ["gloomy"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Tsunami",
+    "meaning": ["tsunami"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Turm",
+    "meaning": ["tower"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "umdrehen",
+    "meaning": ["to turn around"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "umgehen",
+    "meaning": ["to go round"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "umweltfreundlich",
+    "meaning": ["environmentally friendly"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Umweltschutz",
+    "meaning": ["environmental protection"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Umweltverschmutzung",
+    "meaning": ["environmental pollution"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "das Unwetter",
+    "meaning": ["thunderstorm"],
+    "articleId": "1",
+    "pluralForm": "Unwetter",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "verändern",
+    "meaning": ["to change"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "verlaufen",
+    "meaning": ["to continue"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "verschmutzen",
+    "meaning": ["to contaminate"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "verschwenden",
+    "meaning": ["to disappear"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Verschwendung",
+    "meaning": ["waste"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "versprechen",
+    "meaning": ["to promise"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "verwerten",
+    "meaning": ["to exploit"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "voraussichtlich",
+    "meaning": ["provisionally"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "vorhersagen",
+    "meaning": ["to predict"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "wahrscheinlich",
+    "meaning": ["probably"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "wegschmeißen",
+    "meaning": ["to chuck out"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "wegwerfen",
+    "meaning": ["to throw away"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Wertstoff",
+    "meaning": ["recyclable material"],
+    "articleId": "1",
+    "pluralForm": "Wertstoffe",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Wind",
+    "meaning": ["wind"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Windel",
+    "meaning": ["nappy"],
+    "articleId": "1",
+    "pluralForm": "Windeln",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "der Wirbelsturm",
+    "meaning": ["hurricane"],
+    "articleId": "1",
+    "pluralForm": "Wirbelstürme",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Wolke",
+    "meaning": ["cloud"],
+    "articleId": "1",
+    "pluralForm": "Wolken",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "zerstören",
+    "meaning": ["to destroy"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Zerstörung",
+    "meaning": ["destruction"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "die Zigarettenkippe",
+    "meaning": ["cigarette butts"],
+    "articleId": "1",
+    "pluralForm": "Zigarettenkippen",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "zurückfahren",
+    "meaning": ["to go back"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "4"
+  },
+  {
+    "value": "AGB",
+    "meaning": ["General T&C", "General terms and conditions"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "anfassen",
+    "meaning": ["to touch"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Anprobe",
+    "meaning": ["fitting room"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "anprobieren",
+    "meaning": ["to try on"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Art",
+    "meaning": ["type"],
+    "articleId": "1",
+    "pluralForm": "Arten",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Artikelnummer",
+    "meaning": ["item number"],
+    "articleId": "1",
+    "pluralForm": "Artikelnummern",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Atmung",
+    "meaning": ["breathing"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "atmungsaktiv",
+    "meaning": ["breathable"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "aufmerksam",
+    "meaning": ["attentive"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Auftrag",
+    "meaning": ["order"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Auftragsnummer",
+    "meaning": ["order number"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "ausliefern",
+    "meaning": ["to deliver"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Auswahl",
+    "meaning": ["selection"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Bankeinzug",
+    "meaning": ["direct debit"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "bereits",
+    "meaning": ["already"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "beschädigt",
+    "meaning": ["damaged"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Bestellhotline",
+    "meaning": ["order hotline"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Betrag",
+    "meaning": ["sum"],
+    "articleId": "1",
+    "pluralForm": "Beträge",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Bezahlvorgang",
+    "meaning": ["payment process"],
+    "articleId": "1",
+    "pluralForm": "Bezahlvorgänge",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "das Callcenter",
+    "meaning": ["call centre"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Datenschutz",
+    "meaning": ["data protection"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "dicht",
+    "meaning": ["thick"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "durchlässig",
+    "meaning": ["permeable"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "ebenso",
+    "meaning": ["as well"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "eher",
+    "meaning": ["rather"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "das Eigentum",
+    "meaning": ["property"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Ergänzung",
+    "meaning": ["addition"],
+    "articleId": "1",
+    "pluralForm": "Ergänzungen",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "erhältlich",
+    "meaning": ["available"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "eventuell",
+    "meaning": ["possible"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "falls",
+    "meaning": ["in case"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Gutschein",
+    "meaning": ["voucher"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "herstellen",
+    "meaning": ["to manufacture"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Herstellung",
+    "meaning": ["manufacture"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "das Impressum",
+    "meaning": ["imprint"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "innerhalb",
+    "meaning": ["within"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "irgendwie",
+    "meaning": ["somehow"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Kauf",
+    "meaning": ["purchase"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Kaufbestätigung",
+    "meaning": ["purchase confirmation"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der/die Käufer/in",
+    "meaning": ["customer"],
+    "articleId": "1",
+    "pluralForm": "Käufer/innen",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Kaufvertrag",
+    "meaning": ["sales contract"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Kosmetik",
+    "meaning": ["cosmetics"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Kundenbefragung",
+    "meaning": ["customer survey"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "kundenfreundlich",
+    "meaning": ["customer friendly"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "das Lager",
+    "meaning": ["warehouse"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "lieferbar",
+    "meaning": ["in stock"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Lieferbedingung",
+    "meaning": ["delivery conditions"],
+    "articleId": "1",
+    "pluralForm": "Lieferbedingungen",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Lieferung",
+    "meaning": ["delivery"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "luftdurchlässig",
+    "meaning": ["breathable"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Mehrkosten",
+    "meaning": ["extra costs"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Nachnahme",
+    "meaning": ["cash on delivery"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Nachteil",
+    "meaning": ["disadvantage"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Onlineeinkauf",
+    "meaning": ["online shopping"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Onlineshop",
+    "meaning": ["online shop"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "das Onlineshopping",
+    "meaning": ["online shopping"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "das Paket",
+    "meaning": ["parcel"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Paketbote",
+    "meaning": ["parcel carrier"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Paketdienst",
+    "meaning": ["parcel service"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "das Porto",
+    "meaning": ["postage"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "portofrei",
+    "meaning": ["postage paid"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Portokosten",
+    "meaning": ["postage"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "produzieren",
+    "meaning": ["to produce"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Qualität",
+    "meaning": ["quality"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Reklamation",
+    "meaning": ["complaint"],
+    "articleId": "1",
+    "pluralForm": "Reklamationen",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Retoure",
+    "meaning": ["return order"],
+    "articleId": "1",
+    "pluralForm": "Retouren",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Retourenschein",
+    "meaning": ["return order slip"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Rücksendung",
+    "meaning": ["return delivery"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "das Shopping",
+    "meaning": ["shopping"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "unverbindlich",
+    "meaning": ["non-binding"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der/die Verbraucher/in",
+    "meaning": ["consumer"],
+    "articleId": "1",
+    "pluralForm": "Verbraucher/innen",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "verpacken",
+    "meaning": ["to package"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Versand",
+    "meaning": ["shipping"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Versandkosten",
+    "meaning": ["shipping fee"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "versandkostenfrei",
+    "meaning": ["free of shipping costs"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Versandkostenpauschale",
+    "meaning": ["flat shipping rate"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "versenden",
+    "meaning": ["to send"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Ware",
+    "meaning": ["goods"],
+    "articleId": "1",
+    "pluralForm": "Waren",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Warenkorb",
+    "meaning": ["basket"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "wasserdicht",
+    "meaning": ["waterproof"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "der Werktag",
+    "meaning": ["working day"],
+    "articleId": "1",
+    "pluralForm": "Werktage",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "wetterfest",
+    "meaning": ["waterproof"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "widerrufen",
+    "meaning": ["disclaimer"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "das Widerrufsrecht",
+    "meaning": ["right of revocation"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "die Zahlung",
+    "meaning": ["payment"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "zurückschicken",
+    "meaning": ["to send back"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "zurücksenden",
+    "meaning": ["to send back"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "zurücktreten",
+    "meaning": ["to withdraw"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "zustellen",
+    "meaning": ["to deliver"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "5"
+  },
+  {
+    "value": "Alter",
+    "meaning": ["age"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "anschauen",
+    "meaning": ["to look at"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der Anstoß",
+    "meaning": ["stimulus"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "anstrengend",
+    "meaning": ["tiring"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "das Autorennen",
+    "meaning": ["motor racing"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "befragen",
+    "meaning": ["to consult"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "begeistern",
+    "meaning": ["to inspire"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "beliebt",
+    "meaning": ["popular"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der Biergarten",
+    "meaning": ["beer garden"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "das Boxen",
+    "meaning": ["boxing"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Chips",
+    "meaning": ["crisps"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "demnächst",
+    "meaning": ["soon"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Detektivgeschichte",
+    "meaning": ["detective story"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "das Diagramm",
+    "meaning": ["diagram"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Diskussion",
+    "meaning": ["discussion"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Dokumentation",
+    "meaning": ["documentary"],
+    "articleId": "1",
+    "pluralForm": "Dokumentationen",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "doppelt",
+    "meaning": ["doubled"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "dramatisch",
+    "meaning": ["dramatic"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der Durchschnitt",
+    "meaning": ["average"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die DVD",
+    "meaning": ["DVD"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "ehrlich",
+    "meaning": ["honest"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "einschlafen",
+    "meaning": ["to fall asleep"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "einsetzen",
+    "meaning": ["to use"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "das Eishockey",
+    "meaning": ["ice hockey"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der Eiskunstlauf",
+    "meaning": ["ice skating"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "entstehen",
+    "meaning": ["to result"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "das Ereignis",
+    "meaning": ["event"],
+    "articleId": "1",
+    "pluralForm": "Ereignisse",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "erfolgreich",
+    "meaning": ["successful"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "das Ergebnis",
+    "meaning": ["result"],
+    "articleId": "1",
+    "pluralForm": "Ergebnisse",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der/die Experte/Expertin",
+    "meaning": ["expert"],
+    "articleId": "1",
+    "pluralForm": "Experten/Expertinnen",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der Fan",
+    "meaning": ["fan"],
+    "articleId": "1",
+    "pluralForm": "Fans",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der Fußballclub",
+    "meaning": ["football club"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Gewohnheit",
+    "meaning": ["habit"],
+    "articleId": "1",
+    "pluralForm": "Gewohnheiten",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "das Golf",
+    "meaning": ["golf"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der Handball",
+    "meaning": ["hand ball"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "das Herz",
+    "meaning": ["heart"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der Horrorfilm",
+    "meaning": ["horror film"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der/die Kandidat/in",
+    "meaning": ["candidate"],
+    "articleId": "1",
+    "pluralForm": "Kandidaten/Kandidatinnen",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der/die Kommissar/in",
+    "meaning": ["commissioner"],
+    "articleId": "1",
+    "pluralForm": "Kommissare/Kommissarinnen",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der/die Kommentator/in",
+    "meaning": ["commentator"],
+    "articleId": "1",
+    "pluralForm": "Kommentatoren/Kommentatorinnen",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Komödie",
+    "meaning": ["comedy"],
+    "articleId": "1",
+    "pluralForm": "Komödien",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der Krimi",
+    "meaning": ["crime thriller"],
+    "articleId": "1",
+    "pluralForm": "Krimis",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "kuscheln",
+    "meaning": ["to cuddle"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Langeweile",
+    "meaning": ["boredom"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Leichtathletik",
+    "meaning": ["athletics"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Lieblingsbeschäftigung",
+    "meaning": ["favourite pastime"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "das Magazin",
+    "meaning": ["magazine"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Mannschaft",
+    "meaning": ["team"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Mehrheit",
+    "meaning": ["majority"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Minderheit",
+    "meaning": ["minority"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "mitreden",
+    "meaning": ["to have a say"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "das Mittelfeld",
+    "meaning": ["mid-field"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Moderation",
+    "meaning": ["presentation"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der Mord",
+    "meaning": ["murder"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "motiviert",
+    "meaning": ["motivated"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "naschen",
+    "meaning": ["to snack"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Niederlage",
+    "meaning": ["defeat"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "objektiv",
+    "meaning": ["objective"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Quizshow",
+    "meaning": ["quiz show"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "das Radrennen",
+    "meaning": ["cycling race"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Rangliste",
+    "meaning": ["league table"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "das Rätsel",
+    "meaning": ["puzzle"],
+    "articleId": "1",
+    "pluralForm": "Rätsel",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Reportage",
+    "meaning": ["report"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der/die Reporter/in",
+    "meaning": ["reporter"],
+    "articleId": "1",
+    "pluralForm": "Reporter/innen",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "retten",
+    "meaning": ["to rescue"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "romantisch",
+    "meaning": ["romantic"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Runde",
+    "meaning": ["round"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "schalten",
+    "meaning": ["to switch"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der Schiedsrichter",
+    "meaning": ["referee"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "schießen",
+    "meaning": ["to shoot"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Seifenoper",
+    "meaning": ["soap opera"],
+    "articleId": "1",
+    "pluralForm": "Seifenopern",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Sendung",
+    "meaning": ["programme"],
+    "articleId": "1",
+    "pluralForm": "Sendungen",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Serie",
+    "meaning": ["series"],
+    "articleId": "1",
+    "pluralForm": "Serien",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "siegen",
+    "meaning": ["to win"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der/die Sieger/in",
+    "meaning": ["winner"],
+    "articleId": "1",
+    "pluralForm": "Sieger/innen",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der Skisport",
+    "meaning": ["ski sport"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Soap",
+    "meaning": ["soap opera"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "spannend",
+    "meaning": ["exciting"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der/die Spieler/in",
+    "meaning": ["player"],
+    "articleId": "1",
+    "pluralForm": "Spieler/innen",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der Spielfilm",
+    "meaning": ["feature film"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "das Stadion",
+    "meaning": ["stadium"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Statistik",
+    "meaning": ["statistics"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der Tagesablauf",
+    "meaning": ["daily routine"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Talkshow",
+    "meaning": ["talk show"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "das Tor",
+    "meaning": ["goal"],
+    "articleId": "1",
+    "pluralForm": "Tore",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der/die Torwart/in",
+    "meaning": ["goalie"],
+    "articleId": "1",
+    "pluralForm": "Torwarte/innen",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der/die Tote",
+    "meaning": ["dead people"],
+    "articleId": "1",
+    "pluralForm": "Toten",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Übertragung",
+    "meaning": ["transmission"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "unentschieden",
+    "meaning": ["undecided"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "ungesund",
+    "meaning": ["unhealthy"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Unterhaltung",
+    "meaning": ["entertainment"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der/die Verlierer/in",
+    "meaning": ["loser"],
+    "articleId": "1",
+    "pluralForm": "Verlierer/innen",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Weltmeisterschaft",
+    "meaning": ["World cup"],
+    "articleId": "1",
+    "pluralForm": "Weltmeisterschaften",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "weshalb",
+    "meaning": ["which is why"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "zappen",
+    "meaning": ["to channel surf"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der Zeichentrickfilm",
+    "meaning": ["animated film"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "die Zeitverschwendung",
+    "meaning": ["waste of time"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der/die Zuschauer/in",
+    "meaning": ["viewer"],
+    "articleId": "1",
+    "pluralForm": "Zuschauer/innen",
+    "levelId": "3",
+    "topicId": "6"
+  },
+  {
+    "value": "der/die Alliierte",
+    "meaning": ["allies"],
+    "articleId": "1",
+    "pluralForm": "Alliierten",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Amtssprache",
+    "meaning": ["official language"],
+    "articleId": "1",
+    "pluralForm": "Amtssprachen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "anfangs",
+    "meaning": ["initially"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "anheben",
+    "meaning": ["to raise"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Arbeitskraft",
+    "meaning": ["workforce"],
+    "articleId": "1",
+    "pluralForm": "Arbeitskräfte",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Arbeitslosigkeit",
+    "meaning": ["unemployment"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der/die Astronaut/in",
+    "meaning": ["astronaut"],
+    "articleId": "1",
+    "pluralForm": "Astronauten/Astronautinnen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "das Asyl",
+    "meaning": ["asylum"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "aufschreiben",
+    "meaning": ["to write down"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "aufteilen",
+    "meaning": ["to divide"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der Auswanderer",
+    "meaning": ["emigrant"],
+    "articleId": "1",
+    "pluralForm": "Auswanderer",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Auswanderung",
+    "meaning": ["emigration"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Besatzungszone",
+    "meaning": ["occupied zone"],
+    "articleId": "1",
+    "pluralForm": "Besatzungszonen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "besiegen",
+    "meaning": ["to conquer"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der/die Bundeskanzler/in",
+    "meaning": ["federal chancellor"],
+    "articleId": "1",
+    "pluralForm": "Bundeskanzler/innen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Bundesrepublik (BRD)",
+    "meaning": ["federal republic (FRG)"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der/die Bürger/in",
+    "meaning": ["citizen"],
+    "articleId": "1",
+    "pluralForm": "Bürger/innen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der Bürgerkrieg",
+    "meaning": ["civil war"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Demokratie",
+    "meaning": ["democracy"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "demokratisch",
+    "meaning": ["democratic"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Demonstration",
+    "meaning": ["demonstration"],
+    "articleId": "1",
+    "pluralForm": "Demonstrationen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Deutsche Demokratische Republik (DDR)",
+    "meaning": ["German democratic republic (GDR)"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "ehemalig",
+    "meaning": ["former"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "einführen",
+    "meaning": ["to introduce"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "einsperren",
+    "meaning": ["to confine"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Einwanderung",
+    "meaning": ["immigration"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "emotional",
+    "meaning": ["emotional"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "entwickeln",
+    "meaning": ["to develop"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "erinnern",
+    "meaning": ["to remember"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Erinnerung",
+    "meaning": ["memory"],
+    "articleId": "1",
+    "pluralForm": "Erinnerungen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "ernähren",
+    "meaning": ["to feed"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Europäische Union (EU)",
+    "meaning": ["European union"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Euroeinführung",
+    "meaning": ["introduction of the Euro"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der Flüchtling",
+    "meaning": ["refugee"],
+    "articleId": "1",
+    "pluralForm": "Flüchtlinge",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "fördern",
+    "meaning": ["to promote"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Fremdsprache",
+    "meaning": ["foreign language"],
+    "articleId": "1",
+    "pluralForm": "Fremdsprachen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "friedlich",
+    "meaning": ["peaceful"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der/die Gastarbeiter/in",
+    "meaning": ["guest worker"],
+    "articleId": "1",
+    "pluralForm": "Gastarbeiter/innen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "das Gefühl",
+    "meaning": ["feeling"],
+    "articleId": "1",
+    "pluralForm": "Gefühle",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der/die Gegner/in",
+    "meaning": ["opponent"],
+    "articleId": "1",
+    "pluralForm": "Gegner/innen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "das Gehalt",
+    "meaning": ["salary"],
+    "articleId": "1",
+    "pluralForm": "Gehälter",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "das Gewürz",
+    "meaning": ["spice"],
+    "articleId": "1",
+    "pluralForm": "Gewürze",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Grenze",
+    "meaning": ["border"],
+    "articleId": "1",
+    "pluralForm": "Grenzen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "gründen",
+    "meaning": ["to establish"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "hart",
+    "meaning": ["hard"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Hauptstadt",
+    "meaning": ["capital city"],
+    "articleId": "1",
+    "pluralForm": "Hauptstädte",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Heimat",
+    "meaning": ["home country"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Industrie",
+    "meaning": ["industry"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "irgendwann",
+    "meaning": ["at some point"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "jahrelang",
+    "meaning": ["for years"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "das Jahrhundert",
+    "meaning": ["century"],
+    "articleId": "1",
+    "pluralForm": "Jahrhunderte",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "das Jahrzehnt",
+    "meaning": ["decade"],
+    "articleId": "1",
+    "pluralForm": "Jahrzehnte",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der/die Jude/Jüdin",
+    "meaning": ["jew"],
+    "articleId": "1",
+    "pluralForm": "Juden/Jüdinnen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "kaum",
+    "meaning": ["hardly"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Kindheit",
+    "meaning": ["childhood"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der Krieg",
+    "meaning": ["war"],
+    "articleId": "1",
+    "pluralForm": "Kriege",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "das Kriegsende",
+    "meaning": ["end of war"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Krippe",
+    "meaning": ["crib"],
+    "articleId": "1",
+    "pluralForm": "Krippen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der/die Kritiker/in",
+    "meaning": ["critic"],
+    "articleId": "1",
+    "pluralForm": "Kritiker/innen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Mauer",
+    "meaning": ["wall"],
+    "articleId": "1",
+    "pluralForm": "Mauern",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der Mauerbau",
+    "meaning": ["building of the wall"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der Mauerfall",
+    "meaning": ["fall of the Berlin wall"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Medizin",
+    "meaning": ["medicine"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "merken",
+    "meaning": ["to realise"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Migration",
+    "meaning": ["migration"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "miteinander",
+    "meaning": ["together"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "miterleben",
+    "meaning": ["to experience with"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "musikalisch",
+    "meaning": ["musical"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Muttersprache",
+    "meaning": ["native language"],
+    "articleId": "1",
+    "pluralForm": "Muttersprachen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Nachkriegszeit",
+    "meaning": ["post-war years"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der Nationalsozialismus",
+    "meaning": ["national socialism"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die NATO",
+    "meaning": ["NATO"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Notunterkunft",
+    "meaning": ["emergency accommodation"],
+    "articleId": "1",
+    "pluralForm": "Notunterkünfte",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Öffnung",
+    "meaning": ["opening"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Phase",
+    "meaning": ["phase"],
+    "articleId": "1",
+    "pluralForm": "Phasen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "politisch",
+    "meaning": ["political"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der Protest",
+    "meaning": ["protest"],
+    "articleId": "1",
+    "pluralForm": "Proteste",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Regierung",
+    "meaning": ["government"],
+    "articleId": "1",
+    "pluralForm": "Regierungen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Republik",
+    "meaning": ["republic"],
+    "articleId": "1",
+    "pluralForm": "Republiken",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der/die Russlanddeutsche",
+    "meaning": ["German-Russian"],
+    "articleId": "1",
+    "pluralForm": "Russlanddeutschen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "der Staat",
+    "meaning": ["state"],
+    "articleId": "1",
+    "pluralForm": "Staaten",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Staatsgründung",
+    "meaning": ["formation of a state"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "das Stipendium",
+    "meaning": ["scholarship"],
+    "articleId": "1",
+    "pluralForm": "Stipendien",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "tatsächlich",
+    "meaning": ["actual"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Teilung",
+    "meaning": ["division"],
+    "articleId": "1",
+    "pluralForm": "Teilungen",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "verdrängen",
+    "meaning": ["to suppress"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "vereinigen",
+    "meaning": ["to unite"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "verfolgen",
+    "meaning": ["to follow"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "verhaften",
+    "meaning": ["to arrest"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "verlängern",
+    "meaning": ["to extend"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "verlassen",
+    "meaning": ["to leave"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "vermischen",
+    "meaning": ["to mix"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "das Visum",
+    "meaning": ["visa"],
+    "articleId": "1",
+    "pluralForm": "Visa",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "das Weltall",
+    "meaning": ["space"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "wiedervereinigen",
+    "meaning": ["to re-unify"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "die Wiedervereinigung",
+    "meaning": ["reunification"],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "zerschlagen",
+    "meaning": ["to destroy"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  },
+  {
+    "value": "zurückkehren",
+    "meaning": ["to return"],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "3",
+    "topicId": "7"
+  }
+]

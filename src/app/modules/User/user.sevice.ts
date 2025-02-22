@@ -1,0 +1,319 @@
+import {
+  Admin,
+  BasicUser,
+  Prisma,
+  User,
+  UserRole,
+  UserStatus,
+} from "@prisma/client";
+import * as bcrypt from "bcrypt";
+import prisma from "../../../shared/prisma";
+import { fileUploader } from "../../../helpers/fileUploader";
+import { IFile } from "../../interfaces/file";
+import { Request } from "express";
+import { IPaginationOptions } from "../../interfaces/pagination";
+import { paginationHelper } from "../../../helpers/paginationHelper";
+import { userSearchAbleFields } from "./user.constant";
+import { IAuthUser } from "../../interfaces/common";
+import emailSender from "../Auth/emailSender";
+import config from "../../../config";
+import {
+  generateVerificationToken,
+  jwtHelpers,
+} from "../../../helpers/jwtHelpers";
+import { Secret } from "jsonwebtoken";
+
+const createAdmin = async (req: Request): Promise<Admin> => {
+  const file = req.file as IFile;
+
+  if (file) {
+    const uploadToCloudinary = await fileUploader.uploadToCloudinary(file);
+    req.body.admin.profilePhoto = uploadToCloudinary?.secure_url;
+  }
+
+  const hashedPassword: string = await bcrypt.hash(req.body.password, 12);
+
+  const userData = {
+    email: req.body.admin.email,
+    password: hashedPassword,
+    role: UserRole.ADMIN,
+  };
+
+  const result = await prisma.$transaction(async (transactionClient) => {
+    await transactionClient.user.create({
+      data: userData,
+    });
+
+    const createdAdminData = await transactionClient.admin.create({
+      data: req.body.admin,
+    });
+
+    return createdAdminData;
+  });
+
+  return result;
+};
+
+// const createBasicUser = async (req: Request): Promise<BasicUser> => {
+//   const file = req.file as IFile;
+
+//   if (file) {
+//     const uploadedProfileImage = await fileUploader.uploadToCloudinary(file);
+//     req.body.basicUser.profilePhoto = uploadedProfileImage?.secure_url;
+//   }
+
+//   const hashedPassword: string = await bcrypt.hash(req.body.password, 12);
+
+//   const userData = {
+//     email: req.body.basicUser.email,
+//     password: hashedPassword,
+//     role: UserRole.BASIC_USER,
+//   };
+
+//   const result = await prisma.$transaction(async (transactionClient) => {
+//     const createdUser = await transactionClient.user.create({
+//       data: userData,
+//     });
+
+//     // const createdBasicUserData = await transactionClient.basicUser.create({
+//     //   data: req.body.basicUser,
+//     // });
+
+//     const createdBasicUserData = await transactionClient.basicUser.create({
+//       data: {
+//         name: req.body.basicUser.name, // Pass other fields that belong to basicUser
+//         contactNumber: req.body.basicUser.contactNumber,
+//         address: req.body.basicUser.address,
+//         user: {
+//           connect: { email: createdUser.email }, // Connect the user by email
+//         },
+//       },
+//     });
+
+//     return createdBasicUserData;
+//   });
+
+//   return result;
+// };
+// =============================================
+const createBasicUser = async (req: Request): Promise<{ message: string }> => {
+  const file = req.file as IFile;
+
+  if (file) {
+    const uploadedProfileImage = await fileUploader.uploadToCloudinary(file);
+    req.body.basicUser.profilePhoto = uploadedProfileImage?.secure_url;
+  }
+
+  const hashedPassword: string = await bcrypt.hash(req.body.password, 12);
+
+  const verificationToken = jwtHelpers.generateToken(
+    { email: req.body.basicUser.email },
+    config.jwt.verification_token_secret as Secret,
+    config.jwt.verification_token_expires_in as string
+  );
+
+  const userData = {
+    email: req.body.basicUser.email,
+    password: hashedPassword,
+    role: UserRole.BASIC_USER,
+    status: UserStatus.PENDING,
+    verificationToken: generateVerificationToken(),
+  };
+
+  await prisma.user.create({ data: userData });
+
+  // Send verification email
+  const verificationLink = `${config.verification_link}?token=${verificationToken}`;
+  await emailSender(
+    req.body.basicUser.email,
+    `
+      <div>
+          <p>Dear User,</p>
+          <p>Please verify your email by clicking the link below:</p>
+          <a href="${verificationLink}">
+              <button>Verify Email</button>
+          </a>
+      </div>
+    `
+  );
+
+  return { message: "Please check your email to verify your account!" };
+};
+// ================================
+const getAllFromDB = async (params: any, options: IPaginationOptions) => {
+  const { page, limit, skip } = paginationHelper.calculatePagination(options);
+  const { searchTerm, ...filterData } = params;
+
+  const andCondions: Prisma.UserWhereInput[] = [];
+
+  //console.log(filterData);
+  if (params.searchTerm) {
+    andCondions.push({
+      OR: userSearchAbleFields.map((field) => ({
+        [field]: {
+          contains: params.searchTerm,
+          mode: "insensitive",
+        },
+      })),
+    });
+  }
+
+  if (Object.keys(filterData).length > 0) {
+    andCondions.push({
+      AND: Object.keys(filterData).map((key) => ({
+        [key]: {
+          equals: (filterData as any)[key],
+        },
+      })),
+    });
+  }
+
+  const whereConditons: Prisma.UserWhereInput =
+    andCondions.length > 0 ? { AND: andCondions } : {};
+
+  const result = await prisma.user.findMany({
+    where: whereConditons,
+    skip,
+    take: limit,
+    orderBy:
+      options.sortBy && options.sortOrder
+        ? {
+            [options.sortBy]: options.sortOrder,
+          }
+        : {
+            createdAt: "desc",
+          },
+    select: {
+      id: true,
+      email: true,
+      role: true,
+      needPasswordChange: true,
+      status: true,
+      createdAt: true,
+      updatedAt: true,
+      admin: true,
+      basicUser: true,
+    },
+  });
+
+  const total = await prisma.user.count({
+    where: whereConditons,
+  });
+
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  };
+};
+
+const changeProfileStatus = async (id: string, status: UserRole) => {
+  const userData = await prisma.user.findUniqueOrThrow({
+    where: {
+      id,
+    },
+  });
+
+  const updateUserStatus = await prisma.user.update({
+    where: {
+      id,
+    },
+    data: status,
+  });
+
+  return updateUserStatus;
+};
+
+const getMyProfile = async (user: IAuthUser) => {
+  const userInfo = await prisma.user.findUniqueOrThrow({
+    where: {
+      email: user?.email,
+      status: UserStatus.ACTIVE,
+    },
+    select: {
+      id: true,
+      email: true,
+      needPasswordChange: true,
+      role: true,
+      status: true,
+    },
+  });
+
+  let profileInfo;
+
+  if (userInfo.role === UserRole.SUPER_ADMIN) {
+    profileInfo = await prisma.admin.findUnique({
+      where: {
+        email: userInfo.email,
+      },
+    });
+  } else if (userInfo.role === UserRole.ADMIN) {
+    profileInfo = await prisma.admin.findUnique({
+      where: {
+        email: userInfo.email,
+      },
+    });
+  } else if (userInfo.role === UserRole.BASIC_USER) {
+    profileInfo = await prisma.basicUser.findUnique({
+      where: {
+        email: userInfo.email,
+      },
+    });
+  }
+
+  return { ...userInfo, ...profileInfo };
+};
+
+const updateMyProfie = async (user: IAuthUser, req: Request) => {
+  const userInfo = await prisma.user.findUniqueOrThrow({
+    where: {
+      email: user?.email,
+      status: UserStatus.ACTIVE,
+    },
+  });
+
+  const file = req.file as IFile;
+  if (file) {
+    const uploadToCloudinary = await fileUploader.uploadToCloudinary(file);
+    req.body.profilePhoto = uploadToCloudinary?.secure_url;
+  }
+
+  let profileInfo;
+
+  if (userInfo.role === UserRole.SUPER_ADMIN) {
+    profileInfo = await prisma.admin.update({
+      where: {
+        email: userInfo.email,
+      },
+      data: req.body,
+    });
+  } else if (userInfo.role === UserRole.ADMIN) {
+    profileInfo = await prisma.admin.update({
+      where: {
+        email: userInfo.email,
+      },
+      data: req.body,
+    });
+  } else if (userInfo.role === UserRole.BASIC_USER) {
+    profileInfo = await prisma.basicUser.update({
+      where: {
+        email: userInfo.email,
+      },
+      data: req.body,
+    });
+  }
+
+  return { ...profileInfo };
+};
+
+export const userService = {
+  createAdmin,
+  createBasicUser,
+  getAllFromDB,
+  changeProfileStatus,
+  getMyProfile,
+  updateMyProfie,
+};

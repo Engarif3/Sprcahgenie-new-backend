@@ -1,0 +1,146 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String         @id @default(uuid())
+  email              String         @unique
+  password           String
+  role               UserRole
+  needPasswordChange Boolean        @default(true)
+  status             UserStatus     @default(ACTIVE)
+  verificationToken  String? 
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  admin              Admin?
+  basicUser          BasicUser?
+  
+
+  favoriteWords      FavoriteWord[] // Many-to-many relation with words
+
+  @@map("users")
+}
+
+model Admin {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  profilePhoto  String?
+  contactNumber String
+  isDeleted     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user User @relation(fields: [email], references: [email])
+
+  @@map("admins")
+}
+
+model BasicUser {
+  id            String   @id @unique @default(uuid())
+  email         String   @unique
+  name          String
+  profilePhoto  String?
+  contactNumber String?
+  address       String?
+  isDeleted     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user User @relation(references: [email], fields: [email])
+
+  @@map("basic_users")
+}
+
+model FavoriteWord {
+  userId String
+  wordId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word   Word @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@id([userId, wordId]) // Composite primary key
+  @@map("favorite_words")
+}
+
+model Word {
+  id            Int          @id @default(autoincrement())
+  value         String       @unique
+  meaning       String[]     // Mandatory
+  sentences     String[]     // Optional
+  levelId       Int?
+  topicId       Int?
+  articleId     Int?
+  partOfSpeechId Int?
+  pluralForm    String?      // Only for nouns (optional)
+
+  // level         Level        @relation("WordLevel", fields: [levelId], references: [id], onDelete: Cascade)
+  level         Level?        @relation("WordLevel", fields: [levelId], references: [id], map: "fk_word_level")
+  topic         Topic?        @relation("WordTopic", fields: [topicId], references: [id], map: "fk_word_topic")
+  article       Article?      @relation("WordArticle", fields: [articleId], references: [id], map: "fk_word_article")
+  partOfSpeech  PartOfSpeech? @relation("WordPartOfSpeech", fields: [partOfSpeechId], references: [id], map: "fk_word_part_of_speech")
+
+  synonyms      Word[]       @relation("SynonymRelation")
+  synonymOf     Word[]       @relation("SynonymRelation") // Opposite side
+
+  antonyms      Word[]       @relation("AntonymRelation")
+  antonymOf     Word[]       @relation("AntonymRelation") // Opposite side
+
+  similarWords  Word[]       @relation("SimilarWordRelation")
+  similarTo     Word[]       @relation("SimilarWordRelation") // Opposite side
+
+  favoritedBy    FavoriteWord[]
+
+  @@map("words_table")
+}
+
+model Level {
+  id     Int    @id @default(autoincrement())
+  level  String @unique
+  words  Word[] @relation("WordLevel")
+  deletedAt DateTime? @db.Timestamptz // Use Timestamptz for PostgreSQL
+
+  @@map("levels")
+}
+
+model Topic {
+  id     Int    @id @default(autoincrement())
+  name   String @unique
+  words  Word[] @relation("WordTopic")
+
+  @@map("topics")
+}
+
+model Article {
+  id     Int    @id @default(autoincrement())
+  name   String @unique
+  words  Word[] @relation("WordArticle")
+
+  @@map("articles")
+}
+
+model PartOfSpeech {
+  id     Int    @id @default(autoincrement())
+  name   String @unique
+  words  Word[] @relation("WordPartOfSpeech")
+
+  @@map("parts_of_speech")
+
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  BASIC_USER
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+  DELETED
+  PENDING
+}
