@@ -23,7 +23,7 @@ SET row_security = off;
 CREATE SCHEMA auth;
 
 
-ALTER SCHEMA auth OWNER TO supabase_admin;
+-- ALTER SCHEMA auth OWNER TO supabase_admin;
 
 --
 -- Name: extensions; Type: SCHEMA; Schema: -; Owner: postgres
@@ -41,7 +41,7 @@ ALTER SCHEMA extensions OWNER TO postgres;
 CREATE SCHEMA graphql;
 
 
-ALTER SCHEMA graphql OWNER TO supabase_admin;
+-- ALTER SCHEMA graphql OWNER TO supabase_admin;
 
 --
 -- Name: graphql_public; Type: SCHEMA; Schema: -; Owner: supabase_admin

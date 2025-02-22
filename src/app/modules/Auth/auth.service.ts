@@ -31,7 +31,12 @@ const loginUser = async (payload: { email: string; password: string }) => {
 
   //this data can be received from the frontend
   const accessToken = jwtHelpers.generateToken(
-    { id: userData.id, email: userData.email, role: userData.role },
+    {
+      id: userData.id,
+      name: userData.name,
+      email: userData.email,
+      role: userData.role,
+    },
     config.jwt.jwt_secret as Secret,
     config.jwt.expires_in as string
   );

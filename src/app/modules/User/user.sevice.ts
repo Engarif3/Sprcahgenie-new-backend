@@ -144,6 +144,7 @@ const createBasicUser = async (
   // User data to be inserted
   const userData = {
     email: req.body.basicUser.email,
+    name: req.body.basicUser.name,
     password: hashedPassword,
     role: UserRole.BASIC_USER,
     status: UserStatus.PENDING, // User status is set to PENDING
@@ -165,7 +166,7 @@ const createBasicUser = async (
         address: req.body.basicUser.address,
         profilePhoto: req.body.basicUser.profilePhoto, // If there's a profile photo
         user: {
-          connect: { email: createdUser.email }, // Connect the created user to the basicUser
+          connect: { email: createdUser.email, name: createdUser.name }, // Connect the created user to the basicUser
         },
       },
     });

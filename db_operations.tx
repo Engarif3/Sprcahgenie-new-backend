@@ -1,3 +1,10 @@
+prisma common commands:
+npx prisma studio
+npx prisma generate
+npx prisma migrate dev --name add_verification_token
+
+
+
 for creating backup:
 C:\Program Files\PostgreSQL\<version>\bin
 
