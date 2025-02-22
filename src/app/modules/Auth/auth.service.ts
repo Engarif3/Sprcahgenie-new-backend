@@ -151,7 +151,8 @@ const forgotPassword = async (payload: { email: string }) => {
             </p>
 
         </div>
-        `
+        `,
+    " Reset Password"
   );
   //console.log(resetPassLink)
 };

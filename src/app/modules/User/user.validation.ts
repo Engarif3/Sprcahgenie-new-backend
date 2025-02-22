@@ -12,9 +12,9 @@ const createAdmin = z.object({
     email: z.string({
       required_error: "Email is required!",
     }),
-    contactNumber: z.string({
-      required_error: "Contact Number is required!",
-    }),
+    // contactNumber: z.string({
+    //   required_error: "Contact Number is required!",
+    // }),
   }),
 });
 
@@ -29,12 +29,12 @@ const createBasicUser = z.object({
     name: z.string({
       required_error: "Name is required!",
     }),
-    contactNumber: z.string({
-      required_error: "Contact number is required!",
-    }),
-    address: z.string({
-      required_error: "Address is required",
-    }),
+    // contactNumber: z.string({
+    //   required_error: "Contact number is required!",
+    // }),
+    // address: z.string({
+    //   required_error: "Address is required",
+    // }),
   }),
 });
 

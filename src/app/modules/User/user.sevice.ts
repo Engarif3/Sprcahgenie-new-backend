@@ -96,31 +96,82 @@ const createAdmin = async (req: Request): Promise<Admin> => {
 //   return result;
 // };
 // =============================================
-const createBasicUser = async (req: Request): Promise<{ message: string }> => {
+// ============
+const createBasicUser = async (
+  req: Request
+): Promise<{ message: string; pending?: boolean }> => {
   const file = req.file as IFile;
 
+  // Handle file upload for profile photo
   if (file) {
     const uploadedProfileImage = await fileUploader.uploadToCloudinary(file);
     req.body.basicUser.profilePhoto = uploadedProfileImage?.secure_url;
   }
 
+  // Hash the password
   const hashedPassword: string = await bcrypt.hash(req.body.password, 12);
 
+  // Generate a verification token
   const verificationToken = jwtHelpers.generateToken(
     { email: req.body.basicUser.email },
     config.jwt.verification_token_secret as Secret,
     config.jwt.verification_token_expires_in as string
   );
 
+  // Check if the user already exists by email
+  const existingUser = await prisma.user.findUnique({
+    where: { email: req.body.basicUser.email },
+  });
+
+  if (existingUser) {
+    // Handle existing user based on status
+    if (existingUser.status === "ACTIVE") {
+      return {
+        message: "User already exists",
+      };
+    } else if (existingUser.status === "BLOCKED") {
+      return {
+        message: "Your account is blocked",
+      };
+    } else if (existingUser.status === "PENDING") {
+      return {
+        message: "Please verify your email before logging in.",
+        pending: true,
+      };
+    }
+  }
+
+  // User data to be inserted
   const userData = {
     email: req.body.basicUser.email,
     password: hashedPassword,
     role: UserRole.BASIC_USER,
-    status: UserStatus.PENDING,
-    verificationToken: generateVerificationToken(),
+    status: UserStatus.PENDING, // User status is set to PENDING
+    verificationToken: generateVerificationToken(), // New verification token
   };
 
-  await prisma.user.create({ data: userData });
+  // Start a transaction to create both user and basicUser
+  await prisma.$transaction(async (transactionClient) => {
+    // Create user
+    const createdUser = await transactionClient.user.create({
+      data: userData,
+    });
+
+    // Create basicUser
+    const createdBasicUser = await transactionClient.basicUser.create({
+      data: {
+        name: req.body.basicUser.name,
+        contactNumber: req.body.basicUser.contactNumber,
+        address: req.body.basicUser.address,
+        profilePhoto: req.body.basicUser.profilePhoto, // If there's a profile photo
+        user: {
+          connect: { email: createdUser.email }, // Connect the created user to the basicUser
+        },
+      },
+    });
+
+    return createdBasicUser;
+  });
 
   // Send verification email
   const verificationLink = `${config.verification_link}?token=${verificationToken}`;
@@ -134,11 +185,14 @@ const createBasicUser = async (req: Request): Promise<{ message: string }> => {
               <button>Verify Email</button>
           </a>
       </div>
-    `
+    `,
+    "Verify Your Email"
   );
 
   return { message: "Please check your email to verify your account!" };
 };
+
+// ============
 // ================================
 const getAllFromDB = async (params: any, options: IPaginationOptions) => {
   const { page, limit, skip } = paginationHelper.calculatePagination(options);
