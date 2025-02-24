@@ -1,0 +1,54 @@
+{
+  "topic": "Homeoffice Diskussion",
+  "text": [
+    {
+      "speaker": "Lena",
+      "message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?"
+    },
+    {
+      "speaker": "David",
+      "message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten."
+    },
+    {
+      "speaker": "Sophie",
+      "message": "Das stimmt, aber ich finde es manchmal schwierig, mich zu konzentrieren. Zu Hause gibt es viele Ablenkungen, zum Beispiel Familie oder Haushalt. Im Büro bin ich produktiver."
+    },
+    {
+      "speaker": "Max",
+      "message": "Ich bin da eher zwiegespalten. Einerseits ist Homeoffice bequem, andererseits fehlt mir der soziale Kontakt mit meinen Kollegen. Man kann nicht einfach in der Kaffeepause über Ideen sprechen oder schnell Fragen klären."
+    },
+    {
+      "speaker": "Lena",
+      "message": "Ja, genau! Ich denke, ein Hybridmodell wäre ideal. Also zum Beispiel drei Tage im Büro und zwei Tage Homeoffice. So hätte man sowohl Struktur als auch Flexibilität."
+    },
+    {
+      "speaker": "David",
+      "message": "Das klingt gut. Aber was ist mit Teamarbeit? Ich finde, dass Videokonferenzen nicht dasselbe sind wie persönliche Meetings."
+    },
+    {
+      "speaker": "Sophie",
+      "message": "Stimmt, die Kommunikation ist im Büro oft effizienter. Aber Homeoffice hat auch Vorteile für die Work-Life-Balance. Man kann zum Beispiel während der Mittagspause spazieren gehen oder gesünder essen."
+    },
+    {
+      "speaker": "Max",
+      "message": "Gute Argumente! Vielleicht kommt es auch auf den Beruf an. In der IT-Branche ist Homeoffice einfacher als zum Beispiel in einem Krankenhaus oder einer Schule."
+    },
+    {
+      "speaker": "Lena",
+      "message": "Das ist ein guter Punkt. Vielleicht sollten Unternehmen ihren Mitarbeitern mehr Freiheit geben, zu entscheiden, was für sie am besten funktioniert."
+    },
+    {
+      "speaker": "David",
+      "message": "Ja, das wäre fair. Ich denke, die Zukunft gehört der Flexibilität."
+    },
+    {
+      "speaker": "Sophie",
+      "message": "Genau! Jeder arbeitet anders und braucht andere Bedingungen, um produktiv zu sein."
+    },
+    {
+      "speaker": "Max",
+      "message": "Super Diskussion! Ich finde, wir haben gute Argumente auf beiden Seiten gehört."
+    }
+  ],
+  "levelId": 1
+}

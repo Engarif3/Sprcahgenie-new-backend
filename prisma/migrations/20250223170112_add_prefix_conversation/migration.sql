@@ -1,14 +1,38 @@
-/*
-  Warnings:
+-- CreateEnum
+CREATE TYPE "UserRole" AS ENUM ('SUPER_ADMIN', 'ADMIN', 'BASIC_USER');
 
-  - You are about to drop the `companies` table. If the table is not empty, all the data it contains will be lost.
+-- CreateEnum
+CREATE TYPE "UserStatus" AS ENUM ('ACTIVE', 'BLOCKED', 'DELETED', 'PENDING');
 
-*/
--- DropForeignKey
-ALTER TABLE "companies" DROP CONSTRAINT "companies_email_fkey";
+-- CreateTable
+CREATE TABLE "users" (
+    "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "name" TEXT,
+    "role" "UserRole" NOT NULL,
+    "needPasswordChange" BOOLEAN NOT NULL DEFAULT true,
+    "status" "UserStatus" NOT NULL DEFAULT 'ACTIVE',
+    "verificationToken" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
--- DropTable
-DROP TABLE "companies";
+    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "admins" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "profilePhoto" TEXT,
+    "contactNumber" TEXT NOT NULL,
+    "isDeleted" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "admins_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "basic_users" (
@@ -82,6 +106,36 @@ CREATE TABLE "parts_of_speech" (
 );
 
 -- CreateTable
+CREATE TABLE "Conversation" (
+    "id" SERIAL NOT NULL,
+    "topic" TEXT NOT NULL,
+    "text" JSONB NOT NULL,
+    "levelId" INTEGER NOT NULL,
+
+    CONSTRAINT "Conversation_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "prefix_types" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+
+    CONSTRAINT "prefix_types_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "prefixes" (
+    "id" SERIAL NOT NULL,
+    "prefixName" TEXT NOT NULL,
+    "wordWithoutPrefix" TEXT NOT NULL,
+    "meaning" TEXT[],
+    "sentences" TEXT[],
+    "prefixTypeId" INTEGER NOT NULL,
+
+    CONSTRAINT "prefixes_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "_SynonymRelation" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL,
@@ -106,6 +160,12 @@ CREATE TABLE "_SimilarWordRelation" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "admins_email_key" ON "admins"("email");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "basic_users_id_key" ON "basic_users"("id");
 
 -- CreateIndex
@@ -127,6 +187,9 @@ CREATE UNIQUE INDEX "articles_name_key" ON "articles"("name");
 CREATE UNIQUE INDEX "parts_of_speech_name_key" ON "parts_of_speech"("name");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "prefix_types_name_key" ON "prefix_types"("name");
+
+-- CreateIndex
 CREATE INDEX "_SynonymRelation_B_index" ON "_SynonymRelation"("B");
 
 -- CreateIndex
@@ -134,6 +197,9 @@ CREATE INDEX "_AntonymRelation_B_index" ON "_AntonymRelation"("B");
 
 -- CreateIndex
 CREATE INDEX "_SimilarWordRelation_B_index" ON "_SimilarWordRelation"("B");
+
+-- AddForeignKey
+ALTER TABLE "admins" ADD CONSTRAINT "admins_email_fkey" FOREIGN KEY ("email") REFERENCES "users"("email") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "basic_users" ADD CONSTRAINT "basic_users_email_fkey" FOREIGN KEY ("email") REFERENCES "users"("email") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -155,6 +221,12 @@ ALTER TABLE "words_table" ADD CONSTRAINT "fk_word_article" FOREIGN KEY ("article
 
 -- AddForeignKey
 ALTER TABLE "words_table" ADD CONSTRAINT "fk_word_part_of_speech" FOREIGN KEY ("partOfSpeechId") REFERENCES "parts_of_speech"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Conversation" ADD CONSTRAINT "Conversation_levelId_fkey" FOREIGN KEY ("levelId") REFERENCES "levels"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "prefixes" ADD CONSTRAINT "prefixes_prefixTypeId_fkey" FOREIGN KEY ("prefixTypeId") REFERENCES "prefix_types"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_SynonymRelation" ADD CONSTRAINT "_SynonymRelation_A_fkey" FOREIGN KEY ("A") REFERENCES "words_table"("id") ON DELETE CASCADE ON UPDATE CASCADE;

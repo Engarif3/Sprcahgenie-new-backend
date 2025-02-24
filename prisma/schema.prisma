@@ -7,22 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ================================USER================================
 model User {
-  id                 String         @id @default(uuid())
-  email              String         @unique
+  id                 String     @id @default(uuid())
+  email              String     @unique
   password           String
-  name               String? 
+  name               String?
   role               UserRole
-  needPasswordChange Boolean        @default(true)
-  status             UserStatus     @default(ACTIVE)
-  verificationToken  String? 
-  createdAt          DateTime       @default(now())
-  updatedAt          DateTime       @updatedAt
+  needPasswordChange Boolean    @default(true)
+  status             UserStatus @default(ACTIVE)
+  verificationToken  String?
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
   admin              Admin?
   basicUser          BasicUser?
-  
 
-  favoriteWords      FavoriteWord[] // Many-to-many relation with words
+  favoriteWords FavoriteWord[] // Many-to-many relation with words
 
   @@map("users")
 }
@@ -58,81 +58,116 @@ model BasicUser {
   @@map("basic_users")
 }
 
+// ================================Favorite Word================================
 model FavoriteWord {
   userId String
   wordId Int
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  word   Word @relation(fields: [wordId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word   Word   @relation(fields: [wordId], references: [id], onDelete: Cascade)
 
   @@id([userId, wordId]) // Composite primary key
   @@map("favorite_words")
 }
 
+// ================================Word================================
 model Word {
-  id            Int          @id @default(autoincrement())
-  value         String       @unique
-  meaning       String[]     // Mandatory
-  sentences     String[]     // Optional
-  levelId       Int?
-  topicId       Int?
-  articleId     Int?
+  id             Int      @id @default(autoincrement())
+  value          String   @unique
+  meaning        String[] // Mandatory
+  sentences      String[] // Optional
+  levelId        Int?
+  topicId        Int?
+  articleId      Int?
   partOfSpeechId Int?
-  pluralForm    String?      // Only for nouns (optional)
+  pluralForm     String? // Only for nouns (optional)
 
   // level         Level        @relation("WordLevel", fields: [levelId], references: [id], onDelete: Cascade)
-  level         Level?        @relation("WordLevel", fields: [levelId], references: [id], map: "fk_word_level")
-  topic         Topic?        @relation("WordTopic", fields: [topicId], references: [id], map: "fk_word_topic")
-  article       Article?      @relation("WordArticle", fields: [articleId], references: [id], map: "fk_word_article")
-  partOfSpeech  PartOfSpeech? @relation("WordPartOfSpeech", fields: [partOfSpeechId], references: [id], map: "fk_word_part_of_speech")
+  level        Level?        @relation("WordLevel", fields: [levelId], references: [id], map: "fk_word_level")
+  topic        Topic?        @relation("WordTopic", fields: [topicId], references: [id], map: "fk_word_topic")
+  article      Article?      @relation("WordArticle", fields: [articleId], references: [id], map: "fk_word_article")
+  partOfSpeech PartOfSpeech? @relation("WordPartOfSpeech", fields: [partOfSpeechId], references: [id], map: "fk_word_part_of_speech")
 
-  synonyms      Word[]       @relation("SynonymRelation")
-  synonymOf     Word[]       @relation("SynonymRelation") // Opposite side
+  synonyms  Word[] @relation("SynonymRelation")
+  synonymOf Word[] @relation("SynonymRelation") // Opposite side
 
-  antonyms      Word[]       @relation("AntonymRelation")
-  antonymOf     Word[]       @relation("AntonymRelation") // Opposite side
+  antonyms  Word[] @relation("AntonymRelation")
+  antonymOf Word[] @relation("AntonymRelation") // Opposite side
 
-  similarWords  Word[]       @relation("SimilarWordRelation")
-  similarTo     Word[]       @relation("SimilarWordRelation") // Opposite side
+  similarWords Word[] @relation("SimilarWordRelation")
+  similarTo    Word[] @relation("SimilarWordRelation") // Opposite side
 
-  favoritedBy    FavoriteWord[]
+  favoritedBy FavoriteWord[]
 
   @@map("words_table")
 }
 
 model Level {
-  id     Int    @id @default(autoincrement())
-  level  String @unique
-  words  Word[] @relation("WordLevel")
-  deletedAt DateTime? @db.Timestamptz // Use Timestamptz for PostgreSQL
+  id            Int            @id @default(autoincrement())
+  level         String         @unique
+  words         Word[]         @relation("WordLevel")
+  conversations Conversation[]
+  deletedAt     DateTime?      @db.Timestamptz // Use Timestamptz for PostgreSQL
 
   @@map("levels")
 }
 
 model Topic {
-  id     Int    @id @default(autoincrement())
-  name   String @unique
-  words  Word[] @relation("WordTopic")
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  words Word[] @relation("WordTopic")
 
   @@map("topics")
 }
 
 model Article {
-  id     Int    @id @default(autoincrement())
-  name   String @unique
-  words  Word[] @relation("WordArticle")
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  words Word[] @relation("WordArticle")
 
   @@map("articles")
 }
 
 model PartOfSpeech {
-  id     Int    @id @default(autoincrement())
-  name   String @unique
-  words  Word[] @relation("WordPartOfSpeech")
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  words Word[] @relation("WordPartOfSpeech")
 
   @@map("parts_of_speech")
-
 }
 
+// ===============================Conversation====================
+model Conversation {
+  id          Int             @id @default(autoincrement())
+  topic       String
+  text        Json            // Store the text as JSON with person-based keys
+  levelId     Int
+  level       Level           @relation(fields: [levelId], references: [id])
+}
+
+// ========================Prefix===============================
+model PrefixType {
+  id       Int      @id @default(autoincrement())
+  name     String   @unique // e.g., Separable, Inseparable, Dual
+  prefixes Prefix[] // One-to-many relationship with Prefix
+
+  @@map("prefix_types")
+}
+
+model Prefix {
+  id                Int        @id @default(autoincrement())
+  prefixName        String // e.g., Er, Auf
+  wordWithoutPrefix String // e.g., kennen, stehen
+  meaning           String[] // Array of meanings for the prefix-word
+  sentences         String[] // Optional array of example sentences
+  prefixTypeId      Int
+  prefixType        PrefixType @relation(fields: [prefixTypeId], references: [id])
+
+  // Note: The `prefixWord` will still be dynamically generated in the application logic
+
+  @@map("prefixes")
+}
+
+// =========================ENUM================================
 enum UserRole {
   SUPER_ADMIN
   ADMIN

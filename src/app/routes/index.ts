@@ -47,6 +47,7 @@ import {
   getFavoriteWords,
   removeFavoriteWord,
 } from "../modules/Favourite/favorite.controller";
+import { conversationRoutes } from "../modules/Conversation/conversation.routes";
 // =======================
 
 const moduleRoutes = [
@@ -70,6 +71,10 @@ const moduleRoutes = [
   {
     path: "/meta",
     route: MetaRoutes,
+  },
+  {
+    path: "/conversation",
+    route: conversationRoutes,
   },
 ];
 
