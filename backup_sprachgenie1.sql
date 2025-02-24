@@ -23,7 +23,7 @@ SET row_security = off;
 CREATE SCHEMA auth;
 
 
-ALTER SCHEMA auth OWNER TO supabase_admin;
+-- ALTER SCHEMA auth OWNER TO supabase_admin;
 
 --
 -- Name: extensions; Type: SCHEMA; Schema: -; Owner: postgres
@@ -41,7 +41,7 @@ ALTER SCHEMA extensions OWNER TO postgres;
 CREATE SCHEMA graphql;
 
 
-ALTER SCHEMA graphql OWNER TO supabase_admin;
+-- ALTER SCHEMA graphql OWNER TO supabase_admin;
 
 --
 -- Name: graphql_public; Type: SCHEMA; Schema: -; Owner: supabase_admin
@@ -276,33 +276,6 @@ CREATE TYPE auth.one_time_token_type AS ENUM (
 
 
 ALTER TYPE auth.one_time_token_type OWNER TO supabase_auth_admin;
-
---
--- Name: UserRole; Type: TYPE; Schema: public; Owner: postgres
---
-
-CREATE TYPE public."UserRole" AS ENUM (
-    'SUPER_ADMIN',
-    'ADMIN',
-    'BASIC_USER'
-);
-
-
-ALTER TYPE public."UserRole" OWNER TO postgres;
-
---
--- Name: UserStatus; Type: TYPE; Schema: public; Owner: postgres
---
-
-CREATE TYPE public."UserStatus" AS ENUM (
-    'ACTIVE',
-    'BLOCKED',
-    'DELETED',
-    'PENDING'
-);
-
-
-ALTER TYPE public."UserStatus" OWNER TO postgres;
 
 --
 -- Name: action; Type: TYPE; Schema: realtime; Owner: supabase_admin
@@ -2284,42 +2257,6 @@ COMMENT ON COLUMN auth.users.is_sso_user IS 'Auth: Set this column to true when 
 
 
 --
--- Name: Conversation; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public."Conversation" (
-    id integer NOT NULL,
-    topic text NOT NULL,
-    text jsonb NOT NULL,
-    "levelId" integer NOT NULL
-);
-
-
-ALTER TABLE public."Conversation" OWNER TO postgres;
-
---
--- Name: Conversation_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public."Conversation_id_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public."Conversation_id_seq" OWNER TO postgres;
-
---
--- Name: Conversation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public."Conversation_id_seq" OWNED BY public."Conversation".id;
-
-
---
 -- Name: _AntonymRelation; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -2374,24 +2311,6 @@ CREATE TABLE public._prisma_migrations (
 ALTER TABLE public._prisma_migrations OWNER TO postgres;
 
 --
--- Name: admins; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.admins (
-    id text NOT NULL,
-    name text NOT NULL,
-    email text NOT NULL,
-    "profilePhoto" text,
-    "contactNumber" text NOT NULL,
-    "isDeleted" boolean DEFAULT false NOT NULL,
-    "createdAt" timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    "updatedAt" timestamp(3) without time zone NOT NULL
-);
-
-
-ALTER TABLE public.admins OWNER TO postgres;
-
---
 -- Name: articles; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -2424,37 +2343,6 @@ ALTER SEQUENCE public.articles_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE public.articles_id_seq OWNED BY public.articles.id;
 
-
---
--- Name: basic_users; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.basic_users (
-    id text NOT NULL,
-    email text NOT NULL,
-    name text NOT NULL,
-    "profilePhoto" text,
-    "contactNumber" text,
-    address text,
-    "isDeleted" boolean DEFAULT false NOT NULL,
-    "createdAt" timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    "updatedAt" timestamp(3) without time zone NOT NULL
-);
-
-
-ALTER TABLE public.basic_users OWNER TO postgres;
-
---
--- Name: favorite_words; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.favorite_words (
-    "userId" text NOT NULL,
-    "wordId" integer NOT NULL
-);
-
-
-ALTER TABLE public.favorite_words OWNER TO postgres;
 
 --
 -- Name: levels; Type: TABLE; Schema: public; Owner: postgres
@@ -2526,78 +2414,6 @@ ALTER SEQUENCE public.parts_of_speech_id_seq OWNED BY public.parts_of_speech.id;
 
 
 --
--- Name: prefix_types; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.prefix_types (
-    id integer NOT NULL,
-    name text NOT NULL
-);
-
-
-ALTER TABLE public.prefix_types OWNER TO postgres;
-
---
--- Name: prefix_types_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.prefix_types_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.prefix_types_id_seq OWNER TO postgres;
-
---
--- Name: prefix_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.prefix_types_id_seq OWNED BY public.prefix_types.id;
-
-
---
--- Name: prefixes; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.prefixes (
-    id integer NOT NULL,
-    "prefixName" text NOT NULL,
-    "wordWithoutPrefix" text NOT NULL,
-    meaning text[],
-    sentences text[],
-    "prefixTypeId" integer NOT NULL
-);
-
-
-ALTER TABLE public.prefixes OWNER TO postgres;
-
---
--- Name: prefixes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.prefixes_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.prefixes_id_seq OWNER TO postgres;
-
---
--- Name: prefixes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.prefixes_id_seq OWNED BY public.prefixes.id;
-
-
---
 -- Name: topics; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -2630,26 +2446,6 @@ ALTER SEQUENCE public.topics_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE public.topics_id_seq OWNED BY public.topics.id;
 
-
---
--- Name: users; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.users (
-    id text NOT NULL,
-    email text NOT NULL,
-    password text NOT NULL,
-    name text,
-    role public."UserRole" NOT NULL,
-    "needPasswordChange" boolean DEFAULT true NOT NULL,
-    status public."UserStatus" DEFAULT 'ACTIVE'::public."UserStatus" NOT NULL,
-    "verificationToken" text,
-    "createdAt" timestamp(3) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    "updatedAt" timestamp(3) without time zone NOT NULL
-);
-
-
-ALTER TABLE public.users OWNER TO postgres;
 
 --
 -- Name: words_table; Type: TABLE; Schema: public; Owner: postgres
@@ -2897,13 +2693,6 @@ ALTER TABLE ONLY auth.refresh_tokens ALTER COLUMN id SET DEFAULT nextval('auth.r
 
 
 --
--- Name: Conversation id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public."Conversation" ALTER COLUMN id SET DEFAULT nextval('public."Conversation_id_seq"'::regclass);
-
-
---
 -- Name: articles id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2922,20 +2711,6 @@ ALTER TABLE ONLY public.levels ALTER COLUMN id SET DEFAULT nextval('public.level
 --
 
 ALTER TABLE ONLY public.parts_of_speech ALTER COLUMN id SET DEFAULT nextval('public.parts_of_speech_id_seq'::regclass);
-
-
---
--- Name: prefix_types id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.prefix_types ALTER COLUMN id SET DEFAULT nextval('public.prefix_types_id_seq'::regclass);
-
-
---
--- Name: prefixes id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.prefixes ALTER COLUMN id SET DEFAULT nextval('public.prefixes_id_seq'::regclass);
 
 
 --
@@ -3150,25 +2925,6 @@ COPY pgsodium.key (id, status, created, expires, key_type, key_id, key_context, 
 
 
 --
--- Data for Name: Conversation; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public."Conversation" (id, topic, text, "levelId") FROM stdin;
-26	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
-27	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
-28	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
-29	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
-30	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
-31	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
-16	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
-1	Büro vs Homeoffice	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}, {"message": "Das stimmt, aber ich finde es manchmal schwierig, mich zu konzentrieren. Zu Hause gibt es viele Ablenkungen, zum Beispiel Familie oder Haushalt. Im Büro bin ich produktiver.", "speaker": "Sophie"}, {"message": "Ich bin da eher zwiegespalten. Einerseits ist Homeoffice bequem, andererseits fehlt mir der soziale Kontakt mit meinen Kollegen. Man kann nicht einfach in der Kaffeepause über Ideen sprechen oder schnell Fragen klären.", "speaker": "Max"}, {"message": "Ja, genau! Ich denke, ein Hybridmodell wäre ideal. Also zum Beispiel drei Tage im Büro und zwei Tage Homeoffice. So hätte man sowohl Struktur als auch Flexibilität.", "speaker": "Lena"}, {"message": "Das klingt gut. Aber was ist mit Teamarbeit? Ich finde, dass Videokonferenzen nicht dasselbe sind wie persönliche Meetings.", "speaker": "David"}, {"message": "Stimmt, die Kommunikation ist im Büro oft effizienter. Aber Homeoffice hat auch Vorteile für die Work-Life-Balance. Man kann zum Beispiel während der Mittagspause spazieren gehen oder gesünder essen.", "speaker": "Sophie"}, {"message": "Gute Argumente! Vielleicht kommt es auch auf den Beruf an. In der IT-Branche ist Homeoffice einfacher als zum Beispiel in einem Krankenhaus oder einer Schule.", "speaker": "Max"}, {"message": "Das ist ein guter Punkt. Vielleicht sollten Unternehmen ihren Mitarbeitern mehr Freiheit geben, zu entscheiden, was für sie am besten funktioniert.", "speaker": "Lena"}, {"message": "Ja, das wäre fair. Ich denke, die Zukunft gehört der Flexibilität.", "speaker": "David"}, {"message": "Genau! Jeder arbeitet anders und braucht andere Bedingungen, um produktiv zu sein.", "speaker": "Sophie"}, {"message": "Super Diskussion! Ich finde, wir haben gute Argumente auf beiden Seiten gehört.", "speaker": "Max"}]	1
-33	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
-34	Diskussionss	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	4
-36	Arifsd	[{"message": "Hallo...", "speaker": "Lena"}]	4
-\.
-
-
---
 -- Data for Name: _AntonymRelation; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3221,18 +2977,8 @@ COPY public."_SynonymRelation" ("A", "B") FROM stdin;
 --
 
 COPY public._prisma_migrations (id, checksum, finished_at, migration_name, logs, rolled_back_at, started_at, applied_steps_count) FROM stdin;
-2f1037c5-4a77-4465-890e-db9fba56d790	1f09d361989afe01975048b254b4982bbce8015f622495ddd5f921374ebfa974	2025-02-23 18:02:21.674331+00	20250223170112_add_prefix_conversation	\N	\N	2025-02-23 18:02:21.413818+00	1
 59fc3dfd-f3c6-4eff-8d9b-78ea02133fe4	3e4f6d22d953dbf377fa6449f21f29e7c057168adf684fd1c54c3b163499a491	2025-01-19 06:01:25.709216+00	20250119060125_init	\N	\N	2025-01-19 06:01:25.532412+00	1
 dd378218-7f98-406a-8d9a-101ff767f551	3e4f6d22d953dbf377fa6449f21f29e7c057168adf684fd1c54c3b163499a491	2025-01-19 05:38:01.37951+00	20250119053801_init	\N	\N	2025-01-19 05:38:01.195702+00	1
-\.
-
-
---
--- Data for Name: admins; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.admins (id, name, email, "profilePhoto", "contactNumber", "isDeleted", "createdAt", "updatedAt") FROM stdin;
-c56400e7-54dc-4524-88b2-3b64289bf38c	Super Admin	arif.aust.eng@gmail.com	\N	01234567890	f	2025-02-24 00:12:02.922	2025-02-24 00:12:02.922
 \.
 
 
@@ -3244,23 +2990,6 @@ COPY public.articles (id, name) FROM stdin;
 1	der
 2	die
 3	das
-\.
-
-
---
--- Data for Name: basic_users; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.basic_users (id, email, name, "profilePhoto", "contactNumber", address, "isDeleted", "createdAt", "updatedAt") FROM stdin;
-13e9c82c-7e71-4ca8-9d85-1f89973cde15	almon.arif@gmail.com	Md Arifur Rahman	\N	\N	\N	f	2025-02-24 02:05:34.278	2025-02-24 02:05:34.278
-\.
-
-
---
--- Data for Name: favorite_words; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.favorite_words ("userId", "wordId") FROM stdin;
 \.
 
 
@@ -3288,22 +3017,6 @@ COPY public.parts_of_speech (id, name) FROM stdin;
 
 
 --
--- Data for Name: prefix_types; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.prefix_types (id, name) FROM stdin;
-\.
-
-
---
--- Data for Name: prefixes; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.prefixes (id, "prefixName", "wordWithoutPrefix", meaning, sentences, "prefixTypeId") FROM stdin;
-\.
-
-
---
 -- Data for Name: topics; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3320,16 +3033,6 @@ COPY public.topics (id, name) FROM stdin;
 10	Büroalltag
 11	Gesunde Ernährung
 12	Gut versichert!
-\.
-
-
---
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.users (id, email, password, name, role, "needPasswordChange", status, "verificationToken", "createdAt", "updatedAt") FROM stdin;
-d9a98059-2f81-4cfa-a9a3-04545a677972	arif.aust.eng@gmail.com	$2b$12$cPcCqPWXfchIvegltsCZ4OVkCHKyummLsXF.srkOo9qWm0mzaPwda	\N	SUPER_ADMIN	t	ACTIVE	\N	2025-02-24 00:12:02.922	2025-02-24 00:12:02.922
-b87b7be2-9e0e-4712-a647-e873e01d5439	almon.arif@gmail.com	$2b$12$KbhZ.Z4Qu0Tr3aXD8PINwuWQSxn56NRT2rjLtAKg97N71aOwDoUYi	Md Arifur Rahman	BASIC_USER	t	ACTIVE	\N	2025-02-24 02:05:34.088	2025-02-24 02:06:08.872
 \.
 
 
@@ -3570,7 +3273,6 @@ COPY public.words_table (id, value, meaning, sentences, "levelId", "topicId", "a
 233	das klima	{climate}	\N	3	4	1	\N	\N
 234	der klimawandel	{"climate change"}	\N	3	4	1	\N	\N
 235	die konservendose	{"preserving jars"}	\N	3	4	1	\N	\N
-389	befragen	{"to consult"}	\N	3	6	\N	\N	\N
 236	der kunststoff	{"synthetic material"}	\N	3	4	1	\N	kunststoffe
 237	die luft	{air}	\N	3	4	1	\N	\N
 238	die matratze	{mattress}	\N	3	4	1	\N	\N
@@ -3723,6 +3425,7 @@ COPY public.words_table (id, value, meaning, sentences, "levelId", "topicId", "a
 386	der anstoß	{stimulus}	\N	3	6	1	\N	\N
 387	anstrengend	{tiring}	\N	3	6	\N	\N	\N
 388	das autorennen	{"motor racing"}	\N	3	6	1	\N	\N
+389	befragen	{"to consult"}	\N	3	6	\N	\N	\N
 390	begeistern	{"to inspire"}	\N	3	6	\N	\N	\N
 391	beliebt	{popular}	\N	3	6	\N	\N	\N
 392	der biergarten	{"beer garden"}	\N	3	6	1	\N	\N
@@ -4514,13 +4217,6 @@ SELECT pg_catalog.setval('pgsodium.key_key_id_seq', 1, false);
 
 
 --
--- Name: Conversation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public."Conversation_id_seq"', 36, true);
-
-
---
 -- Name: articles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -4539,20 +4235,6 @@ SELECT pg_catalog.setval('public.levels_id_seq', 5, true);
 --
 
 SELECT pg_catalog.setval('public.parts_of_speech_id_seq', 2, true);
-
-
---
--- Name: prefix_types_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.prefix_types_id_seq', 1, false);
-
-
---
--- Name: prefixes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.prefixes_id_seq', 1, false);
 
 
 --
@@ -4753,14 +4435,6 @@ ALTER TABLE ONLY auth.users
 
 
 --
--- Name: Conversation Conversation_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public."Conversation"
-    ADD CONSTRAINT "Conversation_pkey" PRIMARY KEY (id);
-
-
---
 -- Name: _AntonymRelation _AntonymRelation_AB_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4793,35 +4467,11 @@ ALTER TABLE ONLY public._prisma_migrations
 
 
 --
--- Name: admins admins_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.admins
-    ADD CONSTRAINT admins_pkey PRIMARY KEY (id);
-
-
---
 -- Name: articles articles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.articles
     ADD CONSTRAINT articles_pkey PRIMARY KEY (id);
-
-
---
--- Name: basic_users basic_users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.basic_users
-    ADD CONSTRAINT basic_users_pkey PRIMARY KEY (id);
-
-
---
--- Name: favorite_words favorite_words_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.favorite_words
-    ADD CONSTRAINT favorite_words_pkey PRIMARY KEY ("userId", "wordId");
 
 
 --
@@ -4841,35 +4491,11 @@ ALTER TABLE ONLY public.parts_of_speech
 
 
 --
--- Name: prefix_types prefix_types_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.prefix_types
-    ADD CONSTRAINT prefix_types_pkey PRIMARY KEY (id);
-
-
---
--- Name: prefixes prefixes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.prefixes
-    ADD CONSTRAINT prefixes_pkey PRIMARY KEY (id);
-
-
---
 -- Name: topics topics_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.topics
     ADD CONSTRAINT topics_pkey PRIMARY KEY (id);
-
-
---
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.users
-    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
 --
@@ -5254,31 +4880,10 @@ CREATE INDEX "_SynonymRelation_B_index" ON public."_SynonymRelation" USING btree
 
 
 --
--- Name: admins_email_key; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX admins_email_key ON public.admins USING btree (email);
-
-
---
 -- Name: articles_name_key; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX articles_name_key ON public.articles USING btree (name);
-
-
---
--- Name: basic_users_email_key; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX basic_users_email_key ON public.basic_users USING btree (email);
-
-
---
--- Name: basic_users_id_key; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX basic_users_id_key ON public.basic_users USING btree (id);
 
 
 --
@@ -5296,24 +4901,10 @@ CREATE UNIQUE INDEX parts_of_speech_name_key ON public.parts_of_speech USING btr
 
 
 --
--- Name: prefix_types_name_key; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX prefix_types_name_key ON public.prefix_types USING btree (name);
-
-
---
 -- Name: topics_name_key; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX topics_name_key ON public.topics USING btree (name);
-
-
---
--- Name: users_email_key; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX users_email_key ON public.users USING btree (email);
 
 
 --
@@ -5475,14 +5066,6 @@ ALTER TABLE ONLY auth.sso_domains
 
 
 --
--- Name: Conversation Conversation_levelId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public."Conversation"
-    ADD CONSTRAINT "Conversation_levelId_fkey" FOREIGN KEY ("levelId") REFERENCES public.levels(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
 -- Name: _AntonymRelation _AntonymRelation_A_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5531,38 +5114,6 @@ ALTER TABLE ONLY public."_SynonymRelation"
 
 
 --
--- Name: admins admins_email_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.admins
-    ADD CONSTRAINT admins_email_fkey FOREIGN KEY (email) REFERENCES public.users(email) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: basic_users basic_users_email_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.basic_users
-    ADD CONSTRAINT basic_users_email_fkey FOREIGN KEY (email) REFERENCES public.users(email) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: favorite_words favorite_words_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.favorite_words
-    ADD CONSTRAINT "favorite_words_userId_fkey" FOREIGN KEY ("userId") REFERENCES public.users(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: favorite_words favorite_words_wordId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.favorite_words
-    ADD CONSTRAINT "favorite_words_wordId_fkey" FOREIGN KEY ("wordId") REFERENCES public.words_table(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
 -- Name: words_table fk_word_article; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5592,14 +5143,6 @@ ALTER TABLE ONLY public.words_table
 
 ALTER TABLE ONLY public.words_table
     ADD CONSTRAINT fk_word_topic FOREIGN KEY ("topicId") REFERENCES public.topics(id) ON UPDATE CASCADE ON DELETE SET NULL;
-
-
---
--- Name: prefixes prefixes_prefixTypeId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.prefixes
-    ADD CONSTRAINT "prefixes_prefixTypeId_fkey" FOREIGN KEY ("prefixTypeId") REFERENCES public.prefix_types(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --

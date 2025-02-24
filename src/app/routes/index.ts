@@ -48,6 +48,8 @@ import {
   removeFavoriteWord,
 } from "../modules/Favourite/favorite.controller";
 import { conversationRoutes } from "../modules/Conversation/conversation.routes";
+import { prefixRoutes } from "../modules/Prefix/prefix.routes";
+import { insertPrefixesFromJson } from "../../dataToDb/InsertPrefix";
 // =======================
 
 const moduleRoutes = [
@@ -76,6 +78,10 @@ const moduleRoutes = [
     path: "/conversation",
     route: conversationRoutes,
   },
+  {
+    path: "/prefix",
+    route: prefixRoutes,
+  },
 ];
 
 // ==============================
@@ -99,6 +105,7 @@ router.post("/insert", importWordsFromJson);
 router.get("/count", countJsonEntries);
 router.get("/check", checkDuplicates);
 router.get("/validity", validateFields);
+router.post("/insert-prefixes", insertPrefixesFromJson);
 
 // Endpoint to fetch all Level data
 router.get("/levels", getLevels);

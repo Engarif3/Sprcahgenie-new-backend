@@ -1,0 +1,102 @@
+[
+  {
+    "prefixName": "Ein",
+    "prefixWord": "einfallen",
+    "meaning": ["to come to mind", "to occur"],
+    "sentences": [
+      "Mir ist eine gute Idee eingefallen.",
+      "Fällt dir eine Lösung für dieses Problem ein?"
+    ],
+    "prefixTypeId": 1
+  },
+  {
+    "prefixName": "Ein",
+    "prefixWord": "eingeben",
+    "meaning": ["to enter (data)", "to input"],
+    "sentences": [
+      "Bitte geben Sie Ihr Passwort ein.",
+      "Er hat seine Adresse in das Formular eingegeben."
+    ],
+    "prefixTypeId": 1
+  },
+  {
+    "prefixName": "Ein",
+    "prefixWord": "einrichten",
+    "meaning": ["to set up", "to furnish"],
+    "sentences": [
+      "Wir müssen das neue Büro noch einrichten.",
+      "Er hat seinen Laptop neu eingerichtet."
+    ],
+    "prefixTypeId": 1
+  },
+  {
+    "prefixName": "Ein",
+    "prefixWord": "einschalten",
+    "meaning": ["to switch on", "to turn on"],
+    "sentences": [
+      "Kannst du bitte das Licht einschalten?",
+      "Ich habe den Computer gerade eingeschaltet."
+    ],
+    "prefixTypeId": 1
+  },
+  {
+    "prefixName": "Ein",
+    "prefixWord": "eintreten",
+    "meaning": ["to enter", "to join"],
+    "sentences": [
+      "Er trat langsam in den Raum ein.",
+      "Ich möchte in den Verein eintreten."
+    ],
+    "prefixTypeId": 1
+  },
+  {
+    "prefixName": "Ein",
+    "prefixWord": "einziehen",
+    "meaning": ["to move in", "to confiscate"],
+    "sentences": [
+      "Wir ziehen nächste Woche in unsere neue Wohnung ein.",
+      "Der Staat hat sein Eigentum eingezogen."
+    ],
+    "prefixTypeId": 1
+  },
+  {
+    "prefixName": "Ein",
+    "prefixWord": "einpacken",
+    "meaning": ["to pack", "to wrap"],
+    "sentences": [
+      "Vergiss nicht, deine Sachen einzupacken.",
+      "Ich packe das Geschenk schön ein."
+    ],
+    "prefixTypeId": 1
+  },
+  {
+    "prefixName": "Ein",
+    "prefixWord": "einladen",
+    "meaning": ["to invite"],
+    "sentences": [
+      "Ich lade dich zu meiner Geburtstagsfeier ein.",
+      "Er hat seine Freunde zum Essen eingeladen."
+    ],
+    "prefixTypeId": 1
+  },
+  {
+    "prefixName": "Ein",
+    "prefixWord": "einkaufen",
+    "meaning": ["to go shopping"],
+    "sentences": [
+      "Wir gehen heute Abend einkaufen.",
+      "Er hat viele Lebensmittel eingekauft."
+    ],
+    "prefixTypeId": 1
+  },
+  {
+    "prefixName": "Ein",
+    "prefixWord": "einatmen",
+    "meaning": ["to inhale"],
+    "sentences": [
+      "Atme tief ein und entspanne dich.",
+      "Er atmete frische Bergluft ein."
+    ],
+    "prefixTypeId": 1
+  }
+]
