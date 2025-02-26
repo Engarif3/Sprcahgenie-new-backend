@@ -1,112 +1,90 @@
 [
   {
-    "prefixName": "Ein",
-    "prefixWord": "einfallen",
-    "meaning": ["to come to mind", "to occur"],
+    "prefixName": "Über",
+    "prefixWord": "übersehen",
+    "meaning": ["to overlook", "to ignore"],
     "sentences": [
-      "Mir ist eine gute Idee eingefallen.",
-      "Fällt dir eine Lösung für dieses Problem ein?"
+      "Er hat den Fehler übersehen.",
+      "Ich übersehe manchmal kleine Details."
     ],
-    "prefixTypeId": 1,
+    "prefixTypeId": 3,
     "verb": true
   },
   {
-    "prefixName": "Ein",
-    "prefixWord": "eingeben",
-    "meaning": ["to enter (data)", "to input"],
+    "prefixName": "Über",
+    "prefixWord": "übergeben",
+    "meaning": ["to hand over", "to vomit"],
     "sentences": [
-      "Bitte geben Sie Ihr Passwort ein.",
-      "Er hat seine Adresse in das Formular eingegeben."
+      "Er übergab das Paket dem Kurier.",
+      "Nach dem Essen musste er sich übergeben."
     ],
-    "prefixTypeId": 1,
+    "prefixTypeId": 3,
     "verb": true
   },
   {
-    "prefixName": "Ein",
-    "prefixWord": "einrichten",
-    "meaning": ["to set up", "to furnish"],
+    "prefixName": "Um",
+    "prefixWord": "umfahren",
+    "meaning": ["to drive around", "to run over"],
     "sentences": [
-      "Wir müssen das neue Büro noch einrichten.",
-      "Er hat seinen Laptop neu eingerichtet."
+      "Ich umfahre das Hindernis vorsichtig.",
+      "Er hat das Verkehrsschild umgefahren."
     ],
-    "prefixTypeId": 1,
+    "prefixTypeId": 3,
     "verb": true
   },
   {
-    "prefixName": "Ein",
-    "prefixWord": "einschalten",
-    "meaning": ["to switch on", "to turn on"],
+    "prefixName": "Unter",
+    "prefixWord": "untergehen",
+    "meaning": ["to sink", "to perish"],
     "sentences": [
-      "Kannst du bitte das Licht einschalten?",
-      "Ich habe den Computer gerade eingeschaltet."
+      "Die Sonne geht langsam unter.",
+      "Das Schiff ist im Sturm untergegangen."
     ],
-    "prefixTypeId": 1,
+    "prefixTypeId": 3,
     "verb": true
   },
   {
-    "prefixName": "Ein",
-    "prefixWord": "eintreten",
-    "meaning": ["to enter", "to join"],
+    "prefixName": "Unter",
+    "prefixWord": "unterbrechen",
+    "meaning": ["to interrupt"],
     "sentences": [
-      "Er trat langsam in den Raum ein.",
-      "Ich möchte in den Verein eintreten."
+      "Bitte unterbrich mich nicht während der Präsentation.",
+      "Er unterbrach das Gespräch für eine wichtige Mitteilung."
     ],
-    "prefixTypeId": 1,
+    "prefixTypeId": 3,
     "verb": true
   },
   {
-    "prefixName": "Ein",
-    "prefixWord": "einziehen",
-    "meaning": ["to move in", "to confiscate"],
+    "prefixName": "Wider",
+    "prefixWord": "widersprechen",
+    "meaning": ["to contradict", "to object"],
     "sentences": [
-      "Wir ziehen nächste Woche in unsere neue Wohnung ein.",
-      "Der Staat hat sein Eigentum eingezogen."
+      "Ich muss deiner Aussage widersprechen.",
+      "Er widersprach seiner Chefin nicht."
     ],
-    "prefixTypeId": 1,
+    "prefixTypeId": 3,
     "verb": true
   },
   {
-    "prefixName": "Ein",
-    "prefixWord": "einpacken",
-    "meaning": ["to pack", "to wrap"],
+    "prefixName": "Wieder",
+    "prefixWord": "wiederholen",
+    "meaning": ["to repeat"],
     "sentences": [
-      "Vergiss nicht, deine Sachen einzupacken.",
-      "Ich packe das Geschenk schön ein."
+      "Könntest du bitte deine Frage wiederholen?",
+      "Ich habe die Übung mehrmals wiederholt."
     ],
-    "prefixTypeId": 1,
+    "prefixTypeId": 3,
     "verb": true
   },
   {
-    "prefixName": "Ein",
-    "prefixWord": "einladen",
-    "meaning": ["to invite"],
+    "prefixName": "Um",
+    "prefixWord": "umschauen",
+    "meaning": ["to look around"],
     "sentences": [
-      "Ich lade dich zu meiner Geburtstagsfeier ein.",
-      "Er hat seine Freunde zum Essen eingeladen."
+      "Ich schaue mich in der neuen Stadt um.",
+      "Er schaute sich neugierig um."
     ],
-    "prefixTypeId": 1,
-    "verb": true
-  },
-  {
-    "prefixName": "Ein",
-    "prefixWord": "einkaufen",
-    "meaning": ["to go shopping"],
-    "sentences": [
-      "Wir gehen heute Abend einkaufen.",
-      "Er hat viele Lebensmittel eingekauft."
-    ],
-    "prefixTypeId": 1,
-    "verb": true
-  },
-  {
-    "prefixName": "Ein",
-    "prefixWord": "einatmen",
-    "meaning": ["to inhale"],
-    "sentences": [
-      "Atme tief ein und entspanne dich.",
-      "Er atmete frische Bergluft ein."
-    ],
-    "prefixTypeId": 1,
+    "prefixTypeId": 3,
     "verb": true
   }
 ]
