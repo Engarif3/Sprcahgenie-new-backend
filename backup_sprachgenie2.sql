@@ -2566,10 +2566,10 @@ ALTER SEQUENCE public.prefix_types_id_seq OWNED BY public.prefix_types.id;
 CREATE TABLE public.prefixes (
     id integer NOT NULL,
     "prefixName" text NOT NULL,
+    "wordWithoutPrefix" text NOT NULL,
     meaning text[],
     sentences text[],
-    "prefixTypeId" integer NOT NULL,
-    "prefixWord" text NOT NULL
+    "prefixTypeId" integer NOT NULL
 );
 
 
@@ -3221,8 +3221,6 @@ COPY public."_SynonymRelation" ("A", "B") FROM stdin;
 --
 
 COPY public._prisma_migrations (id, checksum, finished_at, migration_name, logs, rolled_back_at, started_at, applied_steps_count) FROM stdin;
-af8f97c6-b7b4-4d7c-bb8f-765f6d660ebe	1f09d361989afe01975048b254b4982bbce8015f622495ddd5f921374ebfa974	2025-02-24 04:57:08.493192+00	20250223170112_add_prefix_conversation	\N	\N	2025-02-24 04:57:08.210392+00	1
-abb715fc-812d-41b7-81de-6d69057151d8	048421eac9471e9d6d9759480c57206e466d9085ae9d502ed7441a1308825e65	2025-02-24 04:57:08.651282+00	20250224040917_add_prefix	\N	\N	2025-02-24 04:57:08.53877+00	1
 2f1037c5-4a77-4465-890e-db9fba56d790	1f09d361989afe01975048b254b4982bbce8015f622495ddd5f921374ebfa974	2025-02-23 18:02:21.674331+00	20250223170112_add_prefix_conversation	\N	\N	2025-02-23 18:02:21.413818+00	1
 59fc3dfd-f3c6-4eff-8d9b-78ea02133fe4	3e4f6d22d953dbf377fa6449f21f29e7c057168adf684fd1c54c3b163499a491	2025-01-19 06:01:25.709216+00	20250119060125_init	\N	\N	2025-01-19 06:01:25.532412+00	1
 dd378218-7f98-406a-8d9a-101ff767f551	3e4f6d22d953dbf377fa6449f21f29e7c057168adf684fd1c54c3b163499a491	2025-01-19 05:38:01.37951+00	20250119053801_init	\N	\N	2025-01-19 05:38:01.195702+00	1
@@ -3263,9 +3261,6 @@ COPY public.basic_users (id, email, name, "profilePhoto", "contactNumber", addre
 --
 
 COPY public.favorite_words ("userId", "wordId") FROM stdin;
-b87b7be2-9e0e-4712-a647-e873e01d5439	1525
-b87b7be2-9e0e-4712-a647-e873e01d5439	1389
-b87b7be2-9e0e-4712-a647-e873e01d5439	1
 \.
 
 
@@ -3297,10 +3292,6 @@ COPY public.parts_of_speech (id, name) FROM stdin;
 --
 
 COPY public.prefix_types (id, name) FROM stdin;
-1	Separable
-2	Inseparable
-3	Dual
-4	Unknown
 \.
 
 
@@ -3308,77 +3299,7 @@ COPY public.prefix_types (id, name) FROM stdin;
 -- Data for Name: prefixes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.prefixes (id, "prefixName", meaning, sentences, "prefixTypeId", "prefixWord") FROM stdin;
-5	Er	{"to recognize"}	{"Ich kann das Bild erkennen.","Er konnte die Musik sofort erkennen."}	2	Erkennen
-28	Er	{"to encourage"}	{"Die Regierung fördert den Umweltschutz.","Er fördert junge Talente in seiner Firma."}	2	Erfördern
-29	Er	{"to inquire","to investigate"}	{"Die Wissenschaftler erforschen neue Behandlungsmethoden.","Er erforschte die Geschichte seiner Familie."}	2	Erforschen
-6	Er	{"to explain"}	{"Kannst du mir die Aufgabe erklären?","Der Lehrer erklärte die Grammatik deutlich."}	2	Erklären
-7	Er	{"to invent"}	{"Wer hat das Telefon erfunden?","Er hat eine neue Maschine erfunden."}	2	Erfinden
-8	Er	{"to reach","to achieve"}	{"Ich habe mein Ziel erreicht.","Wir erreichen den Bahnhof in zehn Minuten."}	2	Erreichen
-9	Er	{"to expand","to extend"}	{"Er will sein Wissen erweitern.","Die Firma erweitert ihr Angebot."}	2	Erweitern
-16	Er	{"to awaken"}	{"Ich erwachte früh am Morgen.","Er erwachte aus einem tiefen Schlaf."}	2	Erwachen
-15	Er	{"to succumb","to fall victim"}	{"Er erlag seiner Krankheit.","Viele erlagen der Versuchung, das Angebot anzunehmen."}	2	Erliegen
-14	Er	{"to bloom","to flourish"}	{"Die Blumen erblühen im Frühling.","Seine Karriere erblühte nach harter Arbeit."}	2	Erblühen
-13	Er	{"to endure","to bear"}	{"Ich kann diesen Lärm nicht mehr ertragen.","Sie erträgt die Schmerzen tapfer."}	2	Ertragen
-12	Er	{"to tell","to narrate"}	{"Er erzählt eine spannende Geschichte.","Kannst du mir mehr über deine Reise erzählen?"}	2	Erzählen
-17	Er	{"to create","to construct","to build"}	{"Ich erstelle eine neue Webseite.","Er hat eine beeindruckende Skulptur erstellt."}	2	Erstellen
-11	Er	{"to replace","to use","to employ","to deploy"}	{"Ich muss die alten Batterien ersetzen.","Das Unternehmen ersetzte die veraltete Software."}	2	Ersetzen
-18	Er	{"to experience"}	{"Ich habe viel über andere Kulturen erfahren.","Sie erfuhr von der neuen Regelung durch die Nachrichten."}	2	Erfahren
-19	Er	{"to experience","to witness"}	{"Ich habe eine spannende Reise erlebt.","Er erlebte viele Abenteuer während seines Urlaubs."}	2	Erleben
-20	Er	{"to reach"}	{"Ich habe endlich mein Ziel erreicht.","Er erreichte den höchsten Punkt des Berges."}	2	erreichen
-21	Er	{"to allow"}	{"Meine Eltern erlauben mir, lange aufzubleiben.","Das Gesetz erlaubt das Rauchen in bestimmten Bereichen."}	2	Erlauben
-22	Er	{"to remind","to remember"}	{"Ich erinnere mich an meinen ersten Schultag.","Kannst du mich an das Meeting erinnern?"}	2	Erinnern
-23	Er	{"to increase"}	{"Die Firma hat die Gehälter erhöht.","Er erhöhte seine Laufgeschwindigkeit."}	2	Erhöhen
-24	Er	{"to fight for","to win through effort"}	{"Er hat sich seinen Erfolg hart erkämpft.","Die Mannschaft erkämpfte sich den Sieg in der letzten Minute."}	2	Erkämpfen
-25	Er	{"to encourage"}	{"Meine Lehrerin hat mich immer ermutigt.","Die positiven Kommentare ermutigten ihn weiterzumachen."}	2	Ermutigen
-26	Er	{"to produce"}	{"Windkraft erzeugt saubere Energie.","Das Feuer erzeugt Wärme."}	2	Erzeugen
-30	Er	{"to complete","to take care of"}	{"Ich muss noch ein paar Dinge erledigen.","Er erledigte seine Aufgaben schnell und effizient."}	2	Erledigen
-31	Er	{success}	{"Er hatte großen Erfolg in seinem Beruf.","Der Erfolg des Projekts war beeindruckend."}	4	Erfolg
-10	Er	{"to receive","to get","to obtain"}	{"Ich habe eine E-Mail von meinem Chef erhalten.","Sie erhielt ein Geschenk zu ihrem Geburtstag."}	2	Erhalten
-27	Er	{"to require","to demand"}	{"Diese Arbeit erfordert viel Geduld.","Das Projekt erfordert eine sorgfältige Planung."}	2	Erfordern
-32	Er	{experience}	{"Sie hat viel Erfahrung in diesem Bereich.","Die Reise war eine wertvolle Erfahrung für mich."}	4	Erfahrung
-33	Er	{insight,realization}	{"Er hatte eine plötzliche Erkenntnis über sein Leben.","Die wissenschaftliche Erkenntnis hilft uns, die Welt besser zu verstehen."}	4	Erkenntnis
-34	Er	{memory}	{"Die Erinnerung an meine Kindheit ist sehr lebendig.","Er hat eine schöne Erinnerung an seine Schulzeit."}	4	Erinnerung
-35	Er	{permission}	{"Ich brauche die Erlaubnis meiner Eltern.","Er erhielt die Erlaubnis, das Gebäude zu betreten."}	4	Erlaubnis
-36	Er	{increase}	{"Die Erhöhung der Preise führte zu Protesten.","Eine Erhöhung des Gehalts ist immer willkommen."}	4	Erhöhung
-37	Er	{product,"manufactured good"}	{"Dieses Erzeugnis wird in Deutschland hergestellt.","Die Qualität des Erzeugnisses ist hervorragend."}	4	Erzeugnis
-38	An	{"to look at","to examine"}	{"Ich möchte mir den Film anschauen.","Sie schaute sich das Gemälde genau an."}	1	anschauen
-39	An	{"to arrive"}	{"Der Zug kommt um 18 Uhr an.","Wann bist du zu Hause angekommen?"}	1	ankommen
-40	Auf	{"to open"}	{"Kannst du bitte das Fenster aufmachen?","Er machte die Tür vorsichtig auf."}	1	aufmachen
-41	Auf	{"to get up","to stand up"}	{"Ich stehe jeden Morgen um 7 Uhr auf.","Er stand während der Rede auf."}	1	aufstehen
-42	Aus	{"to execute","to perform"}	{"Der Computer führte den Befehl aus.","Er führte die Aufgabe erfolgreich aus."}	1	ausführen
-43	Aus	{"to come out","to get along"}	{"Er kommt gut mit seinen Kollegen aus.","Wann kommt der neue Film aus?"}	1	auskommen
-44	Ein	{"to press in","to dent"}	{"Bitte nicht zu stark eindrücken.","Er hat den Knopf eingedrückt."}	1	eindrücken
-45	Ein	{"to inhale"}	{"Atme tief ein und entspanne dich.","Er musste den Rauch einatmen."}	1	einatmen
-46	Mit	{"to come with"}	{"Kommst du mit ins Kino?","Er kam spontan mit uns mit."}	1	mitkommen
-47	Mit	{"to participate","to join in"}	{"Ich mache beim Wettbewerb mit.","Er hat beim Marathon mitgemacht."}	1	mitmachen
-48	Nach	{"to pursue","to trace"}	{"Er ging seiner Leidenschaft nach.","Die Polizei geht dem Hinweis nach."}	1	nachgehen
-49	Nach	{"to refill"}	{"Bitte füllen Sie das Glas nach.","Er hat den Drucker mit Papier nachgefüllt."}	1	nachfüllen
-50	Zu	{"to admit","to confess"}	{"Er musste seinen Fehler zugeben.","Ich gebe zu, dass ich mich geirrt habe."}	1	zugeben
-51	Zu	{"to authorize","to allow"}	{"Die Schule lässt keine Handys zu.","Er wurde zur Prüfung zugelassen."}	1	zulassen
-52	Ein	{purchase,shopping}	{"Der Einkauf im Supermarkt dauerte eine Stunde.","Ich habe meinen Einkauf in der Tasche."}	4	Einkauf
-53	Ein	{impression}	{"Er machte einen guten Eindruck beim Vorstellungsgespräch.","Mein erster Eindruck von der Stadt war positiv."}	4	Eindruck
-54	Ein	{influence}	{"Seine Eltern haben einen großen Einfluss auf ihn.","Der Klimawandel hat einen Einfluss auf das Wetter."}	4	Einfluss
-55	Ein	{entrance}	{"Der Eingang zum Gebäude ist auf der rechten Seite.","Bitte benutzen Sie den Haupteingang."}	4	Eingang
-56	Ein	{unit,unity}	{"Kilogramm ist eine Einheit des Gewichts.","Die Menschen demonstrierten für Einheit und Frieden."}	4	Einheit
-57	Ein	{income,revenue,"intake (medicine)"}	{"Die Firma verzeichnete hohe Einnahmen im letzten Jahr.","Die Einnahme des Medikaments sollte regelmäßig erfolgen."}	4	Einnahme
-58	Ein	{invitation}	{"Ich habe eine Einladung zur Hochzeit bekommen.","Seine Einladung zum Abendessen war sehr nett."}	4	Einladung
-59	Ein	{insight,understanding}	{"Er zeigte Einsicht in seine Fehler.","Die Dokumente sind nur für autorisierte Personen zur Einsicht."}	4	Einsicht
-60	Ein	{inhabitant,resident}	{"Berlin hat über 3 Millionen Einwohner.","Die Einwohner der Stadt sind sehr freundlich."}	4	Einwohner
-61	Ein	{burglary,break-in}	{"Letzte Nacht gab es einen Einbruch in der Nachbarschaft.","Die Polizei untersucht den Einbruch im Museum."}	4	Einbruch
-62	Ein	{intervention,"procedure (medical)"}	{"Der Arzt führte einen kleinen Eingriff durch.","Ein politischer Eingriff ist in dieser Situation notwendig."}	4	Eingriff
-63	Ein	{facility,furnishing}	{"Die Einrichtung der neuen Wohnung ist sehr modern.","Krankenhäuser sind wichtige medizinische Einrichtungen."}	4	Einrichtung
-64	Ein	{assessment,evaluation}	{"Seine Einschätzung der Situation war korrekt.","Die Experten gaben eine Einschätzung zum Wirtschaftswachstum ab."}	4	Einschätzung
-65	Ein	{detail}	{"Er erklärte mir jede Einzelheit des Plans.","Die Einzelheiten des Vertrags müssen noch geklärt werden."}	4	Einzelheit
-66	Ein	{"to come to mind","to occur"}	{"Mir ist eine gute Idee eingefallen.","Fällt dir eine Lösung für dieses Problem ein?"}	1	einfallen
-67	Ein	{"to enter (data)","to input"}	{"Bitte geben Sie Ihr Passwort ein.","Er hat seine Adresse in das Formular eingegeben."}	1	eingeben
-68	Ein	{"to set up","to furnish"}	{"Wir müssen das neue Büro noch einrichten.","Er hat seinen Laptop neu eingerichtet."}	1	einrichten
-69	Ein	{"to switch on","to turn on"}	{"Kannst du bitte das Licht einschalten?","Ich habe den Computer gerade eingeschaltet."}	1	einschalten
-70	Ein	{"to enter","to join"}	{"Er trat langsam in den Raum ein.","Ich möchte in den Verein eintreten."}	1	eintreten
-71	Ein	{"to move in","to confiscate"}	{"Wir ziehen nächste Woche in unsere neue Wohnung ein.","Der Staat hat sein Eigentum eingezogen."}	1	einziehen
-72	Ein	{"to pack","to wrap"}	{"Vergiss nicht, deine Sachen einzupacken.","Ich packe das Geschenk schön ein."}	1	einpacken
-73	Ein	{"to invite"}	{"Ich lade dich zu meiner Geburtstagsfeier ein.","Er hat seine Freunde zum Essen eingeladen."}	1	einladen
-74	Ein	{"to go shopping"}	{"Wir gehen heute Abend einkaufen.","Er hat viele Lebensmittel eingekauft."}	1	einkaufen
+COPY public.prefixes (id, "prefixName", "wordWithoutPrefix", meaning, sentences, "prefixTypeId") FROM stdin;
 \.
 
 
@@ -4624,14 +4545,14 @@ SELECT pg_catalog.setval('public.parts_of_speech_id_seq', 2, true);
 -- Name: prefix_types_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.prefix_types_id_seq', 4, true);
+SELECT pg_catalog.setval('public.prefix_types_id_seq', 1, false);
 
 
 --
 -- Name: prefixes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.prefixes_id_seq', 74, true);
+SELECT pg_catalog.setval('public.prefixes_id_seq', 1, false);
 
 
 --

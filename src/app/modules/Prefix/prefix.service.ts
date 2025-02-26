@@ -39,73 +39,57 @@ const getPrefixTypeFromDB = async (
   return prefixType;
 };
 
-// Create a new Prefix
-// const createPrefix = async (
-//   req: Request
-// ): Promise<Prefix | { message: string }> => {
-//   const { prefixName, prefixWord, meaning, sentences, prefixTypeId } = req.body;
+const deletePrefixType = async (
+  prefixTypeId: number
+): Promise<{ message: string }> => {
+  // Validate ID
+  if (!prefixTypeId) {
+    return { message: "PrefixType ID is required" };
+  }
 
-//   // Check for missing required fields
-//   if (!prefixName || !prefixWord || !meaning || !prefixTypeId) {
-//     return { message: "Prefix fields are required" };
-//   }
+  // Check if the PrefixType exists
+  const existingPrefixType = await prisma.prefixType.findUnique({
+    where: { id: prefixTypeId },
+    include: { prefixes: true }, // Fetch related prefixes
+  });
 
-//   // Create the new prefix entry in the database
-//   const prefix = await prisma.prefix.create({
-//     data: {
-//       prefixName,
-//       prefixWord,
-//       meaning,
-//       sentences,
-//       prefixTypeId,
-//     },
-//   });
+  if (!existingPrefixType) {
+    return { message: "PrefixType not found" };
+  }
 
-//   return prefix;
-// };
-// const createPrefix = async (
-//   req: Request
-// ): Promise<Prefix | { message: string }> => {
-//   const { prefixName, prefixWord, meaning, sentences, prefixTypeId } = req.body;
+  // Delete all related Prefixes first to avoid constraint issues
+  await prisma.prefix.deleteMany({
+    where: { prefixTypeId },
+  });
 
-//   // Check for missing required fields
-//   if (!prefixName || !prefixWord || !meaning || !prefixTypeId) {
-//     return { message: "Prefix fields are required" };
-//   }
+  // Now delete the PrefixType
+  await prisma.prefixType.delete({
+    where: { id: prefixTypeId },
+  });
 
-//   // Check if the prefixWord already exists
-//   const existingPrefix = await prisma.prefix.findFirst({
-//     where: { prefixWord },
-//   });
+  return { message: "PrefixType deleted successfully!" };
+};
 
-//   if (existingPrefix) {
-//     return {
-//       message: "This prefixWord already exists. Please choose a unique one.",
-//     };
-//   }
-
-//   // Create the new prefix entry in the database
-//   const prefix = await prisma.prefix.create({
-//     data: {
-//       prefixName,
-//       prefixWord,
-//       meaning,
-//       sentences,
-//       prefixTypeId,
-//     },
-//   });
-
-//   return prefix;
-// };
+// ===================================================
 
 const createPrefix = async (
   req: Request
 ): Promise<Prefix | { message: string }> => {
-  const { prefixName, prefixWord, meaning, sentences, prefixTypeId } = req.body;
+  const { prefixName, prefixWord, verb, meaning, sentences, prefixTypeId } =
+    req.body;
 
   // Check for missing required fields
-  if (!prefixName || !prefixWord || !meaning || !prefixTypeId) {
-    return { message: "Prefix fields are required" };
+  // if (!prefixName || !prefixWord || !meaning || !prefixTypeId) {
+  //   return { message: "Prefix fields are required" };
+  // }
+  if (
+    !prefixName ||
+    !prefixWord ||
+    verb === undefined ||
+    !meaning ||
+    !prefixTypeId
+  ) {
+    return { message: "All prefix fields, including 'verb', are required" };
   }
 
   // Check if the prefixWord already exists (case-insensitive)
@@ -129,6 +113,7 @@ const createPrefix = async (
     data: {
       prefixName,
       prefixWord,
+      verb,
       meaning,
       sentences,
       prefixTypeId,
@@ -137,14 +122,6 @@ const createPrefix = async (
 
   return prefix;
 };
-
-// Get all Prefixes
-// const getAllPrefixesFromDB = async (): Promise<Prefix[]> => {
-//   const prefixes = await prisma.prefix.findMany({
-//     include: { prefixType: true },
-//   });
-//   return prefixes;
-// };
 
 const getAllPrefixesFromDB = async (): Promise<Prefix[]> => {
   const prefixes = await prisma.prefix.findMany({
@@ -181,7 +158,8 @@ const updatePrefix = async (
   req: Request
 ): Promise<Prefix | { message: string }> => {
   const { prefixId } = req.params; // Get prefixId from request params
-  const { prefixName, prefixWord, meaning, sentences, prefixTypeId } = req.body;
+  const { prefixName, prefixWord, verb, meaning, sentences, prefixTypeId } =
+    req.body;
 
   const parsedPrefixId = parseInt(prefixId, 10);
   if (isNaN(parsedPrefixId)) {
@@ -202,6 +180,7 @@ const updatePrefix = async (
     data: {
       prefixName,
       prefixWord,
+      verb,
       meaning,
       sentences,
       prefixTypeId,
@@ -236,6 +215,7 @@ export const prefixService = {
   getAllPrefixTypesFromDB,
   getPrefixTypeFromDB,
   createPrefix,
+  deletePrefixType,
   getAllPrefixesFromDB,
   getPrefixFromDB,
   updatePrefix,

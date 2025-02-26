@@ -7,6 +7,10 @@ const router = express.Router();
 router.post("/type-create", prefixController.createPrefixType);
 router.get("/prefix-types", prefixController.getAllPrefixTypes);
 router.get("/prefix-type/:prefixTypeId", prefixController.getPrefixType);
+router.delete(
+  "/delete-prefixType/:prefixTypeId",
+  prefixController.deletePrefixTypeController
+);
 
 // Prefix Routes
 router.post("/create", prefixController.createPrefix);

@@ -155,8 +155,9 @@ model PrefixType {
 
 model Prefix {
   id                Int        @id @default(autoincrement())
-  prefixName        String  @unique // e.g., Er, Auf
-  prefixWord String // e.g., kennen, stehen
+  prefixName        String   // e.g., Er, Auf
+  prefixWord String  @unique// e.g., kennen, stehen
+  verb Boolean
   meaning           String[] // Array of meanings for the prefix-word
   sentences         String[] // Optional array of example sentences
   prefixTypeId      Int

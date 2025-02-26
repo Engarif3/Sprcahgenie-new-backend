@@ -71,6 +71,32 @@ const getPrefixType = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const deletePrefixTypeController = catchAsync(
+  async (req: Request, res: Response) => {
+    const { prefixTypeId } = req.params;
+
+    const parsedPrefixTypeId = parseInt(prefixTypeId, 10);
+
+    if (isNaN(parsedPrefixTypeId)) {
+      return sendResponse(res, {
+        statusCode: httpStatus.BAD_REQUEST,
+        success: false,
+        message: "Invalid PrefixType ID",
+        data: null,
+      });
+    }
+
+    const result = await prefixService.deletePrefixType(parsedPrefixTypeId);
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: result.message,
+      data: {},
+    });
+  }
+);
+
 // Create a new Prefix
 // const createPrefix = catchAsync(async (req: Request, res: Response) => {
 //   const result = await prefixService.createPrefix(req);
@@ -208,6 +234,7 @@ export const prefixController = {
   createPrefixType,
   getAllPrefixTypes,
   getPrefixType,
+  deletePrefixTypeController,
   createPrefix,
   getAllPrefixes,
   getPrefix,

@@ -23,10 +23,16 @@ export const insertPrefixesFromJson = async (req: Request, res: Response) => {
 
     // Insert each prefix into the database
     for (const prefix of jsonData) {
-      const { prefixName, prefixWord, meaning, sentences, prefixTypeId } =
+      const { prefixName, prefixWord, verb, meaning, sentences, prefixTypeId } =
         prefix;
 
-      if (!prefixName || !prefixWord || !meaning || !prefixTypeId) {
+      if (
+        !prefixName ||
+        !prefixWord ||
+        verb === undefined ||
+        !meaning ||
+        !prefixTypeId
+      ) {
         continue; // Skip invalid entries
       }
 
@@ -46,6 +52,7 @@ export const insertPrefixesFromJson = async (req: Request, res: Response) => {
           data: {
             prefixName,
             prefixWord,
+            verb,
             meaning,
             sentences,
             prefixTypeId,
