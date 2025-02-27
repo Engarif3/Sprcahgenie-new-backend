@@ -22,7 +22,7 @@ export const updateLevel = async (req: Request, res: Response) => {
 };
 
 // update topic
-export const updateTopic = async (req: any, res: any) => {
+export const createTopic = async (req: any, res: any) => {
   const { name } = req.body;
   try {
     const newTopic = await prisma.topic.create({
@@ -68,7 +68,7 @@ export const upDatePartsOfSpeech = async (req: any, res: any) => {
 };
 
 // update a word
-const normalizeCasing = (str: string) => str.toLowerCase().trim();
+// const normalizeCasing = (str: string) => str.toLowerCase().trim();
 
 // ==================================
 // this is corrected code also and no need of handle relations function for this
@@ -234,6 +234,7 @@ const normalizeCasing = (str: string) => str.toLowerCase().trim();
 //   }
 // };
 
+const normalizeCasing = (str: string) => str.toLowerCase().trim();
 const handleRelations = async (
   words: string[],
   relation: string,
@@ -249,17 +250,6 @@ const handleRelations = async (
   // Handle word additions and reciprocal relations
   for (const word of words) {
     const normalizedWord = normalizeCasing(word);
-
-    // // Check if the word already exists
-    // const existingWord = await prisma.word.findUnique({
-    //   where: { value: normalizedWord },
-    // });
-
-    // if (existingWord) {
-    //   console.log(`Word '${normalizedWord}' already exists.`);
-    //   continue; // Skip this word if it already exists
-    // }
-
     // Find or create the related word
     const wordEntity = await prisma.word.upsert({
       where: { value: normalizedWord },
@@ -359,7 +349,7 @@ const handleRelations = async (
 export const updateWord = async (req: any, res: any) => {
   try {
     const {
-      id,
+      // id,
       value,
       meaning,
       sentences,
@@ -372,12 +362,12 @@ export const updateWord = async (req: any, res: any) => {
       antonyms = [],
       similarWords = [],
     } = req.body;
-
+    const { id } = req.params;
     // Log the incoming request data for debugging
     console.log("Request body:", req.body);
 
     // Validate Required Fields
-    if (!id || !value || !meaning) {
+    if (!value || !meaning) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
@@ -420,29 +410,6 @@ export const updateWord = async (req: any, res: any) => {
         return word ? { id: word.id } : null;
       })
     );
-
-    // // Check if the word already exists (for conflict handling)
-    // const existingWord = await prisma.word.findUnique({
-    //   where: { value: normalizedValue },
-    // });
-
-    // if (existingWord && existingWord.id !== id) {
-    //   // If the word exists and has a different ID, return a conflict response
-    //   return res.status(409).json({
-    //     error: `The word '${normalizedValue}' already exists. Cannot update.`,
-    //   });
-    // }
-    // Update the word data
-    // const updatedWord = await prisma.word.update({
-    //   where: { id },
-    //   data: {
-    //     value: normalizedValue,
-    //     meaning: normalizedMeaning,
-    //     sentences,
-    //     ...parsedIds,
-    //     pluralForm: pluralForm ? normalizeCasing(pluralForm) : null,
-    //   },
-    // });
 
     const updatedWord = await prisma.word.update({
       where: { id: parseInt(id, 10) },

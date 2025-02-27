@@ -10,11 +10,7 @@ const router = express.Router();
 
 // =======================
 
-import {
-  createLevel,
-  createWord,
-  importWordsFromJson,
-} from "../../prisma/scripts/create";
+import { createWord, importWordsFromJson } from "../../prisma/scripts/create";
 import {
   deleteAllWords,
   deleteLevel,
@@ -31,10 +27,10 @@ import {
 } from "../../prisma/scripts/get";
 import { wordQuery } from "../../prisma/scripts/query";
 import {
+  createTopic,
   updateArticle,
   updateLevel,
   upDatePartsOfSpeech,
-  updateTopic,
   updateWord,
 } from "../../prisma/scripts/update";
 import {
@@ -50,6 +46,9 @@ import {
 import { conversationRoutes } from "../modules/Conversation/conversation.routes";
 import { prefixRoutes } from "../modules/Prefix/prefix.routes";
 import { insertPrefixesFromJson } from "../../dataToDb/InsertPrefix";
+import { topicRoutes } from "../modules/Word/Topic/topic.routes";
+import { levelRoutes } from "../modules/Word/Level/level.routes";
+import { wordRoutes } from "../modules/Word/Word/word.routes";
 // =======================
 
 const moduleRoutes = [
@@ -74,6 +73,19 @@ const moduleRoutes = [
     path: "/meta",
     route: MetaRoutes,
   },
+  // =============================App data=======================================
+  {
+    path: "/topic",
+    route: topicRoutes,
+  },
+  {
+    path: "/level",
+    route: levelRoutes,
+  },
+  {
+    path: "/word",
+    route: wordRoutes,
+  },
   {
     path: "/conversation",
     route: conversationRoutes,
@@ -85,11 +97,6 @@ const moduleRoutes = [
 ];
 
 // ==============================
-router.post("/levels", createLevel);
-
-// Endpoint to insert Topic data
-router.post("/topics", updateTopic);
-
 // Endpoint to insert Article data
 router.post("/articles", updateArticle);
 

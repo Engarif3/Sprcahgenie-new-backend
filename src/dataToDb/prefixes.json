@@ -1,90 +1,57 @@
 [
   {
-    "prefixName": "Über",
-    "prefixWord": "übersehen",
-    "meaning": ["to overlook", "to ignore"],
+    "prefixName": "Er",
+    "prefixWord": "Erteilen",
+    "meaning": ["to issue", "give"],
     "sentences": [
-      "Er hat den Fehler übersehen.",
-      "Ich übersehe manchmal kleine Details."
+      "Er erteilte mir die Erlaubnis.",
+      "Sie erteilte eine Genehmigung."
     ],
-    "prefixTypeId": 3,
+    "prefixTypeId": 2,
     "verb": true
   },
   {
-    "prefixName": "Über",
-    "prefixWord": "übergeben",
-    "meaning": ["to hand over", "to vomit"],
+    "prefixName": "Er",
+    "prefixWord": "Ersatz",
+    "meaning": ["replacement", "substitute"],
     "sentences": [
-      "Er übergab das Paket dem Kurier.",
-      "Nach dem Essen musste er sich übergeben."
+      "Dieser Ersatz war notwendig.",
+      "Er brachte einen guten Ersatz."
     ],
-    "prefixTypeId": 3,
-    "verb": true
+    "prefixTypeId": 2,
+    "verb": false
   },
   {
-    "prefixName": "Um",
-    "prefixWord": "umfahren",
-    "meaning": ["to drive around", "to run over"],
+    "prefixName": "Er",
+    "prefixWord": "Erfrischend",
+    "meaning": ["refreshing"],
     "sentences": [
-      "Ich umfahre das Hindernis vorsichtig.",
-      "Er hat das Verkehrsschild umgefahren."
+      "Das kühle Getränk war sehr erfrischend.",
+      "Das frische Wasser war ein Genuss."
     ],
-    "prefixTypeId": 3,
-    "verb": true
+    "prefixTypeId": 2,
+    "verb": false
   },
   {
-    "prefixName": "Unter",
-    "prefixWord": "untergehen",
-    "meaning": ["to sink", "to perish"],
+    "prefixName": "Er",
+    "prefixWord": "Ereignis",
+    "meaning": ["event", "incident"],
     "sentences": [
-      "Die Sonne geht langsam unter.",
-      "Das Schiff ist im Sturm untergegangen."
+      "Das Ereignis war ein großer Erfolg.",
+      "Wir haben das Ereignis aufmerksam verfolgt."
     ],
-    "prefixTypeId": 3,
-    "verb": true
+    "prefixTypeId": 2,
+    "verb": false
   },
   {
-    "prefixName": "Unter",
-    "prefixWord": "unterbrechen",
-    "meaning": ["to interrupt"],
+    "prefixName": "Er",
+    "prefixWord": "Erwachen",
+    "meaning": ["to awaken"],
     "sentences": [
-      "Bitte unterbrich mich nicht während der Präsentation.",
-      "Er unterbrach das Gespräch für eine wichtige Mitteilung."
+      "Er erwachte aus einem tiefen Schlaf.",
+      "Die Sonne weckte sie früh am Morgen."
     ],
-    "prefixTypeId": 3,
-    "verb": true
-  },
-  {
-    "prefixName": "Wider",
-    "prefixWord": "widersprechen",
-    "meaning": ["to contradict", "to object"],
-    "sentences": [
-      "Ich muss deiner Aussage widersprechen.",
-      "Er widersprach seiner Chefin nicht."
-    ],
-    "prefixTypeId": 3,
-    "verb": true
-  },
-  {
-    "prefixName": "Wieder",
-    "prefixWord": "wiederholen",
-    "meaning": ["to repeat"],
-    "sentences": [
-      "Könntest du bitte deine Frage wiederholen?",
-      "Ich habe die Übung mehrmals wiederholt."
-    ],
-    "prefixTypeId": 3,
-    "verb": true
-  },
-  {
-    "prefixName": "Um",
-    "prefixWord": "umschauen",
-    "meaning": ["to look around"],
-    "sentences": [
-      "Ich schaue mich in der neuen Stadt um.",
-      "Er schaute sich neugierig um."
-    ],
-    "prefixTypeId": 3,
+    "prefixTypeId": 2,
     "verb": true
   }
 ]
