@@ -49,6 +49,7 @@ import { insertPrefixesFromJson } from "../../dataToDb/InsertPrefix";
 import { topicRoutes } from "../modules/Word/Topic/topic.routes";
 import { levelRoutes } from "../modules/Word/Level/level.routes";
 import { wordRoutes } from "../modules/Word/Word/word.routes";
+import { cronJob } from "../../cronTest";
 // =======================
 
 const moduleRoutes = [
@@ -97,6 +98,9 @@ const moduleRoutes = [
 ];
 
 // ==============================
+// =========================cron =======================
+router.post("/cronJob", cronJob);
+// ================================================
 // Endpoint to insert Article data
 router.post("/articles", updateArticle);
 

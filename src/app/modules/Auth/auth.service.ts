@@ -125,17 +125,22 @@ const changePassword = async (user: any, payload: any) => {
 };
 
 const forgotPassword = async (payload: { email: string }) => {
-  const userData = await prisma.user.findUniqueOrThrow({
+  const userData = await prisma.user.findUnique({
     where: {
       email: payload.email,
       status: UserStatus.ACTIVE,
     },
   });
 
+  if (!userData) {
+    throw new Error("User does not exist");
+  }
+
   const resetPassToken = jwtHelpers.generateToken(
     { email: userData.email, role: userData.role },
     config.jwt.reset_pass_secret as Secret,
-    config.jwt.reset_pass_token_expires_in as string
+    // config.jwt.reset_pass_token_expires_in as string
+    "2m"
   );
   //console.log(resetPassToken)
 
@@ -181,7 +186,10 @@ const resetPassword = async (
   );
 
   if (!isValidToken) {
-    throw new ApiError(httpStatus.FORBIDDEN, "Forbidden!");
+    throw new ApiError(
+      httpStatus.FORBIDDEN,
+      "This link has expired or is invalid!"
+    );
   }
 
   // hash password
@@ -197,6 +205,8 @@ const resetPassword = async (
     },
   });
 };
+
+// ==================get reset password=====================
 
 // ============================
 const verifyEmail = async (token: string) => {

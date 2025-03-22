@@ -588,48 +588,40 @@ COMMENT ON FUNCTION extensions.grant_pg_graphql_access() IS 'Grants access to pg
 CREATE FUNCTION extensions.grant_pg_net_access() RETURNS event_trigger
     LANGUAGE plpgsql
     AS $$
-  BEGIN
-    IF EXISTS (
+BEGIN
+  IF EXISTS (
+    SELECT 1
+    FROM pg_event_trigger_ddl_commands() AS ev
+    JOIN pg_extension AS ext
+    ON ev.objid = ext.oid
+    WHERE ext.extname = 'pg_net'
+  )
+  THEN
+    IF NOT EXISTS (
       SELECT 1
-      FROM pg_event_trigger_ddl_commands() AS ev
-      JOIN pg_extension AS ext
-      ON ev.objid = ext.oid
-      WHERE ext.extname = 'pg_net'
+      FROM pg_roles
+      WHERE rolname = 'supabase_functions_admin'
     )
     THEN
-      IF NOT EXISTS (
-        SELECT 1
-        FROM pg_roles
-        WHERE rolname = 'supabase_functions_admin'
-      )
-      THEN
-        CREATE USER supabase_functions_admin NOINHERIT CREATEROLE LOGIN NOREPLICATION;
-      END IF;
-
-      GRANT USAGE ON SCHEMA net TO supabase_functions_admin, postgres, anon, authenticated, service_role;
-
-      IF EXISTS (
-        SELECT FROM pg_extension
-        WHERE extname = 'pg_net'
-        -- all versions in use on existing projects as of 2025-02-20
-        -- version 0.12.0 onwards don't need these applied
-        AND extversion IN ('0.2', '0.6', '0.7', '0.7.1', '0.8.0', '0.10.0', '0.11.0')
-      ) THEN
-        ALTER function net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) SECURITY DEFINER;
-        ALTER function net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) SECURITY DEFINER;
-
-        ALTER function net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) SET search_path = net;
-        ALTER function net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) SET search_path = net;
-
-        REVOKE ALL ON FUNCTION net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) FROM PUBLIC;
-        REVOKE ALL ON FUNCTION net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) FROM PUBLIC;
-
-        GRANT EXECUTE ON FUNCTION net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) TO supabase_functions_admin, postgres, anon, authenticated, service_role;
-        GRANT EXECUTE ON FUNCTION net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) TO supabase_functions_admin, postgres, anon, authenticated, service_role;
-      END IF;
+      CREATE USER supabase_functions_admin NOINHERIT CREATEROLE LOGIN NOREPLICATION;
     END IF;
-  END;
-  $$;
+
+    GRANT USAGE ON SCHEMA net TO supabase_functions_admin, postgres, anon, authenticated, service_role;
+
+    ALTER function net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) SECURITY DEFINER;
+    ALTER function net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) SECURITY DEFINER;
+
+    ALTER function net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) SET search_path = net;
+    ALTER function net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) SET search_path = net;
+
+    REVOKE ALL ON FUNCTION net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) FROM PUBLIC;
+    REVOKE ALL ON FUNCTION net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) FROM PUBLIC;
+
+    GRANT EXECUTE ON FUNCTION net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) TO supabase_functions_admin, postgres, anon, authenticated, service_role;
+    GRANT EXECUTE ON FUNCTION net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) TO supabase_functions_admin, postgres, anon, authenticated, service_role;
+  END IF;
+END;
+$$;
 
 
 ALTER FUNCTION extensions.grant_pg_net_access() OWNER TO postgres;
@@ -2577,8 +2569,7 @@ CREATE TABLE public.prefixes (
     meaning text[],
     sentences text[],
     "prefixTypeId" integer NOT NULL,
-    "prefixWord" text NOT NULL,
-    verb boolean NOT NULL
+    "prefixWord" text NOT NULL
 );
 
 
@@ -3163,12 +3154,17 @@ COPY pgsodium.key (id, status, created, expires, key_type, key_id, key_context, 
 --
 
 COPY public."Conversation" (id, topic, text, "levelId") FROM stdin;
-28	Gesunde Ernährung	[{"message": "Hallo zusammen! Ich habe neulich über gesunde Ernährung nachgedacht. Was denkt ihr, wie wichtig ist es, sich gesund zu ernähren?", "speaker": "Eva"}, {"message": "Hallo Eva! Ich finde es sehr wichtig, sich gesund zu ernähren. Es beeinflusst nicht nur unsere körperliche Gesundheit, sondern auch unsere Energie und Stimmung.", "speaker": "Markus"}, {"message": "Ja, das stimmt, Markus. Aber es ist manchmal schwer, sich gesund zu ernähren, besonders wenn man wenig Zeit hat oder viel arbeitet. Oft greift man dann zu schnellen, ungesunden Mahlzeiten.", "speaker": "Laura"}, {"message": "Das ist ein Problem, Laura. Aber ich denke, wenn man sich im Voraus plant, kann man auch im stressigen Alltag gesunde Mahlzeiten zubereiten. Zum Beispiel kann man am Wochenende Mahlzeiten vorkochen.", "speaker": "Eva"}, {"message": "Gute Idee, Eva! Ich habe auch angefangen, meine Mahlzeiten vorzubereiten. Das spart Zeit und hilft mir, mich gesünder zu ernähren.", "speaker": "Markus"}, {"message": "Ich versuche, mehr Obst und Gemüse in meine Ernährung zu integrieren. Es ist nicht nur gesund, sondern auch lecker und vielseitig.", "speaker": "Laura"}, {"message": "Ich stimme dir zu, Laura. Aber ich finde es manchmal schwierig, genug Gemüse zu essen, vor allem, wenn es nicht in vielen Gerichten vorkommt. Ich muss kreativer sein!", "speaker": "Markus"}, {"message": "Ja, man muss neue Rezepte ausprobieren. Zum Beispiel kann man Gemüse in Smoothies oder Suppen integrieren. So bekommt man viele Nährstoffe.", "speaker": "Eva"}, {"message": "Stimmt! Und was haltet ihr von vegetarischer oder veganer Ernährung? Ich habe überlegt, es auszuprobieren, aber es scheint mir schwierig zu sein, genug Eiweiß zu bekommen.", "speaker": "Laura"}, {"message": "Ich finde vegetarisch oder vegan eine gute Wahl, wenn man es richtig macht. Man muss sich nur gut informieren und auf eine ausgewogene Ernährung achten. Es gibt viele pflanzliche Eiweißquellen.", "speaker": "Markus"}, {"message": "Ich stimme dir zu, Markus. Es gibt viele leckere Rezepte, die auch ohne Fleisch gesund sind. Ich denke, es ist wichtig, sich Zeit zu nehmen und auf den eigenen Körper zu hören.", "speaker": "Eva"}, {"message": "Es ist wirklich eine Frage der Balance. Wenn man sich ausgewogen ernährt, fühlt man sich besser und hat mehr Energie.", "speaker": "Laura"}, {"message": "Ich denke, wir sind uns alle einig: Eine gesunde Ernährung ist wichtig und jeder sollte versuchen, für sich selbst das Beste zu tun.", "speaker": "Markus"}]	3
-29	Freizeitaktivitäten	[{"message": "Hallo zusammen! Was macht ihr in eurer Freizeit am liebsten? Ich versuche immer, mich zu entspannen, wenn ich Zeit habe.", "speaker": "Clara"}, {"message": "Hallo Clara! Ich gehe in meiner Freizeit gerne joggen. Es hilft mir, den Kopf freizubekommen und mich fit zu halten.", "speaker": "Felix"}, {"message": "Joggen ist eine gute Idee, Felix! Ich gehe auch gerne spazieren, vor allem in der Natur. Es ist eine tolle Möglichkeit, den Alltag zu vergessen.", "speaker": "Miriam"}, {"message": "Ich finde es auch schön, draußen zu sein. Aber ich spiele auch gerne Videospiele, besonders an Wochenenden, wenn ich etwas mehr Zeit habe.", "speaker": "Lukas"}, {"message": "Videospiele sind auch ein toller Zeitvertreib, Lukas! Aber ich versuche, meine Freizeit mit Aktivitäten zu füllen, die mich auch körperlich herausfordern. Zum Beispiel gehe ich ins Fitnessstudio.", "speaker": "Felix"}, {"message": "Das ist eine gute Balance, Felix! Ich finde es wichtig, auch aktiv zu bleiben. Aber manchmal mag ich es auch, einfach einen Film zu schauen oder ein Buch zu lesen.", "speaker": "Clara"}, {"message": "Ich liebe es, neue Filme zu entdecken! Aber ich bevorzuge es, draußen etwas zu unternehmen, besonders bei gutem Wetter. Ein Picknick im Park ist immer eine schöne Option.", "speaker": "Miriam"}, {"message": "Ja, Picknick ist eine tolle Idee, Miriam! Aber was ist mit kreativen Aktivitäten? Ich habe neulich mit Malen angefangen, es macht mir sehr viel Spaß.", "speaker": "Lukas"}, {"message": "Das klingt spannend, Lukas! Ich wollte auch mal etwas Kreatives ausprobieren, wie z.B. Basteln oder Kochen. Es ist eine gute Möglichkeit, sich zu entspannen und gleichzeitig etwas Neues zu lernen.", "speaker": "Clara"}, {"message": "Ich finde es immer interessant, neue Hobbys zu entdecken. Vielleicht sollte ich auch mehr in kreativen Bereichen wie Musik oder Kunst versuchen.", "speaker": "Felix"}, {"message": "Ja, es gibt so viele Dinge, die man in seiner Freizeit tun kann. Man muss nur die richtige Balance finden, damit man sich nicht überfordert fühlt.", "speaker": "Miriam"}, {"message": "Ich denke, wir haben viele gute Ideen gesammelt! Freizeit ist wichtig, um sich zu erholen und neue Energie zu tanken.", "speaker": "Lukas"}]	3
+26	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
+27	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
+28	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
+29	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
+30	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
+31	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
+16	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
 1	Büro vs Homeoffice	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}, {"message": "Das stimmt, aber ich finde es manchmal schwierig, mich zu konzentrieren. Zu Hause gibt es viele Ablenkungen, zum Beispiel Familie oder Haushalt. Im Büro bin ich produktiver.", "speaker": "Sophie"}, {"message": "Ich bin da eher zwiegespalten. Einerseits ist Homeoffice bequem, andererseits fehlt mir der soziale Kontakt mit meinen Kollegen. Man kann nicht einfach in der Kaffeepause über Ideen sprechen oder schnell Fragen klären.", "speaker": "Max"}, {"message": "Ja, genau! Ich denke, ein Hybridmodell wäre ideal. Also zum Beispiel drei Tage im Büro und zwei Tage Homeoffice. So hätte man sowohl Struktur als auch Flexibilität.", "speaker": "Lena"}, {"message": "Das klingt gut. Aber was ist mit Teamarbeit? Ich finde, dass Videokonferenzen nicht dasselbe sind wie persönliche Meetings.", "speaker": "David"}, {"message": "Stimmt, die Kommunikation ist im Büro oft effizienter. Aber Homeoffice hat auch Vorteile für die Work-Life-Balance. Man kann zum Beispiel während der Mittagspause spazieren gehen oder gesünder essen.", "speaker": "Sophie"}, {"message": "Gute Argumente! Vielleicht kommt es auch auf den Beruf an. In der IT-Branche ist Homeoffice einfacher als zum Beispiel in einem Krankenhaus oder einer Schule.", "speaker": "Max"}, {"message": "Das ist ein guter Punkt. Vielleicht sollten Unternehmen ihren Mitarbeitern mehr Freiheit geben, zu entscheiden, was für sie am besten funktioniert.", "speaker": "Lena"}, {"message": "Ja, das wäre fair. Ich denke, die Zukunft gehört der Flexibilität.", "speaker": "David"}, {"message": "Genau! Jeder arbeitet anders und braucht andere Bedingungen, um produktiv zu sein.", "speaker": "Sophie"}, {"message": "Super Diskussion! Ich finde, wir haben gute Argumente auf beiden Seiten gehört.", "speaker": "Max"}]	1
-27	Umweltschutz	[{"message": "Hallo zusammen! Ich habe neulich über Umweltschutz nachgedacht. Wie wichtig ist es für euch, etwas für die Umwelt zu tun?", "speaker": "Anna"}, {"message": "Hallo Anna! Ich finde Umweltschutz sehr wichtig. Ich versuche, weniger Plastik zu benutzen und mehr recyceln. Es ist wichtig, die Umwelt zu schützen, damit auch zukünftige Generationen in einer sauberen Welt leben können.", "speaker": "Tom"}, {"message": "Ja, ich stimme dir zu, Tom. Aber manchmal fällt es mir schwer, konsequent zu sein. Es ist nicht immer einfach, umweltfreundliche Entscheidungen zu treffen, vor allem wenn es mehr kostet oder weniger bequem ist.", "speaker": "Lisa"}, {"message": "Ich verstehe, was du meinst, Lisa. Aber ich glaube, wenn wir alle kleine Dinge ändern, können wir gemeinsam viel erreichen. Zum Beispiel könnte jeder versuchen, öfter das Fahrrad zu nehmen oder auf den Kauf von Einwegprodukten zu verzichten.", "speaker": "Paul"}, {"message": "Das stimmt, Paul. Ich habe vor kurzem auch angefangen, öfter auf das Auto zu verzichten und öffentliche Verkehrsmittel zu nutzen. Das hilft nicht nur der Umwelt, sondern auch meinem Geldbeutel.", "speaker": "Anna"}, {"message": "Ich finde auch, dass man schon bei der Ernährung umweltbewusst handeln kann. Zum Beispiel weniger Fleisch essen oder Produkte aus der Region kaufen. So unterstützt man auch die lokale Landwirtschaft.", "speaker": "Tom"}, {"message": "Gute Idee, Tom! Aber manchmal ist es schwierig, solche Entscheidungen im Alltag zu treffen, besonders wenn man wenig Zeit hat. Manchmal greift man einfach zu dem, was schnell und einfach ist.", "speaker": "Lisa"}, {"message": "Ja, aber ich denke, wenn man sich einmal an die neuen Gewohnheiten gewöhnt, wird es leichter. Man muss nur den ersten Schritt machen.", "speaker": "Paul"}, {"message": "Das stimmt, Paul. Ich versuche, mich mehr zu informieren und bewusster zu konsumieren. Es ist zwar eine Herausforderung, aber es lohnt sich.", "speaker": "Anna"}, {"message": "Genau, jeder kleine Schritt zählt. Ich hoffe, dass immer mehr Menschen erkennen, wie wichtig es ist, die Umwelt zu schützen.", "speaker": "Tom"}, {"message": "Ich denke, wir sollten alle unser Bestes tun. Es ist die Verantwortung von uns allen, unseren Planeten zu bewahren.", "speaker": "Lisa"}, {"message": "Eine tolle Diskussion! Ich finde es wichtig, dass wir uns gegenseitig motivieren und gemeinsam an einer besseren Zukunft arbeiten.", "speaker": "Paul"}]	3
-30	Reisen	[{"message": "Hallo zusammen! Ich liebe es, zu reisen. Welches Land oder welche Stadt möchtet ihr als nächstes besuchen?", "speaker": "Sarah"}, {"message": "Hallo Sarah! Ich würde gerne nach Japan reisen. Die Kultur und das Essen interessieren mich sehr. Außerdem möchte ich die schönen Tempel und die Natur dort erleben.", "speaker": "Jonas"}, {"message": "Japan klingt fantastisch, Jonas! Ich habe schon viel darüber gehört. Aber ich würde auch gerne nach Spanien reisen, besonders nach Barcelona. Die Architektur von Gaudí ist beeindruckend.", "speaker": "Anna"}, {"message": "Barcelona ist wirklich eine tolle Stadt, Anna! Aber ich habe vor kurzem einen Urlaub in Italien gemacht, und es war unglaublich. Die Sehenswürdigkeiten in Rom und die Strände in Sizilien sind einfach wunderschön.", "speaker": "Max"}, {"message": "Italien ist wirklich ein tolles Reiseziel, Max. Ich war auch schon dort, aber ich möchte unbedingt noch nach Griechenland. Die Inseln sollen sehr schön sein, und ich liebe griechisches Essen.", "speaker": "Sarah"}, {"message": "Griechenland klingt super, Sarah! Aber ich finde es auch spannend, neue Städte in Europa zu entdecken. Letztes Jahr war ich in Prag, und es war einfach zauberhaft.", "speaker": "Jonas"}, {"message": "Prag ist eine tolle Stadt, Jonas! Ich möchte auch gerne mal nach Skandinavien reisen, besonders nach Norwegen. Die Fjorde und die Natur sollen atemberaubend sein.", "speaker": "Anna"}, {"message": "Norwegen ist definitiv auf meiner Liste, Anna! Aber ich finde auch Fernreisen spannend. Ich habe gehört, dass Bali ein perfektes Ziel für einen entspannten Urlaub ist.", "speaker": "Max"}, {"message": "Ja, Bali steht auch auf meiner Wunschliste, Max! Aber ich denke, bevor ich so weit reise, möchte ich noch einige europäische Länder besser kennenlernen.", "speaker": "Sarah"}, {"message": "Ich verstehe, was du meinst, Sarah. Manchmal ist es auch schön, mehr von Europa zu sehen, bevor man große Reisen unternimmt. Ich habe zum Beispiel auch vor, nächstes Jahr nach Amsterdam zu fahren.", "speaker": "Jonas"}, {"message": "Amsterdam ist eine wunderbare Stadt, Jonas! Reisen ist eine tolle Möglichkeit, neue Kulturen kennenzulernen und unvergessliche Erlebnisse zu sammeln.", "speaker": "Anna"}, {"message": "Absolut, Anna! Ich freue mich schon darauf, bald wieder zu reisen und neue Abenteuer zu erleben.", "speaker": "Max"}]	3
-31	Sport und Fitness	[{"message": "Hallo zusammen! Macht ihr regelmäßig Sport? Ich habe vor kurzem angefangen, ins Fitnessstudio zu gehen, um fit zu bleiben.", "speaker": "Julia"}, {"message": "Hallo Julia! Ich mache regelmäßig Yoga und gehe zum Laufen. Es hilft mir, mich zu entspannen und fit zu bleiben. Aber Fitnessstudio ist auch eine gute Idee, wenn man gezielt Muskeln aufbauen möchte.", "speaker": "Daniel"}, {"message": "Ich gehe oft schwimmen, weil es sehr gut für den ganzen Körper ist. Es ist gelenkschonend und gleichzeitig ein tolles Cardio-Training.", "speaker": "Lisa"}, {"message": "Schwimmen ist wirklich eine großartige Sportart, Lisa! Ich habe es auch mal ausprobiert, aber ich finde, dass ich beim Laufen mehr Ausdauer aufbaue. Es ist so einfach, es in den Alltag zu integrieren.", "speaker": "Max"}, {"message": "Ja, Laufen ist wirklich praktisch, Max. Aber ich finde, dass es wichtig ist, auch die Flexibilität zu trainieren, deshalb mache ich regelmäßig Dehnübungen.", "speaker": "Julia"}, {"message": "Ich habe vor kurzem mit Pilates angefangen. Es ist auch super für die Flexibilität und stärkt den Rumpf. Ich finde, es ist eine gute Ergänzung zu anderen Sportarten.", "speaker": "Daniel"}, {"message": "Pilates klingt gut! Ich mache auch Krafttraining, um meine Muskeln zu stärken. Aber manchmal fällt es mir schwer, mich zu motivieren. Habt ihr Tipps, wie man die Motivation hochhält?", "speaker": "Lisa"}, {"message": "Motivation kann wirklich eine Herausforderung sein, Lisa. Ich setze mir kleine Ziele und belohne mich, wenn ich sie erreiche. Das hilft mir, am Ball zu bleiben.", "speaker": "Max"}, {"message": "Ich mache auch gerne Sport mit Freunden. Es macht viel mehr Spaß, zusammen zu trainieren. Vielleicht könntest du dich einer Trainingsgruppe anschließen, Lisa.", "speaker": "Julia"}, {"message": "Das ist eine tolle Idee, Julia! Zusammen macht Sport wirklich mehr Spaß. Ich denke, es ist auch wichtig, regelmäßig neue Sportarten auszuprobieren, um sich nicht zu langweilen.", "speaker": "Daniel"}, {"message": "Ja, das stimmt! Ich denke, der wichtigste Aspekt beim Sport ist, dass man Freude daran hat. Wenn man Spaß hat, bleibt man auch länger dabei.", "speaker": "Max"}]	3
+33	Diskussion	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	3
+34	Diskussionss	[{"message": "Hallo zusammen! Ich habe neulich einen Artikel über Homeoffice gelesen. Viele Unternehmen bieten jetzt die Möglichkeit, von zu Hause aus zu arbeiten. Was denkt ihr darüber?", "speaker": "Lena"}, {"message": "Hallo Lena! Ich persönlich finde Homeoffice super. Ich spare viel Zeit, weil ich nicht zur Arbeit pendeln muss. Außerdem kann ich meine Arbeitszeit flexibler gestalten.", "speaker": "David"}]	4
+36	Arifsd	[{"message": "Hallo...", "speaker": "Lena"}]	4
 \.
 
 
@@ -3225,9 +3221,6 @@ COPY public."_SynonymRelation" ("A", "B") FROM stdin;
 --
 
 COPY public._prisma_migrations (id, checksum, finished_at, migration_name, logs, rolled_back_at, started_at, applied_steps_count) FROM stdin;
-891c7b59-6a49-4739-95e8-6e579cc89352	1f09d361989afe01975048b254b4982bbce8015f622495ddd5f921374ebfa974	2025-02-25 16:50:17.489963+00	20250223170112_add_prefix_conversation	\N	\N	2025-02-25 16:50:17.136716+00	1
-99e05ea0-336d-4c78-8f77-b718c92efc31	048421eac9471e9d6d9759480c57206e466d9085ae9d502ed7441a1308825e65	2025-02-25 16:50:17.615846+00	20250224040917_add_prefix	\N	\N	2025-02-25 16:50:17.522488+00	1
-174e6918-9002-48e6-812e-0c76e76a9bd4	42c6ac5c603c585cab4c1949fec9ceac692ef9a9e3662968e2691986251fc5b6	2025-02-25 16:51:46.60754+00	20250225165146_boolean_added	\N	\N	2025-02-25 16:51:46.485021+00	1
 af8f97c6-b7b4-4d7c-bb8f-765f6d660ebe	1f09d361989afe01975048b254b4982bbce8015f622495ddd5f921374ebfa974	2025-02-24 04:57:08.493192+00	20250223170112_add_prefix_conversation	\N	\N	2025-02-24 04:57:08.210392+00	1
 abb715fc-812d-41b7-81de-6d69057151d8	048421eac9471e9d6d9759480c57206e466d9085ae9d502ed7441a1308825e65	2025-02-24 04:57:08.651282+00	20250224040917_add_prefix	\N	\N	2025-02-24 04:57:08.53877+00	1
 2f1037c5-4a77-4465-890e-db9fba56d790	1f09d361989afe01975048b254b4982bbce8015f622495ddd5f921374ebfa974	2025-02-23 18:02:21.674331+00	20250223170112_add_prefix_conversation	\N	\N	2025-02-23 18:02:21.413818+00	1
@@ -3262,12 +3255,6 @@ COPY public.articles (id, name) FROM stdin;
 
 COPY public.basic_users (id, email, name, "profilePhoto", "contactNumber", address, "isDeleted", "createdAt", "updatedAt") FROM stdin;
 13e9c82c-7e71-4ca8-9d85-1f89973cde15	almon.arif@gmail.com	Md Arifur Rahman	\N	\N	\N	f	2025-02-24 02:05:34.278	2025-02-24 02:05:34.278
-da6acff1-8b78-4f94-ab9e-3853ad75d42d	arif.aust.eng12@gmail.com	fsadfsd	\N	\N	\N	f	2025-03-04 17:43:02.084	2025-03-04 17:43:02.084
-1dce7086-88dc-452d-9ccd-427f1b68033f	jahanaraa719@gmail.com	jahanara	\N	\N	\N	f	2025-03-07 17:51:50.139	2025-03-07 17:51:50.139
-722796c4-eca8-4b3c-ade9-bee4087901f1	fssssdddffddd@gmaihfedtf.com	Asdfgh	\N	\N	\N	f	2025-03-07 21:23:24.707	2025-03-07 21:23:24.707
-3393583b-08ad-403b-b5f1-f1aebdf4819e	ibnaasif12@gmail.com	Asif	\N	\N	\N	f	2025-03-07 21:24:18.94	2025-03-07 21:24:18.94
-282ad498-bf99-411a-a47f-ddb2b7fc7f85	rumi.others@gmail.com	rumi	\N	\N	\N	f	2025-03-15 11:30:35.736	2025-03-15 11:30:35.736
-3ccc1172-2517-4b35-8ec3-edd8f016b116	bhua14bhua@gmail.com	Rahim	\N	\N	\N	f	2025-03-22 13:27:34.679	2025-03-22 13:27:34.679
 \.
 
 
@@ -3276,253 +3263,9 @@ da6acff1-8b78-4f94-ab9e-3853ad75d42d	arif.aust.eng12@gmail.com	fsadfsd	\N	\N	\N	
 --
 
 COPY public.favorite_words ("userId", "wordId") FROM stdin;
+b87b7be2-9e0e-4712-a647-e873e01d5439	1525
 b87b7be2-9e0e-4712-a647-e873e01d5439	1389
 b87b7be2-9e0e-4712-a647-e873e01d5439	1
-87273607-7b2d-441a-886a-d461af83be35	1525
-87273607-7b2d-441a-886a-d461af83be35	1389
-b87b7be2-9e0e-4712-a647-e873e01d5439	1525
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1272
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1273
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1274
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1275
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1276
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1277
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1278
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1279
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1283
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1284
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1286
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1287
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1292
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1295
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1300
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1301
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1305
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1309
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1312
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1313
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1318
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1319
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1322
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1323
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1327
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1328
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1333
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1338
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1340
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1353
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1362
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1372
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1373
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1374
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1375
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1377
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1378
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1388
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1383
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1204
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1205
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1242
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1241
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1240
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1238
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1235
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1234
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1231
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1225
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1223
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1222
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1220
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1218
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1217
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1214
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1210
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1251
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1254
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1256
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1258
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1263
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1264
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1266
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1267
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1268
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1389
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1390
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1394
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1402
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1403
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1409
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1410
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1413
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1422
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1423
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1424
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1427
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1436
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1437
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1435
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1434
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1430
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1428
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1440
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1444
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1446
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1447
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1449
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1450
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1451
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1453
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1454
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1457
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1467
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1473
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1474
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1475
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1478
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1484
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1492
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1493
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1494
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1497
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1499
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1509
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1512
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1513
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1514
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1515
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1516
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1517
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1518
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1522
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1523
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1524
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1520
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1526
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1527
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1529
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1540
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1541
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1542
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1545
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1551
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1552
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1554
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1555
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1560
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1561
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1562
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1565
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1569
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1579
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1580
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1582
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1583
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1584
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1585
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1586
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1587
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1588
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1589
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1592
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1593
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1594
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1595
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1599
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1598
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1601
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1602
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1603
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1604
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1605
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1609
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1611
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1612
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1615
-ff6adb91-458c-4202-99a2-b3dfb479c32e	1616
-ff6adb91-458c-4202-99a2-b3dfb479c32e	11
-ff6adb91-458c-4202-99a2-b3dfb479c32e	31
-ff6adb91-458c-4202-99a2-b3dfb479c32e	32
-ff6adb91-458c-4202-99a2-b3dfb479c32e	53
-ff6adb91-458c-4202-99a2-b3dfb479c32e	89
-ff6adb91-458c-4202-99a2-b3dfb479c32e	103
-ff6adb91-458c-4202-99a2-b3dfb479c32e	111
-ff6adb91-458c-4202-99a2-b3dfb479c32e	116
-ff6adb91-458c-4202-99a2-b3dfb479c32e	114
-ff6adb91-458c-4202-99a2-b3dfb479c32e	183
-ff6adb91-458c-4202-99a2-b3dfb479c32e	188
-ff6adb91-458c-4202-99a2-b3dfb479c32e	197
-ff6adb91-458c-4202-99a2-b3dfb479c32e	106
-ff6adb91-458c-4202-99a2-b3dfb479c32e	144
-ff6adb91-458c-4202-99a2-b3dfb479c32e	120
-ff6adb91-458c-4202-99a2-b3dfb479c32e	121
-ff6adb91-458c-4202-99a2-b3dfb479c32e	150
-ff6adb91-458c-4202-99a2-b3dfb479c32e	175
-ff6adb91-458c-4202-99a2-b3dfb479c32e	203
-ff6adb91-458c-4202-99a2-b3dfb479c32e	204
-ff6adb91-458c-4202-99a2-b3dfb479c32e	207
-ff6adb91-458c-4202-99a2-b3dfb479c32e	209
-ff6adb91-458c-4202-99a2-b3dfb479c32e	227
-ff6adb91-458c-4202-99a2-b3dfb479c32e	280
-ff6adb91-458c-4202-99a2-b3dfb479c32e	294
-ff6adb91-458c-4202-99a2-b3dfb479c32e	214
-ff6adb91-458c-4202-99a2-b3dfb479c32e	228
-ff6adb91-458c-4202-99a2-b3dfb479c32e	267
-ff6adb91-458c-4202-99a2-b3dfb479c32e	270
-ff6adb91-458c-4202-99a2-b3dfb479c32e	281
-ff6adb91-458c-4202-99a2-b3dfb479c32e	282
-ff6adb91-458c-4202-99a2-b3dfb479c32e	283
-ff6adb91-458c-4202-99a2-b3dfb479c32e	284
-ff6adb91-458c-4202-99a2-b3dfb479c32e	285
-ff6adb91-458c-4202-99a2-b3dfb479c32e	298
-ff6adb91-458c-4202-99a2-b3dfb479c32e	305
-ff6adb91-458c-4202-99a2-b3dfb479c32e	322
-ff6adb91-458c-4202-99a2-b3dfb479c32e	378
-ff6adb91-458c-4202-99a2-b3dfb479c32e	306
-ff6adb91-458c-4202-99a2-b3dfb479c32e	314
-ff6adb91-458c-4202-99a2-b3dfb479c32e	323
-ff6adb91-458c-4202-99a2-b3dfb479c32e	329
-ff6adb91-458c-4202-99a2-b3dfb479c32e	319
-ff6adb91-458c-4202-99a2-b3dfb479c32e	321
-ff6adb91-458c-4202-99a2-b3dfb479c32e	324
-ff6adb91-458c-4202-99a2-b3dfb479c32e	382
-ff6adb91-458c-4202-99a2-b3dfb479c32e	387
-ff6adb91-458c-4202-99a2-b3dfb479c32e	410
-ff6adb91-458c-4202-99a2-b3dfb479c32e	412
-ff6adb91-458c-4202-99a2-b3dfb479c32e	426
-ff6adb91-458c-4202-99a2-b3dfb479c32e	439
-ff6adb91-458c-4202-99a2-b3dfb479c32e	448
-ff6adb91-458c-4202-99a2-b3dfb479c32e	457
-ff6adb91-458c-4202-99a2-b3dfb479c32e	293
-ff6adb91-458c-4202-99a2-b3dfb479c32e	478
-ff6adb91-458c-4202-99a2-b3dfb479c32e	484
-ff6adb91-458c-4202-99a2-b3dfb479c32e	485
-ff6adb91-458c-4202-99a2-b3dfb479c32e	495
-ff6adb91-458c-4202-99a2-b3dfb479c32e	575
-ff6adb91-458c-4202-99a2-b3dfb479c32e	482
-ff6adb91-458c-4202-99a2-b3dfb479c32e	521
-ff6adb91-458c-4202-99a2-b3dfb479c32e	515
-ff6adb91-458c-4202-99a2-b3dfb479c32e	493
-ff6adb91-458c-4202-99a2-b3dfb479c32e	511
-ff6adb91-458c-4202-99a2-b3dfb479c32e	507
-ff6adb91-458c-4202-99a2-b3dfb479c32e	559
-ff6adb91-458c-4202-99a2-b3dfb479c32e	577
-ff6adb91-458c-4202-99a2-b3dfb479c32e	504
-ff6adb91-458c-4202-99a2-b3dfb479c32e	505
-ff6adb91-458c-4202-99a2-b3dfb479c32e	506
-ff6adb91-458c-4202-99a2-b3dfb479c32e	516
-ff6adb91-458c-4202-99a2-b3dfb479c32e	535
-ff6adb91-458c-4202-99a2-b3dfb479c32e	567
-ff6adb91-458c-4202-99a2-b3dfb479c32e	568
-ff6adb91-458c-4202-99a2-b3dfb479c32e	570
-ff6adb91-458c-4202-99a2-b3dfb479c32e	569
-ff6adb91-458c-4202-99a2-b3dfb479c32e	571
-ff6adb91-458c-4202-99a2-b3dfb479c32e	572
-ff6adb91-458c-4202-99a2-b3dfb479c32e	573
-ff6adb91-458c-4202-99a2-b3dfb479c32e	578
-ff6adb91-458c-4202-99a2-b3dfb479c32e	579
-b87b7be2-9e0e-4712-a647-e873e01d5439	100
-b87b7be2-9e0e-4712-a647-e873e01d5439	109
-b87b7be2-9e0e-4712-a647-e873e01d5439	113
 \.
 
 
@@ -3536,7 +3279,6 @@ COPY public.levels (id, level, "deletedAt") FROM stdin;
 3	B1	\N
 4	B2	\N
 5	C1	\N
-9	new topic createdddd	2025-02-27 08:26:00.379+00
 \.
 
 
@@ -3558,6 +3300,7 @@ COPY public.prefix_types (id, name) FROM stdin;
 1	Separable
 2	Inseparable
 3	Dual
+4	Unknown
 \.
 
 
@@ -3565,84 +3308,77 @@ COPY public.prefix_types (id, name) FROM stdin;
 -- Data for Name: prefixes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.prefixes (id, "prefixName", meaning, sentences, "prefixTypeId", "prefixWord", verb) FROM stdin;
-76	Er	{"to replace","to use","to employ","to deploy"}	{"Ich muss die alten Batterien ersetzen.","Das Unternehmen ersetzte die veraltete Software."}	2	Ersetzen	t
-77	Er	{"to experience"}	{"Ich habe viel über andere Kulturen erfahren.","Sie erfuhr von der neuen Regelung durch die Nachrichten."}	2	Erfahren	t
-78	Er	{"to experience","to witness"}	{"Ich habe eine spannende Reise erlebt.","Er erlebte viele Abenteuer während seines Urlaubs."}	2	Erleben	t
-79	Er	{"to invent"}	{"Er hat eine neue Technologie erfunden.","Viele glauben, dass Leonardo da Vinci das Flugzeugkonzept erfunden hat."}	2	Erfinden	t
-80	Er	{"to explain"}	{"Der Lehrer erklärt die Grammatik sehr gut.","Kannst du mir das bitte nochmal erklären?"}	2	Erklären	t
-81	Er	{"to reach"}	{"Ich habe endlich mein Ziel erreicht.","Er erreichte den höchsten Punkt des Berges."}	2	Erreichen	t
-82	Er	{"to allow"}	{"Meine Eltern erlauben mir, lange aufzubleiben.","Das Gesetz erlaubt das Rauchen in bestimmten Bereichen."}	2	Erlauben	t
-83	Er	{"to remind","to remember"}	{"Ich erinnere mich an meinen ersten Schultag.","Kannst du mich an das Meeting erinnern?"}	2	Erinnern	t
-84	Er	{"to increase"}	{"Die Firma hat die Gehälter erhöht.","Er erhöhte seine Laufgeschwindigkeit."}	2	Erhöhen	t
-85	Er	{"to recognize"}	{"Ich kann ihn nach all den Jahren kaum erkennen.","Er erkannte die Wahrheit sofort."}	2	Erkennen	t
-86	Er	{"to fight for","to win through effort"}	{"Er hat sich seinen Erfolg hart erkämpft.","Die Mannschaft erkämpfte sich den Sieg in der letzten Minute."}	2	Erkämpfen	t
-87	Er	{"to encourage"}	{"Meine Lehrerin hat mich immer ermutigt.","Die positiven Kommentare ermutigten ihn weiterzumachen."}	2	Ermutigen	t
-88	Er	{"to produce"}	{"Windkraft erzeugt saubere Energie.","Das Feuer erzeugt Wärme."}	2	Erzeugen	t
-89	Er	{"to receive","to get","to obtain"}	{"Ich habe eine E-Mail von meinem Chef erhalten.","Sie erhielt ein Geschenk zu ihrem Geburtstag."}	2	Erhalten	t
-90	Er	{"to require","to demand"}	{"Diese Arbeit erfordert viel Geduld.","Das Projekt erfordert eine sorgfältige Planung."}	2	Erfordern	t
-91	Er	{"to encourage"}	{"Die Regierung fördert den Umweltschutz.","Er fördert junge Talente in seiner Firma."}	2	Erfördern	t
-92	Er	{"to inquire","to investigate"}	{"Die Wissenschaftler erforschen neue Behandlungsmethoden.","Er erforschte die Geschichte seiner Familie."}	2	Erforschen	t
-93	Er	{"to complete","to take care of"}	{"Ich muss noch ein paar Dinge erledigen.","Er erledigte seine Aufgaben schnell und effizient."}	2	Erledigen	t
-94	Er	{"to expand","to extend"}	{"Das Unternehmen erweitert sein Geschäft.","Er erweiterte seine Sprachkenntnisse durch Reisen."}	2	Erweitern	t
-95	Er	{success}	{"Er hatte großen Erfolg in seinem Beruf.","Der Erfolg des Projekts war beeindruckend."}	2	Erfolg	f
-96	An	{"to look at","to examine"}	{"Ich möchte mir den Film anschauen.","Sie schaute sich das Gemälde genau an."}	1	anschauen	t
-97	An	{"to arrive"}	{"Der Zug kommt um 18 Uhr an.","Wann bist du zu Hause angekommen?"}	1	ankommen	t
-98	Auf	{"to open"}	{"Kannst du bitte das Fenster aufmachen?","Er machte die Tür vorsichtig auf."}	1	aufmachen	t
-99	Auf	{"to get up","to stand up"}	{"Ich stehe jeden Morgen um 7 Uhr auf.","Er stand während der Rede auf."}	1	aufstehen	t
-100	Aus	{"to execute","to perform"}	{"Der Computer führte den Befehl aus.","Er führte die Aufgabe erfolgreich aus."}	1	ausführen	t
-101	Aus	{"to come out","to get along"}	{"Er kommt gut mit seinen Kollegen aus.","Wann kommt der neue Film aus?"}	1	auskommen	t
-102	Ein	{"to press in","to dent"}	{"Bitte nicht zu stark eindrücken.","Er hat den Knopf eingedrückt."}	1	eindrücken	t
-103	Ein	{"to inhale"}	{"Atme tief ein und entspanne dich.","Er musste den Rauch einatmen."}	1	einatmen	t
-104	Mit	{"to come with"}	{"Kommst du mit ins Kino?","Er kam spontan mit uns mit."}	1	mitkommen	t
-105	Mit	{"to participate","to join in"}	{"Ich mache beim Wettbewerb mit.","Er hat beim Marathon mitgemacht."}	1	mitmachen	t
-106	Nach	{"to pursue","to trace"}	{"Er ging seiner Leidenschaft nach.","Die Polizei geht dem Hinweis nach."}	1	nachgehen	t
-107	Nach	{"to refill"}	{"Bitte füllen Sie das Glas nach.","Er hat den Drucker mit Papier nachgefüllt."}	1	nachfüllen	t
-108	Zu	{"to admit","to confess"}	{"Er musste seinen Fehler zugeben.","Ich gebe zu, dass ich mich geirrt habe."}	1	zugeben	t
-109	Zu	{"to authorize","to allow"}	{"Die Schule lässt keine Handys zu.","Er wurde zur Prüfung zugelassen."}	1	zulassen	t
-110	Er	{experience}	{"Sie hat viel Erfahrung in diesem Bereich.","Die Reise war eine wertvolle Erfahrung für mich."}	2	Erfahrung	f
-111	Er	{insight,realization}	{"Er hatte eine plötzliche Erkenntnis über sein Leben.","Die wissenschaftliche Erkenntnis hilft uns, die Welt besser zu verstehen."}	2	Erkenntnis	f
-147	Er	{"to issue",give}	{"Er erteilte mir die Erlaubnis.","Sie erteilte eine Genehmigung."}	2	Erteilen	t
-148	Er	{replacement,substitute}	{"Dieser Ersatz war notwendig.","Er brachte einen guten Ersatz."}	2	Ersatz	f
-112	Er	{memory}	{"Die Erinnerung an meine Kindheit ist sehr lebendig.","Er hat eine schöne Erinnerung an seine Schulzeit."}	2	Erinnerung	f
-113	Er	{permission}	{"Ich brauche die Erlaubnis meiner Eltern.","Er erhielt die Erlaubnis, das Gebäude zu betreten."}	2	Erlaubnis	f
-114	Er	{increase}	{"Die Erhöhung der Preise führte zu Protesten.","Eine Erhöhung des Gehalts ist immer willkommen."}	2	Erhöhung	f
-115	Er	{product,"manufactured good"}	{"Dieses Erzeugnis wird in Deutschland hergestellt.","Die Qualität des Erzeugnisses ist hervorragend."}	2	Erzeugnis	f
-116	Ein	{purchase,shopping}	{"Der Einkauf im Supermarkt dauerte eine Stunde.","Ich habe meinen Einkauf in der Tasche."}	1	Einkauf	f
-117	Ein	{impression}	{"Er machte einen guten Eindruck beim Vorstellungsgespräch.","Mein erster Eindruck von der Stadt war positiv."}	1	Eindruck	f
-118	Ein	{influence}	{"Seine Eltern haben einen großen Einfluss auf ihn.","Der Klimawandel hat einen Einfluss auf das Wetter."}	1	Einfluss	f
-119	Ein	{entrance}	{"Der Eingang zum Gebäude ist auf der rechten Seite.","Bitte benutzen Sie den Haupteingang."}	1	Eingang	f
-120	Ein	{unit,unity}	{"Kilogramm ist eine Einheit des Gewichts.","Die Menschen demonstrierten für Einheit und Frieden."}	1	Einheit	f
-121	Ein	{income,revenue,"intake (medicine)"}	{"Die Firma verzeichnete hohe Einnahmen im letzten Jahr.","Die Einnahme des Medikaments sollte regelmäßig erfolgen."}	1	Einnahme	f
-122	Ein	{invitation}	{"Ich habe eine Einladung zur Hochzeit bekommen.","Seine Einladung zum Abendessen war sehr nett."}	1	Einladung	f
-123	Ein	{insight,understanding}	{"Er zeigte Einsicht in seine Fehler.","Die Dokumente sind nur für autorisierte Personen zur Einsicht."}	1	Einsicht	f
-124	Ein	{inhabitant,resident}	{"Berlin hat über 3 Millionen Einwohner.","Die Einwohner der Stadt sind sehr freundlich."}	1	Einwohner	f
-125	Ein	{burglary,break-in}	{"Letzte Nacht gab es einen Einbruch in der Nachbarschaft.","Die Polizei untersucht den Einbruch im Museum."}	1	Einbruch	f
-126	Ein	{intervention,"procedure (medical)"}	{"Der Arzt führte einen kleinen Eingriff durch.","Ein politischer Eingriff ist in dieser Situation notwendig."}	1	Eingriff	f
-127	Ein	{facility,furnishing}	{"Die Einrichtung der neuen Wohnung ist sehr modern.","Krankenhäuser sind wichtige medizinische Einrichtungen."}	1	Einrichtung	f
-128	Ein	{assessment,evaluation}	{"Seine Einschätzung der Situation war korrekt.","Die Experten gaben eine Einschätzung zum Wirtschaftswachstum ab."}	1	Einschätzung	f
-129	Ein	{detail}	{"Er erklärte mir jede Einzelheit des Plans.","Die Einzelheiten des Vertrags müssen noch geklärt werden."}	1	Einzelheit	f
-130	Ein	{"to come to mind","to occur"}	{"Mir ist eine gute Idee eingefallen.","Fällt dir eine Lösung für dieses Problem ein?"}	1	einfallen	t
-131	Ein	{"to enter (data)","to input"}	{"Bitte geben Sie Ihr Passwort ein.","Er hat seine Adresse in das Formular eingegeben."}	1	eingeben	t
-132	Ein	{"to set up","to furnish"}	{"Wir müssen das neue Büro noch einrichten.","Er hat seinen Laptop neu eingerichtet."}	1	einrichten	t
-133	Ein	{"to switch on","to turn on"}	{"Kannst du bitte das Licht einschalten?","Ich habe den Computer gerade eingeschaltet."}	1	einschalten	t
-134	Ein	{"to enter","to join"}	{"Er trat langsam in den Raum ein.","Ich möchte in den Verein eintreten."}	1	eintreten	t
-135	Ein	{"to move in","to confiscate"}	{"Wir ziehen nächste Woche in unsere neue Wohnung ein.","Der Staat hat sein Eigentum eingezogen."}	1	einziehen	t
-136	Ein	{"to pack","to wrap"}	{"Vergiss nicht, deine Sachen einzupacken.","Ich packe das Geschenk schön ein."}	1	einpacken	t
-137	Ein	{"to invite"}	{"Ich lade dich zu meiner Geburtstagsfeier ein.","Er hat seine Freunde zum Essen eingeladen."}	1	einladen	t
-141	Um	{"to drive around","to run over"}	{"Ich umfahre das Hindernis vorsichtig.","Er hat das Verkehrsschild umgefahren."}	3	umfahren	t
-138	Ein	{"to go shopping"}	{"Wir gehen heute Abend einkaufen.","Er hat viele Lebensmittel eingekauft."}	1	einkaufen	t
-75	Er	{"to create","to construct","to build"}	{"Ich erstelle eine neue Webseite.","Er hat eine beeindruckende Skulptur erstellt."}	2	Erstellen	t
-139	Über	{"to overlook","to ignore"}	{"Er hat den Fehler übersehen.","Ich übersehe manchmal kleine Details."}	3	übersehen	t
-140	Über	{"to hand over","to vomit"}	{"Er übergab das Paket dem Kurier.","Nach dem Essen musste er sich übergeben."}	3	übergeben	t
-142	Unter	{"to sink","to perish"}	{"Die Sonne geht langsam unter.","Das Schiff ist im Sturm untergegangen."}	3	untergehen	t
-143	Unter	{"to interrupt"}	{"Bitte unterbrich mich nicht während der Präsentation.","Er unterbrach das Gespräch für eine wichtige Mitteilung."}	3	unterbrechen	t
-144	Wider	{"to contradict","to object"}	{"Ich muss deiner Aussage widersprechen.","Er widersprach seiner Chefin nicht."}	3	widersprechen	t
-145	Wieder	{"to repeat"}	{"Könntest du bitte deine Frage wiederholen?","Ich habe die Übung mehrmals wiederholt."}	3	wiederholen	t
-146	Um	{"to look around"}	{"Ich schaue mich in der neuen Stadt um.","Er schaute sich neugierig um."}	3	umschauen	t
-149	Er	{refreshing}	{"Das kühle Getränk war sehr erfrischend.","Das frische Wasser war ein Genuss."}	2	Erfrischend	f
-150	Er	{event,incident}	{"Das Ereignis war ein großer Erfolg.","Wir haben das Ereignis aufmerksam verfolgt."}	2	Ereignis	f
-151	Er	{"to awaken"}	{"Er erwachte aus einem tiefen Schlaf.","Die Sonne weckte sie früh am Morgen."}	2	Erwachen	t
+COPY public.prefixes (id, "prefixName", meaning, sentences, "prefixTypeId", "prefixWord") FROM stdin;
+5	Er	{"to recognize"}	{"Ich kann das Bild erkennen.","Er konnte die Musik sofort erkennen."}	2	Erkennen
+28	Er	{"to encourage"}	{"Die Regierung fördert den Umweltschutz.","Er fördert junge Talente in seiner Firma."}	2	Erfördern
+29	Er	{"to inquire","to investigate"}	{"Die Wissenschaftler erforschen neue Behandlungsmethoden.","Er erforschte die Geschichte seiner Familie."}	2	Erforschen
+6	Er	{"to explain"}	{"Kannst du mir die Aufgabe erklären?","Der Lehrer erklärte die Grammatik deutlich."}	2	Erklären
+7	Er	{"to invent"}	{"Wer hat das Telefon erfunden?","Er hat eine neue Maschine erfunden."}	2	Erfinden
+8	Er	{"to reach","to achieve"}	{"Ich habe mein Ziel erreicht.","Wir erreichen den Bahnhof in zehn Minuten."}	2	Erreichen
+9	Er	{"to expand","to extend"}	{"Er will sein Wissen erweitern.","Die Firma erweitert ihr Angebot."}	2	Erweitern
+16	Er	{"to awaken"}	{"Ich erwachte früh am Morgen.","Er erwachte aus einem tiefen Schlaf."}	2	Erwachen
+15	Er	{"to succumb","to fall victim"}	{"Er erlag seiner Krankheit.","Viele erlagen der Versuchung, das Angebot anzunehmen."}	2	Erliegen
+14	Er	{"to bloom","to flourish"}	{"Die Blumen erblühen im Frühling.","Seine Karriere erblühte nach harter Arbeit."}	2	Erblühen
+13	Er	{"to endure","to bear"}	{"Ich kann diesen Lärm nicht mehr ertragen.","Sie erträgt die Schmerzen tapfer."}	2	Ertragen
+12	Er	{"to tell","to narrate"}	{"Er erzählt eine spannende Geschichte.","Kannst du mir mehr über deine Reise erzählen?"}	2	Erzählen
+17	Er	{"to create","to construct","to build"}	{"Ich erstelle eine neue Webseite.","Er hat eine beeindruckende Skulptur erstellt."}	2	Erstellen
+11	Er	{"to replace","to use","to employ","to deploy"}	{"Ich muss die alten Batterien ersetzen.","Das Unternehmen ersetzte die veraltete Software."}	2	Ersetzen
+18	Er	{"to experience"}	{"Ich habe viel über andere Kulturen erfahren.","Sie erfuhr von der neuen Regelung durch die Nachrichten."}	2	Erfahren
+19	Er	{"to experience","to witness"}	{"Ich habe eine spannende Reise erlebt.","Er erlebte viele Abenteuer während seines Urlaubs."}	2	Erleben
+20	Er	{"to reach"}	{"Ich habe endlich mein Ziel erreicht.","Er erreichte den höchsten Punkt des Berges."}	2	erreichen
+21	Er	{"to allow"}	{"Meine Eltern erlauben mir, lange aufzubleiben.","Das Gesetz erlaubt das Rauchen in bestimmten Bereichen."}	2	Erlauben
+22	Er	{"to remind","to remember"}	{"Ich erinnere mich an meinen ersten Schultag.","Kannst du mich an das Meeting erinnern?"}	2	Erinnern
+23	Er	{"to increase"}	{"Die Firma hat die Gehälter erhöht.","Er erhöhte seine Laufgeschwindigkeit."}	2	Erhöhen
+24	Er	{"to fight for","to win through effort"}	{"Er hat sich seinen Erfolg hart erkämpft.","Die Mannschaft erkämpfte sich den Sieg in der letzten Minute."}	2	Erkämpfen
+25	Er	{"to encourage"}	{"Meine Lehrerin hat mich immer ermutigt.","Die positiven Kommentare ermutigten ihn weiterzumachen."}	2	Ermutigen
+26	Er	{"to produce"}	{"Windkraft erzeugt saubere Energie.","Das Feuer erzeugt Wärme."}	2	Erzeugen
+30	Er	{"to complete","to take care of"}	{"Ich muss noch ein paar Dinge erledigen.","Er erledigte seine Aufgaben schnell und effizient."}	2	Erledigen
+31	Er	{success}	{"Er hatte großen Erfolg in seinem Beruf.","Der Erfolg des Projekts war beeindruckend."}	4	Erfolg
+10	Er	{"to receive","to get","to obtain"}	{"Ich habe eine E-Mail von meinem Chef erhalten.","Sie erhielt ein Geschenk zu ihrem Geburtstag."}	2	Erhalten
+27	Er	{"to require","to demand"}	{"Diese Arbeit erfordert viel Geduld.","Das Projekt erfordert eine sorgfältige Planung."}	2	Erfordern
+32	Er	{experience}	{"Sie hat viel Erfahrung in diesem Bereich.","Die Reise war eine wertvolle Erfahrung für mich."}	4	Erfahrung
+33	Er	{insight,realization}	{"Er hatte eine plötzliche Erkenntnis über sein Leben.","Die wissenschaftliche Erkenntnis hilft uns, die Welt besser zu verstehen."}	4	Erkenntnis
+34	Er	{memory}	{"Die Erinnerung an meine Kindheit ist sehr lebendig.","Er hat eine schöne Erinnerung an seine Schulzeit."}	4	Erinnerung
+35	Er	{permission}	{"Ich brauche die Erlaubnis meiner Eltern.","Er erhielt die Erlaubnis, das Gebäude zu betreten."}	4	Erlaubnis
+36	Er	{increase}	{"Die Erhöhung der Preise führte zu Protesten.","Eine Erhöhung des Gehalts ist immer willkommen."}	4	Erhöhung
+37	Er	{product,"manufactured good"}	{"Dieses Erzeugnis wird in Deutschland hergestellt.","Die Qualität des Erzeugnisses ist hervorragend."}	4	Erzeugnis
+38	An	{"to look at","to examine"}	{"Ich möchte mir den Film anschauen.","Sie schaute sich das Gemälde genau an."}	1	anschauen
+39	An	{"to arrive"}	{"Der Zug kommt um 18 Uhr an.","Wann bist du zu Hause angekommen?"}	1	ankommen
+40	Auf	{"to open"}	{"Kannst du bitte das Fenster aufmachen?","Er machte die Tür vorsichtig auf."}	1	aufmachen
+41	Auf	{"to get up","to stand up"}	{"Ich stehe jeden Morgen um 7 Uhr auf.","Er stand während der Rede auf."}	1	aufstehen
+42	Aus	{"to execute","to perform"}	{"Der Computer führte den Befehl aus.","Er führte die Aufgabe erfolgreich aus."}	1	ausführen
+43	Aus	{"to come out","to get along"}	{"Er kommt gut mit seinen Kollegen aus.","Wann kommt der neue Film aus?"}	1	auskommen
+44	Ein	{"to press in","to dent"}	{"Bitte nicht zu stark eindrücken.","Er hat den Knopf eingedrückt."}	1	eindrücken
+45	Ein	{"to inhale"}	{"Atme tief ein und entspanne dich.","Er musste den Rauch einatmen."}	1	einatmen
+46	Mit	{"to come with"}	{"Kommst du mit ins Kino?","Er kam spontan mit uns mit."}	1	mitkommen
+47	Mit	{"to participate","to join in"}	{"Ich mache beim Wettbewerb mit.","Er hat beim Marathon mitgemacht."}	1	mitmachen
+48	Nach	{"to pursue","to trace"}	{"Er ging seiner Leidenschaft nach.","Die Polizei geht dem Hinweis nach."}	1	nachgehen
+49	Nach	{"to refill"}	{"Bitte füllen Sie das Glas nach.","Er hat den Drucker mit Papier nachgefüllt."}	1	nachfüllen
+50	Zu	{"to admit","to confess"}	{"Er musste seinen Fehler zugeben.","Ich gebe zu, dass ich mich geirrt habe."}	1	zugeben
+51	Zu	{"to authorize","to allow"}	{"Die Schule lässt keine Handys zu.","Er wurde zur Prüfung zugelassen."}	1	zulassen
+52	Ein	{purchase,shopping}	{"Der Einkauf im Supermarkt dauerte eine Stunde.","Ich habe meinen Einkauf in der Tasche."}	4	Einkauf
+53	Ein	{impression}	{"Er machte einen guten Eindruck beim Vorstellungsgespräch.","Mein erster Eindruck von der Stadt war positiv."}	4	Eindruck
+54	Ein	{influence}	{"Seine Eltern haben einen großen Einfluss auf ihn.","Der Klimawandel hat einen Einfluss auf das Wetter."}	4	Einfluss
+55	Ein	{entrance}	{"Der Eingang zum Gebäude ist auf der rechten Seite.","Bitte benutzen Sie den Haupteingang."}	4	Eingang
+56	Ein	{unit,unity}	{"Kilogramm ist eine Einheit des Gewichts.","Die Menschen demonstrierten für Einheit und Frieden."}	4	Einheit
+57	Ein	{income,revenue,"intake (medicine)"}	{"Die Firma verzeichnete hohe Einnahmen im letzten Jahr.","Die Einnahme des Medikaments sollte regelmäßig erfolgen."}	4	Einnahme
+58	Ein	{invitation}	{"Ich habe eine Einladung zur Hochzeit bekommen.","Seine Einladung zum Abendessen war sehr nett."}	4	Einladung
+59	Ein	{insight,understanding}	{"Er zeigte Einsicht in seine Fehler.","Die Dokumente sind nur für autorisierte Personen zur Einsicht."}	4	Einsicht
+60	Ein	{inhabitant,resident}	{"Berlin hat über 3 Millionen Einwohner.","Die Einwohner der Stadt sind sehr freundlich."}	4	Einwohner
+61	Ein	{burglary,break-in}	{"Letzte Nacht gab es einen Einbruch in der Nachbarschaft.","Die Polizei untersucht den Einbruch im Museum."}	4	Einbruch
+62	Ein	{intervention,"procedure (medical)"}	{"Der Arzt führte einen kleinen Eingriff durch.","Ein politischer Eingriff ist in dieser Situation notwendig."}	4	Eingriff
+63	Ein	{facility,furnishing}	{"Die Einrichtung der neuen Wohnung ist sehr modern.","Krankenhäuser sind wichtige medizinische Einrichtungen."}	4	Einrichtung
+64	Ein	{assessment,evaluation}	{"Seine Einschätzung der Situation war korrekt.","Die Experten gaben eine Einschätzung zum Wirtschaftswachstum ab."}	4	Einschätzung
+65	Ein	{detail}	{"Er erklärte mir jede Einzelheit des Plans.","Die Einzelheiten des Vertrags müssen noch geklärt werden."}	4	Einzelheit
+66	Ein	{"to come to mind","to occur"}	{"Mir ist eine gute Idee eingefallen.","Fällt dir eine Lösung für dieses Problem ein?"}	1	einfallen
+67	Ein	{"to enter (data)","to input"}	{"Bitte geben Sie Ihr Passwort ein.","Er hat seine Adresse in das Formular eingegeben."}	1	eingeben
+68	Ein	{"to set up","to furnish"}	{"Wir müssen das neue Büro noch einrichten.","Er hat seinen Laptop neu eingerichtet."}	1	einrichten
+69	Ein	{"to switch on","to turn on"}	{"Kannst du bitte das Licht einschalten?","Ich habe den Computer gerade eingeschaltet."}	1	einschalten
+70	Ein	{"to enter","to join"}	{"Er trat langsam in den Raum ein.","Ich möchte in den Verein eintreten."}	1	eintreten
+71	Ein	{"to move in","to confiscate"}	{"Wir ziehen nächste Woche in unsere neue Wohnung ein.","Der Staat hat sein Eigentum eingezogen."}	1	einziehen
+72	Ein	{"to pack","to wrap"}	{"Vergiss nicht, deine Sachen einzupacken.","Ich packe das Geschenk schön ein."}	1	einpacken
+73	Ein	{"to invite"}	{"Ich lade dich zu meiner Geburtstagsfeier ein.","Er hat seine Freunde zum Essen eingeladen."}	1	einladen
+74	Ein	{"to go shopping"}	{"Wir gehen heute Abend einkaufen.","Er hat viele Lebensmittel eingekauft."}	1	einkaufen
 \.
 
 
@@ -3671,14 +3407,8 @@ COPY public.topics (id, name) FROM stdin;
 --
 
 COPY public.users (id, email, password, name, role, "needPasswordChange", status, "verificationToken", "createdAt", "updatedAt") FROM stdin;
+d9a98059-2f81-4cfa-a9a3-04545a677972	arif.aust.eng@gmail.com	$2b$12$cPcCqPWXfchIvegltsCZ4OVkCHKyummLsXF.srkOo9qWm0mzaPwda	\N	SUPER_ADMIN	t	ACTIVE	\N	2025-02-24 00:12:02.922	2025-02-24 00:12:02.922
 b87b7be2-9e0e-4712-a647-e873e01d5439	almon.arif@gmail.com	$2b$12$KbhZ.Z4Qu0Tr3aXD8PINwuWQSxn56NRT2rjLtAKg97N71aOwDoUYi	Md Arifur Rahman	BASIC_USER	t	ACTIVE	\N	2025-02-24 02:05:34.088	2025-02-24 02:06:08.872
-3ca75515-e13d-473d-8a26-588c01d08329	arif.aust.eng12@gmail.com	$2b$12$LXzPYpQxZXBj5/pzziXwcu/9cs2h3aeBnU5zfujozpudXq248gI7m	fsadfsd	BASIC_USER	t	PENDING	0fa9a831128fa0f65095d0047e13190f95a3e9f0645ad82e8dd12d22a2b3ade8	2025-03-04 17:43:01.885	2025-03-04 17:43:01.885
-87273607-7b2d-441a-886a-d461af83be35	jahanaraa719@gmail.com	$2b$12$cCgmdNyvgMAhbdoXIobo6ujDQHjQIigtKKSns4ED.1TZZhKqae9rS	jahanara	BASIC_USER	t	ACTIVE	\N	2025-03-07 17:51:49.941	2025-03-07 17:52:25.781
-88fb3b35-c2c7-489f-a14d-037b03579fb1	fssssdddffddd@gmaihfedtf.com	$2b$12$w14adkCTn.oRi1lRzewYV.nHUXxd4P11TgiONuFnhflXUIgHy8FpK	Asdfgh	BASIC_USER	t	PENDING	10c6b6f5d7faf4e4ede027ecafe0bfcf8e5a7948eeda3b9ba35e53deaaa89756	2025-03-07 21:23:24.518	2025-03-07 21:23:24.518
-2772b6c8-0567-47ef-8576-fab77c8334bc	ibnaasif12@gmail.com	$2b$12$yX7kpMsPxa571ILbM5vLLOfXL4W9.6wpMtdSkK9ZZUGxuL4UYYEp.	Asif	BASIC_USER	t	ACTIVE	\N	2025-03-07 21:24:18.75	2025-03-07 21:25:07.581
-ff6adb91-458c-4202-99a2-b3dfb479c32e	rumi.others@gmail.com	$2b$12$v7SCUrVoB9yQGwwOnx1jN.z8a2fC/9pETTRtsTfFoV2H.qidk/Egq	rumi	BASIC_USER	t	ACTIVE	\N	2025-03-15 11:30:35.542	2025-03-15 11:32:06.042
-9f4a8394-3042-4ff4-b158-0d6110ed6efc	bhua14bhua@gmail.com	$2b$12$DSGj70w8EdzI7bMD3JklM.o4hjP1aHauBUv2OQS5A/PXAiXIEBlaa	Rahim	BASIC_USER	t	ACTIVE	\N	2025-03-22 13:27:34.49	2025-03-22 13:32:36.521
-d9a98059-2f81-4cfa-a9a3-04545a677972	arif.aust.eng@gmail.com	$2b$12$0G1ncjK1QAyZmDRhpQ0E0uRdABHZcI7i/Ui1kvLjZmWsCKyH2x45W	Super Admin	SUPER_ADMIN	t	ACTIVE	\N	2025-02-24 00:12:02.922	2025-03-22 15:07:53.649
 \.
 
 
@@ -3694,6 +3424,7 @@ COPY public.words_table (id, value, meaning, sentences, "levelId", "topicId", "a
 6	angenehm	{pleasant}	\N	3	2	\N	\N	\N
 7	annulliert	{cancelled}	\N	3	2	\N	\N	\N
 8	anzeigetafel	{"bulletin board"}	\N	3	2	2	\N	anzeigetafeln
+9	aufruf	{call}	\N	3	2	1	\N	\N
 10	ausgang	{exit}	\N	3	2	1	\N	ausgänge
 11	ausstattung	{equipment}	\N	3	2	2	\N	\N
 12	behälter	{container}	\N	3	2	1	\N	behälter
@@ -4686,6 +4417,7 @@ COPY public.words_table (id, value, meaning, sentences, "levelId", "topicId", "a
 1620	verantwortlich	{responsible}	{}	\N	1	\N	\N	\N
 1653	kämpfen	{fight,battle,"military conflict"}	{}	\N	1	\N	\N	\N
 1654	gemeinschaft	{association,community,society}	{}	\N	1	\N	\N	\N
+1663	mor	{shala}	{}	\N	1	\N	\N	\N
 1	abfall	{rubbish,garbage}	{}	3	2	1	\N	abfälle
 1664	absagen	{"to cancel"}	{}	3	1	\N	\N	\N
 1665	annullieren	{}	{}	3	1	\N	\N	\N
@@ -4693,7 +4425,6 @@ COPY public.words_table (id, value, meaning, sentences, "levelId", "topicId", "a
 1392	anmachen	{"to turn on( e.g. gerät",licht)}	{}	3	10	\N	\N	\N
 1666	ausmachen	{}	{}	3	10	\N	\N	\N
 1395	aufmachen	{"to open","(e.g. door",window)}	{}	3	10	\N	\N	\N
-1668		{}	{}	1	1	3	1	\N
 \.
 
 
@@ -4879,7 +4610,7 @@ SELECT pg_catalog.setval('public.articles_id_seq', 3, true);
 -- Name: levels_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.levels_id_seq', 9, true);
+SELECT pg_catalog.setval('public.levels_id_seq', 5, true);
 
 
 --
@@ -4900,21 +4631,21 @@ SELECT pg_catalog.setval('public.prefix_types_id_seq', 4, true);
 -- Name: prefixes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.prefixes_id_seq', 151, true);
+SELECT pg_catalog.setval('public.prefixes_id_seq', 74, true);
 
 
 --
 -- Name: topics_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.topics_id_seq', 14, true);
+SELECT pg_catalog.setval('public.topics_id_seq', 12, true);
 
 
 --
 -- Name: words_table_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.words_table_id_seq', 1678, true);
+SELECT pg_catalog.setval('public.words_table_id_seq', 1666, true);
 
 
 --
@@ -5648,13 +5379,6 @@ CREATE UNIQUE INDEX parts_of_speech_name_key ON public.parts_of_speech USING btr
 --
 
 CREATE UNIQUE INDEX prefix_types_name_key ON public.prefix_types USING btree (name);
-
-
---
--- Name: prefixes_prefixWord_key; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX "prefixes_prefixWord_key" ON public.prefixes USING btree ("prefixWord");
 
 
 --

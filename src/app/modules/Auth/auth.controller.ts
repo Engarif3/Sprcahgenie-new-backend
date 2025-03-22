@@ -74,9 +74,13 @@ const forgotPassword = catchAsync(async (req: Request, res: Response) => {
 });
 
 const resetPassword = catchAsync(async (req: Request, res: Response) => {
-  const token = req.headers.authorization || "";
+  const { token, id, password } = req.body;
 
-  await AuthServices.resetPassword(token, req.body);
+  if (!token || !id || !password) {
+    throw new Error("Missing required fields!");
+  }
+
+  await AuthServices.resetPassword(token, { id, password });
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -85,6 +89,8 @@ const resetPassword = catchAsync(async (req: Request, res: Response) => {
     data: null,
   });
 });
+
+// ==============================get reset pass ==========================
 
 // ======================================
 

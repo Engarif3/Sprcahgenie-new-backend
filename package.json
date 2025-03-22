@@ -8,6 +8,9 @@
     "build": "prisma generate && tsc",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "seed": "ts-node-dev --respawn --transpile-only src/seed.ts",
+    "test": "ts-node-dev --respawn --transpile-only src/cronTest.ts",
+    "start": "node dist/server.js",
+    "cron": "node dist/cronTest.js",
     "postinstall": "prisma generate"
   },
   "devDependencies": {
