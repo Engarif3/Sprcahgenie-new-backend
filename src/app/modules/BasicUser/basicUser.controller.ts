@@ -51,7 +51,7 @@ const deleteFromDB = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "BasicUser deleted successfully",
+    message: "User deleted successfully",
     data: result,
   });
 });

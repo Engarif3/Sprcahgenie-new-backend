@@ -56,6 +56,9 @@ const getAllFromDB = async (
         : {
             createdAt: "desc",
           },
+    include: {
+      user: { select: { id: true, status: true, role: true } },
+    },
   });
   const total = await prisma.basicUser.count({
     where: whereConditions,
@@ -113,6 +116,14 @@ const updateIntoDB = async (
 };
 
 const deleteFromDB = async (id: string): Promise<BasicUser | null> => {
+  const existingUser = await prisma.basicUser.findUnique({
+    where: { id },
+  });
+
+  if (!existingUser) {
+    throw new Error("User not found");
+  }
+
   const result = await prisma.$transaction(async (tx) => {
     const deletedBasicUser = await tx.basicUser.delete({
       where: {

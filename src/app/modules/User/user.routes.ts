@@ -52,8 +52,22 @@ router.patch(
   fileUploader.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
     req.body = JSON.parse(req.body.data);
-    return userController.updateMyProfie(req, res, next);
+    return userController.updateMyProfile(req, res, next);
   }
+);
+
+//set super user middleware
+router.patch(
+  "/update-status/:id",
+  auth(UserRole.SUPER_ADMIN),
+  userController.updateUserStatus
+);
+
+//set admin middleware here
+router.patch(
+  "/update-basicUser-status/:id",
+  auth(UserRole.ADMIN),
+  userController.updateBasicUserStatus
 );
 // =============================
 router.get("/verify-email", userController.verifyUserEmail);

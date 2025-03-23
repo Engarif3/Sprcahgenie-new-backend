@@ -322,7 +322,7 @@ const getMyProfile = async (user: IAuthUser) => {
   return { ...userInfo, ...profileInfo };
 };
 
-const updateMyProfie = async (user: IAuthUser, req: Request) => {
+const updateMyProfile = async (user: IAuthUser, req: Request) => {
   const userInfo = await prisma.user.findUniqueOrThrow({
     where: {
       email: user?.email,
@@ -364,11 +364,94 @@ const updateMyProfie = async (user: IAuthUser, req: Request) => {
   return { ...profileInfo };
 };
 
+// ======================== action on users and admins by super user ======================
+const updateUserStatus = async (
+  id: string,
+  status: string
+): Promise<User | null> => {
+  console.log("Updating user status:", { id, status }); // Debugging step
+
+  // Check if the user exists in the User table
+  const existingUser = await prisma.user.findUnique({
+    where: { id },
+  });
+
+  if (!existingUser) {
+    throw new Error("User not found");
+  }
+
+  // Normalize status value to match the enum (uppercase)
+  const statusFormatted = status?.toUpperCase();
+
+  // Validate status values
+  const validStatuses = [
+    UserStatus.ACTIVE,
+    UserStatus.BLOCKED,
+    UserStatus.DELETED,
+    UserStatus.PENDING,
+  ]; // Enums should be uppercase
+  if (!validStatuses.includes(statusFormatted as UserStatus)) {
+    throw new Error("Invalid status value");
+  }
+
+  // Update the user status
+  const updatedUser = await prisma.user.update({
+    where: { id },
+    data: { status: statusFormatted as UserStatus }, // Cast status as UserStatus enum
+  });
+
+  return updatedUser;
+};
+
+// ========================action on users by admins  ======================
+
+const updateBasicUserStatus = async (
+  id: string,
+  status: string
+): Promise<User | null> => {
+  console.log("Updating user status:", { id, status }); // Debugging step
+
+  // Check if the user exists in the User table
+  const existingUser = await prisma.user.findUnique({
+    where: { id: id, role: UserRole.BASIC_USER },
+  });
+
+  if (!existingUser) {
+    throw new Error(
+      "User not found or you are not authorized to perform this action"
+    );
+  }
+
+  // Normalize status value to match the enum (uppercase)
+  const statusFormatted = status?.toUpperCase();
+
+  // Validate status values
+  const validStatuses = [
+    UserStatus.ACTIVE,
+    UserStatus.BLOCKED,
+    UserStatus.DELETED,
+    UserStatus.PENDING,
+  ]; // Enums should be uppercase
+  if (!validStatuses.includes(statusFormatted as UserStatus)) {
+    throw new Error("Invalid status value");
+  }
+
+  // Update the user status
+  const updatedUser = await prisma.user.update({
+    where: { id },
+    data: { status: statusFormatted as UserStatus }, // Cast status as UserStatus enum
+  });
+
+  return updatedUser;
+};
+
 export const userService = {
   createAdmin,
   createBasicUser,
   getAllFromDB,
   changeProfileStatus,
   getMyProfile,
-  updateMyProfie,
+  updateMyProfile,
+  updateUserStatus,
+  updateBasicUserStatus,
 };

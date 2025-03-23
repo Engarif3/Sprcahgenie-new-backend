@@ -96,11 +96,11 @@ const getMyProfile = catchAsync(
   }
 );
 
-const updateMyProfie = catchAsync(
+const updateMyProfile = catchAsync(
   async (req: Request & { user?: IAuthUser }, res: Response) => {
     const user = req.user;
 
-    const result = await userService.updateMyProfie(user as IAuthUser, req);
+    const result = await userService.updateMyProfile(user as IAuthUser, req);
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
@@ -220,12 +220,52 @@ const verifyUserEmail = catchAsync(async (req: Request, res: Response) => {
 
 // ===================================
 
+// ========================action on users and admins by super users  ======================
+const updateUserStatus = catchAsync(async (req: Request, res: Response) => {
+  console.log("Received action request:", req.body); // Debugging step
+
+  const { id } = req.params;
+  const { status } = req.body; // Example: "active", "suspended", "banned"
+  const statusFormatted = status?.toUpperCase();
+
+  const result = await userService.updateUserStatus(id, statusFormatted);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: `User status updated to ${statusFormatted}`,
+    data: result,
+  });
+});
+
+// ========================action on users by admins  ======================
+const updateBasicUserStatus = catchAsync(
+  async (req: Request, res: Response) => {
+    console.log("Received action request:", req.body); // Debugging step
+
+    const { id } = req.params;
+    const { status } = req.body; // Example: "active", "suspended", "banned"
+    const statusFormatted = status?.toUpperCase();
+
+    const result = await userService.updateBasicUserStatus(id, statusFormatted);
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: `User status updated to ${statusFormatted}`,
+      data: result,
+    });
+  }
+);
+
 export const userController = {
   createAdmin,
   createBasicUser,
   getAllFromDB,
   changeProfileStatus,
   getMyProfile,
-  updateMyProfie,
+  updateMyProfile,
   verifyUserEmail,
+  updateUserStatus,
+  updateBasicUserStatus,
 };
