@@ -62,6 +62,11 @@ router.patch(
   auth(UserRole.SUPER_ADMIN),
   userController.updateUserStatus
 );
+router.patch(
+  "/update-role/:id",
+  // auth(UserRole.SUPER_ADMIN),
+  userController.updateUserRole
+);
 
 //set admin middleware here
 router.patch(

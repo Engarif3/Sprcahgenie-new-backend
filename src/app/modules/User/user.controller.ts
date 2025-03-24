@@ -237,6 +237,22 @@ const updateUserStatus = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const updateUserRole = catchAsync(async (req: Request, res: Response) => {
+  console.log("Received action request:", req.body); // Debugging step
+
+  const { id } = req.params;
+  const { role } = req.body; // Example: "basic_user", "admin", "super_admin"
+  const roleFormatted = role?.toUpperCase();
+
+  const result = await userService.updateUserRole(id, roleFormatted);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: `User role updated to ${roleFormatted}`,
+    data: result,
+  });
+});
 
 // ========================action on users by admins  ======================
 const updateBasicUserStatus = catchAsync(
@@ -268,4 +284,5 @@ export const userController = {
   verifyUserEmail,
   updateUserStatus,
   updateBasicUserStatus,
+  updateUserRole,
 };

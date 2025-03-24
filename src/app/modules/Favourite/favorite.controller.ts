@@ -153,10 +153,19 @@ export const getFavoriteWords = async (req: Request, res: Response) => {
       },
     });
 
+    // if (favoriteWords.length === 0) {
+    //   return res
+    //     .status(404)
+    //     .json({ error: "No favorite words found for this user" });
+    // }
+
+    // Instead of 404, return 200 with an empty array if no favorite words are found
     if (favoriteWords.length === 0) {
-      return res
-        .status(404)
-        .json({ error: "No favorite words found for this user" });
+      return res.status(200).json({
+        success: true,
+        message: "No favorite words found for this user",
+        data: [],
+      });
     }
 
     // Map the response to match your WordList structure

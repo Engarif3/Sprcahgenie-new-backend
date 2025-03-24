@@ -403,6 +403,48 @@ const updateUserStatus = async (
   return updatedUser;
 };
 
+// ======================update user role ====================
+
+const updateUserRole = async (
+  id: string,
+  role: string
+): Promise<User | null> => {
+  console.log("Updating user status:", { id, role }); // Debugging step
+
+  // Check if the user exists in the User table
+  const existingUser = await prisma.user.findUnique({
+    where: { id },
+  });
+
+  if (!existingUser) {
+    throw new Error("User not found");
+  }
+
+  // Normalize status value to match the enum (uppercase)
+  const roleFormatted = role?.toUpperCase();
+
+  // Validate status values
+  const validRoles = [
+    UserRole.BASIC_USER,
+    UserRole.ADMIN,
+    UserRole.SUPER_ADMIN,
+  ]; // Enums should be uppercase
+  if (!validRoles.includes(roleFormatted as UserRole)) {
+    throw new Error("Invalid role value");
+  }
+
+  if (roleFormatted === UserRole.SUPER_ADMIN) {
+    throw new Error("This action cannot be possible");
+  }
+  // Update the user status
+  const updatedUser = await prisma.user.update({
+    where: { id },
+    data: { role: roleFormatted as UserRole }, // Cast status as UserStatus enum
+  });
+
+  return updatedUser;
+};
+
 // ========================action on users by admins  ======================
 
 const updateBasicUserStatus = async (
@@ -454,4 +496,6 @@ export const userService = {
   updateMyProfile,
   updateUserStatus,
   updateBasicUserStatus,
+
+  updateUserRole,
 };
