@@ -271,19 +271,153 @@ interface UpdateWordPayload {
   similarWords: string[];
 }
 
-interface Metadata {
-  levelId: number;
-  topicId: number;
-  articleId: number;
-  partOfSpeechId: number;
-}
+// interface Metadata {
+//   levelId: number;
+//   topicId: number;
+//   articleId: number;
+//   partOfSpeechId: number;
+// }
+
+// const handleUpdateRelations = async (
+//   words: string[],
+//   relation: "synonyms" | "antonyms" | "similarWords",
+//   wordId: number,
+//   metadata: Metadata
+// ) => {
+//   for (const word of words) {
+//     const normalizedWord = normalizeCasing(word);
+//     const wordEntity = await prisma.word.upsert({
+//       where: { value: normalizedWord },
+//       update: {},
+//       create: {
+//         value: normalizedWord,
+//         meaning: [],
+//         sentences: [],
+//         ...metadata,
+//       },
+//     });
+
+//     await prisma.word.update({
+//       where: { id: wordId },
+//       data: { [relation]: { connect: { id: wordEntity.id } } },
+//     });
+
+//     const reverseRelation =
+//       relation === "synonyms"
+//         ? "synonyms"
+//         : relation === "antonyms"
+//         ? "antonyms"
+//         : "similarWords";
+
+//     await prisma.word.update({
+//       where: { id: wordEntity.id },
+//       data: { [reverseRelation]: { connect: { id: wordId } } },
+//     });
+//   }
+// };
+
+// export const updateWordInDB = async (
+//   wordId: number,
+//   payload: UpdateWordPayload
+// ): Promise<Word | { message: string }> => {
+//   // Validate required fields
+//   if (!payload.value || !payload.meaning) {
+//     return { message: "Value and meaning are required" };
+//   }
+
+//   // Parse IDs
+//   const parsedIds = {
+//     levelId: parseInt(payload.levelId, 10),
+//     topicId: parseInt(payload.topicId, 10),
+//     articleId: parseInt(payload.articleId, 10),
+//     partOfSpeechId: parseInt(payload.partOfSpeechId, 10),
+//   };
+
+//   if (Object.values(parsedIds).some(isNaN)) {
+//     return { message: "Invalid ID values provided" };
+//   }
+
+//   // Check word exists
+//   const existingWord = await prisma.word.findUnique({ where: { id: wordId } });
+//   if (!existingWord) {
+//     return { message: "Word not found" };
+//   }
+
+//   // Update main word
+//   const updatedWord = await prisma.word.update({
+//     where: { id: wordId },
+
+//     data: {
+//       value: normalizeCasing(payload.value),
+//       meaning: payload.meaning.map(normalizeCasing),
+//       sentences: payload.sentences,
+//       ...parsedIds,
+//       pluralForm: payload.pluralForm
+//         ? normalizeCasing(payload.pluralForm)
+//         : null,
+//     },
+//   });
+
+//   // Handle relationships
+//   await handleUpdateRelations(payload.synonyms, "synonyms", wordId, parsedIds);
+//   await handleUpdateRelations(payload.antonyms, "antonyms", wordId, parsedIds);
+//   await handleUpdateRelations(
+//     payload.similarWords,
+//     "similarWords",
+//     wordId,
+//     parsedIds
+//   );
+
+//   return updatedWord;
+// };
+
+// const handleUpdateRelations = async (
+//   words: string[],
+//   relation: "synonyms" | "antonyms" | "similarWords",
+//   wordId: number
+// ) => {
+//   for (const word of words) {
+//     const normalizedWord = normalizeCasing(word);
+//     const wordEntity = await prisma.word.upsert({
+//       where: { value: normalizedWord },
+//       update: {},
+//       create: {
+//         value: normalizedWord,
+//         meaning: [],
+//         sentences: [],
+//       },
+//     });
+
+//     await prisma.word.update({
+//       where: { id: wordId },
+//       data: { [relation]: { connect: { id: wordEntity.id } } },
+//     });
+
+//     const reverseRelation =
+//       relation === "synonyms"
+//         ? "synonyms"
+//         : relation === "antonyms"
+//         ? "antonyms"
+//         : "similarWords";
+
+//     await prisma.word.update({
+//       where: { id: wordEntity.id },
+//       data: { [reverseRelation]: { connect: { id: wordId } } },
+//     });
+//   }
+// };
 
 const handleUpdateRelations = async (
   words: string[],
   relation: "synonyms" | "antonyms" | "similarWords",
-  wordId: number,
-  metadata: Metadata
+  wordId: number
 ) => {
+  // First, remove all existing relations
+  await prisma.word.update({
+    where: { id: wordId },
+    data: { [relation]: { set: [] } }, // This disconnects all existing relations
+  });
+
   for (const word of words) {
     const normalizedWord = normalizeCasing(word);
     const wordEntity = await prisma.word.upsert({
@@ -293,7 +427,6 @@ const handleUpdateRelations = async (
         value: normalizedWord,
         meaning: [],
         sentences: [],
-        ...metadata,
       },
     });
 
@@ -346,6 +479,7 @@ export const updateWordInDB = async (
   // Update main word
   const updatedWord = await prisma.word.update({
     where: { id: wordId },
+
     data: {
       value: normalizeCasing(payload.value),
       meaning: payload.meaning.map(normalizeCasing),
@@ -358,16 +492,20 @@ export const updateWordInDB = async (
   });
 
   // Handle relationships
-  await handleUpdateRelations(payload.synonyms, "synonyms", wordId, parsedIds);
-  await handleUpdateRelations(payload.antonyms, "antonyms", wordId, parsedIds);
-  await handleUpdateRelations(
-    payload.similarWords,
-    "similarWords",
-    wordId,
-    parsedIds
-  );
+  await handleUpdateRelations(payload.synonyms, "synonyms", wordId);
+  await handleUpdateRelations(payload.antonyms, "antonyms", wordId);
+  await handleUpdateRelations(payload.similarWords, "similarWords", wordId);
 
-  return updatedWord;
+  return (
+    (await prisma.word.findUnique({
+      where: { id: wordId },
+      include: {
+        synonyms: { select: { id: true, value: true } },
+        antonyms: { select: { id: true, value: true } },
+        similarWords: { select: { id: true, value: true } },
+      },
+    })) || { message: "Failed to fetch updated word" }
+  );
 };
 
 // ==================delete a word =======================
