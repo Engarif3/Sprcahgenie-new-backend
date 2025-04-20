@@ -3189,7 +3189,6 @@ COPY public."_AntonymRelation" ("A", "B") FROM stdin;
 1392	1396
 1437	1395
 1395	1437
-609	1679
 \.
 
 
@@ -3200,7 +3199,6 @@ COPY public."_AntonymRelation" ("A", "B") FROM stdin;
 COPY public."_SimilarWordRelation" ("A", "B") FROM stdin;
 1620	1301
 1301	1620
-81	1664
 \.
 
 
@@ -3219,7 +3217,6 @@ COPY public."_SynonymRelation" ("A", "B") FROM stdin;
 1389	1436
 1404	1392
 1392	1404
-609	1679
 \.
 
 
@@ -3228,11 +3225,6 @@ COPY public."_SynonymRelation" ("A", "B") FROM stdin;
 --
 
 COPY public._prisma_migrations (id, checksum, finished_at, migration_name, logs, rolled_back_at, started_at, applied_steps_count) FROM stdin;
-13a087fd-7eb3-42c6-9fe2-63c5dd8ac75b	1f09d361989afe01975048b254b4982bbce8015f622495ddd5f921374ebfa974	2025-03-22 16:39:43.712809+00	20250223170112_add_prefix_conversation	\N	\N	2025-03-22 16:39:43.424788+00	1
-e8ec6e1c-8d98-4058-a698-8ef39417871e	048421eac9471e9d6d9759480c57206e466d9085ae9d502ed7441a1308825e65	2025-03-22 16:39:43.842433+00	20250224040917_add_prefix	\N	\N	2025-03-22 16:39:43.749676+00	1
-de6eecaa-14a2-4fbc-a70c-8f75fbfb8eff	42c6ac5c603c585cab4c1949fec9ceac692ef9a9e3662968e2691986251fc5b6	2025-03-22 16:39:43.97551+00	20250225165146_boolean_added	\N	\N	2025-03-22 16:39:43.878804+00	1
-b068280f-12d4-4d63-bf29-33bb66a38328	971f330643d71b03e3074c8fc517d22348baaf8a4d4b4236cbdfe558f5a79e0b	2025-03-22 16:39:44.104687+00	20250322153240_add_reset_token_used	\N	\N	2025-03-22 16:39:44.011223+00	1
-c732d36f-d1b2-441e-9144-9c3ff1c92661	b8100f7704775eed8b9a9c009edce54355653ae9114a04c4727e58ff5789be1b	2025-03-22 16:39:46.532443+00	20250322163946_add_reset_token_used	\N	\N	2025-03-22 16:39:46.437192+00	1
 891c7b59-6a49-4739-95e8-6e579cc89352	1f09d361989afe01975048b254b4982bbce8015f622495ddd5f921374ebfa974	2025-02-25 16:50:17.489963+00	20250223170112_add_prefix_conversation	\N	\N	2025-02-25 16:50:17.136716+00	1
 99e05ea0-336d-4c78-8f77-b718c92efc31	048421eac9471e9d6d9759480c57206e466d9085ae9d502ed7441a1308825e65	2025-02-25 16:50:17.615846+00	20250224040917_add_prefix	\N	\N	2025-02-25 16:50:17.522488+00	1
 174e6918-9002-48e6-812e-0c76e76a9bd4	42c6ac5c603c585cab4c1949fec9ceac692ef9a9e3662968e2691986251fc5b6	2025-02-25 16:51:46.60754+00	20250225165146_boolean_added	\N	\N	2025-02-25 16:51:46.485021+00	1
@@ -3261,7 +3253,6 @@ COPY public.articles (id, name) FROM stdin;
 1	der
 2	die
 3	das
-4	unknown
 \.
 
 
@@ -3270,13 +3261,13 @@ COPY public.articles (id, name) FROM stdin;
 --
 
 COPY public.basic_users (id, email, name, "profilePhoto", "contactNumber", address, "isDeleted", "createdAt", "updatedAt") FROM stdin;
+13e9c82c-7e71-4ca8-9d85-1f89973cde15	almon.arif@gmail.com	Md Arifur Rahman	\N	\N	\N	f	2025-02-24 02:05:34.278	2025-02-24 02:05:34.278
+da6acff1-8b78-4f94-ab9e-3853ad75d42d	arif.aust.eng12@gmail.com	fsadfsd	\N	\N	\N	f	2025-03-04 17:43:02.084	2025-03-04 17:43:02.084
+1dce7086-88dc-452d-9ccd-427f1b68033f	jahanaraa719@gmail.com	jahanara	\N	\N	\N	f	2025-03-07 17:51:50.139	2025-03-07 17:51:50.139
+722796c4-eca8-4b3c-ade9-bee4087901f1	fssssdddffddd@gmaihfedtf.com	Asdfgh	\N	\N	\N	f	2025-03-07 21:23:24.707	2025-03-07 21:23:24.707
 3393583b-08ad-403b-b5f1-f1aebdf4819e	ibnaasif12@gmail.com	Asif	\N	\N	\N	f	2025-03-07 21:24:18.94	2025-03-07 21:24:18.94
 282ad498-bf99-411a-a47f-ddb2b7fc7f85	rumi.others@gmail.com	rumi	\N	\N	\N	f	2025-03-15 11:30:35.736	2025-03-15 11:30:35.736
-833df8f5-3327-4aa8-a504-fd7f1c70a886	arif.aust.eng1@gmail.com	Rahim	\N	\N	\N	f	2025-03-22 21:32:53.748	2025-03-22 21:32:53.748
-d6cfb5c6-a447-4dd5-a1e7-203de94b9060	almon.arif@gmail.com	Md Arifur Rahman 	\N	\N	\N	f	2025-03-23 16:36:15.379	2025-03-23 16:36:15.379
-90d96eed-f4d9-4cb2-9533-8b6d61f7126d	ashiq.mamun10@gmail.com	Md Ashiqur Rahman	\N	\N	\N	f	2025-03-31 18:31:51.391	2025-03-31 18:31:51.391
-61386c05-ca17-4854-acf1-d0356673d4ad	riyadhbd2@gmail.com	Easir Arafat	\N	\N	\N	f	2025-04-06 21:08:28.019	2025-04-06 21:08:28.019
-f5e61b8c-ac07-40c9-963a-82913bc8d27d	sabbir.ziauddin@gmail.com	sabbir	\N	\N	\N	f	2025-04-13 12:04:38.965	2025-04-13 12:04:38.965
+3ccc1172-2517-4b35-8ec3-edd8f016b116	bhua14bhua@gmail.com	Rahim	\N	\N	\N	f	2025-03-22 13:27:34.679	2025-03-22 13:27:34.679
 \.
 
 
@@ -3285,28 +3276,46 @@ f5e61b8c-ac07-40c9-963a-82913bc8d27d	sabbir.ziauddin@gmail.com	sabbir	\N	\N	\N	f
 --
 
 COPY public.favorite_words ("userId", "wordId") FROM stdin;
+b87b7be2-9e0e-4712-a647-e873e01d5439	1389
+b87b7be2-9e0e-4712-a647-e873e01d5439	1
+87273607-7b2d-441a-886a-d461af83be35	1525
+87273607-7b2d-441a-886a-d461af83be35	1389
+b87b7be2-9e0e-4712-a647-e873e01d5439	1525
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1272
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1273
+ff6adb91-458c-4202-99a2-b3dfb479c32e	1274
+ff6adb91-458c-4202-99a2-b3dfb479c32e	1275
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1276
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1277
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1278
+ff6adb91-458c-4202-99a2-b3dfb479c32e	1279
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1283
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1284
+ff6adb91-458c-4202-99a2-b3dfb479c32e	1286
+ff6adb91-458c-4202-99a2-b3dfb479c32e	1287
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1292
+ff6adb91-458c-4202-99a2-b3dfb479c32e	1295
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1300
+ff6adb91-458c-4202-99a2-b3dfb479c32e	1301
+ff6adb91-458c-4202-99a2-b3dfb479c32e	1305
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1309
+ff6adb91-458c-4202-99a2-b3dfb479c32e	1312
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1313
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1318
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1319
+ff6adb91-458c-4202-99a2-b3dfb479c32e	1322
+ff6adb91-458c-4202-99a2-b3dfb479c32e	1323
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1327
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1328
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1333
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1338
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1340
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1353
+ff6adb91-458c-4202-99a2-b3dfb479c32e	1362
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1372
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1373
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1374
+ff6adb91-458c-4202-99a2-b3dfb479c32e	1375
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1377
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1378
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1388
@@ -3331,6 +3340,7 @@ ff6adb91-458c-4202-99a2-b3dfb479c32e	1210
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1251
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1254
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1256
+ff6adb91-458c-4202-99a2-b3dfb479c32e	1258
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1263
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1264
 ff6adb91-458c-4202-99a2-b3dfb479c32e	1266
@@ -3510,14 +3520,9 @@ ff6adb91-458c-4202-99a2-b3dfb479c32e	572
 ff6adb91-458c-4202-99a2-b3dfb479c32e	573
 ff6adb91-458c-4202-99a2-b3dfb479c32e	578
 ff6adb91-458c-4202-99a2-b3dfb479c32e	579
-3964588d-00cf-480b-86df-3951b6e8dc12	1525
-3964588d-00cf-480b-86df-3951b6e8dc12	1204
-3964588d-00cf-480b-86df-3951b6e8dc12	1442
-290b5077-a5ee-460c-8237-d48b3627ab79	1525
-3964588d-00cf-480b-86df-3951b6e8dc12	1389
-a9c3c486-1397-440a-883f-643cdd4cf819	1525
-a9c3c486-1397-440a-883f-643cdd4cf819	1440
-79669a3c-1fde-407d-9f89-f526dc98c7d3	1525
+b87b7be2-9e0e-4712-a647-e873e01d5439	100
+b87b7be2-9e0e-4712-a647-e873e01d5439	109
+b87b7be2-9e0e-4712-a647-e873e01d5439	113
 \.
 
 
@@ -3531,6 +3536,7 @@ COPY public.levels (id, level, "deletedAt") FROM stdin;
 3	B1	\N
 4	B2	\N
 5	C1	\N
+9	new topic createdddd	2025-02-27 08:26:00.379+00
 \.
 
 
@@ -3541,7 +3547,6 @@ COPY public.levels (id, level, "deletedAt") FROM stdin;
 COPY public.parts_of_speech (id, name) FROM stdin;
 1	noun
 2	verb
-3	unknown
 \.
 
 
@@ -3666,14 +3671,14 @@ COPY public.topics (id, name) FROM stdin;
 --
 
 COPY public.users (id, email, password, name, role, "needPasswordChange", status, "verificationToken", "createdAt", "updatedAt") FROM stdin;
-97cb74d9-eefd-40f7-8553-5d237a7ca491	almon.arif@gmail.com	$2b$12$Kr/RXHroawaU.3UzSP763eTFQInMU5OHkoV4AUv.sOCwIPQCXGu5m	Md Arifur Rahman 	ADMIN	t	ACTIVE	\N	2025-03-23 16:36:15.189	2025-03-24 17:20:25.472
-ff6adb91-458c-4202-99a2-b3dfb479c32e	rumi.others@gmail.com	$2b$12$v7SCUrVoB9yQGwwOnx1jN.z8a2fC/9pETTRtsTfFoV2H.qidk/Egq	rumi	BASIC_USER	t	ACTIVE	\N	2025-03-15 11:30:35.542	2025-03-24 18:22:23.835
-d9a98059-2f81-4cfa-a9a3-04545a677972	arif.aust.eng@gmail.com	$2b$12$1au5XCdxcTflz7d7Lj2LmuFhYH/t9jdQz.WN9obEXdc9yaDWl1UUO	Super Admin	SUPER_ADMIN	t	ACTIVE	\N	2025-02-24 00:12:02.922	2025-03-23 14:44:25.805
-3964588d-00cf-480b-86df-3951b6e8dc12	arif.aust.eng1@gmail.com	$2b$12$XrGcRFFukXcDPwZtdiA30OLhSwtmaD3trbGDyosEW40mts3W/iHGO	Rahim	BASIC_USER	t	ACTIVE	fdce63b08c766736a6d0452a570eeeb604a4beda1b1df1cdb18a593803dda669	2025-03-22 21:32:53.562	2025-03-24 18:26:08.632
-290b5077-a5ee-460c-8237-d48b3627ab79	ashiq.mamun10@gmail.com	$2b$12$48mh5yKxEmnySeyNiwInqeNbUgRz6bejMYgjnBeUNRbJRLsgseIyu	Md Ashiqur Rahman	BASIC_USER	t	ACTIVE	\N	2025-03-31 18:31:51.193	2025-03-31 18:34:40.851
-a9c3c486-1397-440a-883f-643cdd4cf819	riyadhbd2@gmail.com	$2b$12$bqoxjjVpedb5l/nDGBMxDe2QDrMfB/ggY2FgcjTt8xl5bsK..htpu	Easir Arafat	BASIC_USER	t	ACTIVE	\N	2025-04-06 21:08:27.813	2025-04-06 21:19:34.134
-2772b6c8-0567-47ef-8576-fab77c8334bc	ibnaasif12@gmail.com	$2b$12$yX7kpMsPxa571ILbM5vLLOfXL4W9.6wpMtdSkK9ZZUGxuL4UYYEp.	Asif	BASIC_USER	t	ACTIVE	\N	2025-03-07 21:24:18.75	2025-04-13 12:08:45.221
-79669a3c-1fde-407d-9f89-f526dc98c7d3	sabbir.ziauddin@gmail.com	$2b$12$xEv5hYDDBWI1kkqs4iOYf.YczMZ.BdJlzndkGfNMEK4O9MIAZEizi	sabbir	BASIC_USER	t	ACTIVE	\N	2025-04-13 12:04:38.769	2025-04-13 12:09:02.444
+b87b7be2-9e0e-4712-a647-e873e01d5439	almon.arif@gmail.com	$2b$12$KbhZ.Z4Qu0Tr3aXD8PINwuWQSxn56NRT2rjLtAKg97N71aOwDoUYi	Md Arifur Rahman	BASIC_USER	t	ACTIVE	\N	2025-02-24 02:05:34.088	2025-02-24 02:06:08.872
+3ca75515-e13d-473d-8a26-588c01d08329	arif.aust.eng12@gmail.com	$2b$12$LXzPYpQxZXBj5/pzziXwcu/9cs2h3aeBnU5zfujozpudXq248gI7m	fsadfsd	BASIC_USER	t	PENDING	0fa9a831128fa0f65095d0047e13190f95a3e9f0645ad82e8dd12d22a2b3ade8	2025-03-04 17:43:01.885	2025-03-04 17:43:01.885
+87273607-7b2d-441a-886a-d461af83be35	jahanaraa719@gmail.com	$2b$12$cCgmdNyvgMAhbdoXIobo6ujDQHjQIigtKKSns4ED.1TZZhKqae9rS	jahanara	BASIC_USER	t	ACTIVE	\N	2025-03-07 17:51:49.941	2025-03-07 17:52:25.781
+88fb3b35-c2c7-489f-a14d-037b03579fb1	fssssdddffddd@gmaihfedtf.com	$2b$12$w14adkCTn.oRi1lRzewYV.nHUXxd4P11TgiONuFnhflXUIgHy8FpK	Asdfgh	BASIC_USER	t	PENDING	10c6b6f5d7faf4e4ede027ecafe0bfcf8e5a7948eeda3b9ba35e53deaaa89756	2025-03-07 21:23:24.518	2025-03-07 21:23:24.518
+2772b6c8-0567-47ef-8576-fab77c8334bc	ibnaasif12@gmail.com	$2b$12$yX7kpMsPxa571ILbM5vLLOfXL4W9.6wpMtdSkK9ZZUGxuL4UYYEp.	Asif	BASIC_USER	t	ACTIVE	\N	2025-03-07 21:24:18.75	2025-03-07 21:25:07.581
+ff6adb91-458c-4202-99a2-b3dfb479c32e	rumi.others@gmail.com	$2b$12$v7SCUrVoB9yQGwwOnx1jN.z8a2fC/9pETTRtsTfFoV2H.qidk/Egq	rumi	BASIC_USER	t	ACTIVE	\N	2025-03-15 11:30:35.542	2025-03-15 11:32:06.042
+9f4a8394-3042-4ff4-b158-0d6110ed6efc	bhua14bhua@gmail.com	$2b$12$DSGj70w8EdzI7bMD3JklM.o4hjP1aHauBUv2OQS5A/PXAiXIEBlaa	Rahim	BASIC_USER	t	ACTIVE	\N	2025-03-22 13:27:34.49	2025-03-22 13:32:36.521
+d9a98059-2f81-4cfa-a9a3-04545a677972	arif.aust.eng@gmail.com	$2b$12$0G1ncjK1QAyZmDRhpQ0E0uRdABHZcI7i/Ui1kvLjZmWsCKyH2x45W	Super Admin	SUPER_ADMIN	t	ACTIVE	\N	2025-02-24 00:12:02.922	2025-03-22 15:07:53.649
 \.
 
 
@@ -3914,7 +3919,6 @@ COPY public.words_table (id, value, meaning, sentences, "levelId", "topicId", "a
 234	der klimawandel	{"climate change"}	\N	3	4	1	\N	\N
 235	die konservendose	{"preserving jars"}	\N	3	4	1	\N	\N
 389	befragen	{"to consult"}	\N	3	6	\N	\N	\N
-390	begeistern	{"to inspire"}	\N	3	6	\N	\N	\N
 236	der kunststoff	{"synthetic material"}	\N	3	4	1	\N	kunststoffe
 237	die luft	{air}	\N	3	4	1	\N	\N
 238	die matratze	{mattress}	\N	3	4	1	\N	\N
@@ -4067,6 +4071,7 @@ COPY public.words_table (id, value, meaning, sentences, "levelId", "topicId", "a
 386	der anstoß	{stimulus}	\N	3	6	1	\N	\N
 387	anstrengend	{tiring}	\N	3	6	\N	\N	\N
 388	das autorennen	{"motor racing"}	\N	3	6	1	\N	\N
+390	begeistern	{"to inspire"}	\N	3	6	\N	\N	\N
 391	beliebt	{popular}	\N	3	6	\N	\N	\N
 392	der biergarten	{"beer garden"}	\N	3	6	1	\N	\N
 393	das boxen	{boxing}	\N	3	6	1	\N	\N
@@ -4670,12 +4675,13 @@ COPY public.words_table (id, value, meaning, sentences, "levelId", "topicId", "a
 1623	der jura	{law}	{}	\N	1	\N	\N	\N
 1319	fordern	{"to demand"}	{}	3	9	\N	\N	\N
 516	fördern	{"to promote","to encourage"}	{}	3	7	\N	\N	\N
+609	erhalten	{"to receive"}	{"Ich erhalte eine Bestellung."}	2	1	\N	\N	\N
+1647	eigentlich	{actually}	{}	\N	1	\N	\N	\N
 1525	abdecken	{"to cover"}	{}	3	12	\N	\N	\N
 1650	decken	{}	{}	3	12	\N	\N	\N
 1651	ungewöhnlich	{uncommon}	{}	3	3	\N	\N	\N
 176	üblich	{normal,common}	{}	3	3	\N	\N	\N
 1270	abhängig	{dependent}	{}	3	9	\N	\N	\N
-1647	eigentlich	{actually}	{}	2	1	4	3	\N
 1301	eigenverantwortlich	{independent}	{}	3	9	\N	\N	\N
 1620	verantwortlich	{responsible}	{}	\N	1	\N	\N	\N
 1653	kämpfen	{fight,battle,"military conflict"}	{}	\N	1	\N	\N	\N
@@ -4687,9 +4693,7 @@ COPY public.words_table (id, value, meaning, sentences, "levelId", "topicId", "a
 1392	anmachen	{"to turn on( e.g. gerät",licht)}	{}	3	10	\N	\N	\N
 1666	ausmachen	{}	{}	3	10	\N	\N	\N
 1395	aufmachen	{"to open","(e.g. door",window)}	{}	3	10	\N	\N	\N
-609	erhalten	{"to receive"}	{"Ich erhalte eine Bestellung.","Ich habe eine Email erhalten."}	2	1	\N	\N	\N
-1679	bekommen	{"to get","to receive"}	{}	2	1	\N	\N	\N
-1755		{}	{}	2	1	4	3	\N
+1668		{}	{}	1	1	3	1	\N
 \.
 
 
@@ -4868,7 +4872,7 @@ SELECT pg_catalog.setval('public."Conversation_id_seq"', 36, true);
 -- Name: articles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.articles_id_seq', 5, true);
+SELECT pg_catalog.setval('public.articles_id_seq', 3, true);
 
 
 --
@@ -4882,7 +4886,7 @@ SELECT pg_catalog.setval('public.levels_id_seq', 9, true);
 -- Name: parts_of_speech_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.parts_of_speech_id_seq', 4, true);
+SELECT pg_catalog.setval('public.parts_of_speech_id_seq', 2, true);
 
 
 --
@@ -4910,7 +4914,7 @@ SELECT pg_catalog.setval('public.topics_id_seq', 14, true);
 -- Name: words_table_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.words_table_id_seq', 1784, true);
+SELECT pg_catalog.setval('public.words_table_id_seq', 1678, true);
 
 
 --

@@ -21,6 +21,11 @@ pg_dump -U <user> -h <host> -p <port> -d <database_name> -f "file_path"
 pg_dump -U postgres.lanpvzloduneuldoqqiw -h aws-0-eu-central-1.pooler.supabase.com -p 5432 -d postgres -f "E:\Sprcahgenie new backend\backup_sprachgenie.sql"
 3. type pass:
 
+alternatively set password before command:
+set PGPASSWORD=npg_lKig4pyqBx1G
+psql -U neondb_owner -h ep-old-sun-a2jd3f1u-pooler.eu-central-1.aws.neon.tech -p 5432 -d sprachgenie -f "backup_sprachgenie.sql" "sslmode=require"
+
+
 // restoring backup
 1. open cmd inside project root
 2. psql -U postgres.lanpvzloduneuldoqqiw -h aws-0-eu-central-1.pooler.supabase.com -p 5432 -d postgres -f "backup_sprachgenie.sql"
