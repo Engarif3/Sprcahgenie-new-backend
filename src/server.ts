@@ -1,4 +1,4 @@
-// this is needed only for local development
+// this is needed only for local development. automatic deploy with git reop connection with vercel doesnn't work with app.listen() function
 import { Server } from "http";
 import app from "./app";
 import config from "./config";
