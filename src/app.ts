@@ -1,3 +1,4 @@
+// deployment server start from this file
 import express, { Application, NextFunction, Request, Response } from "express";
 import cors from "cors";
 import router from "./app/routes";
@@ -36,7 +37,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req: Request, res: Response) => {
   res.send({
-    Message: "SprachGenie server running ....",
+    Message: "Sprach Genie server running ....",
   });
 });
 
