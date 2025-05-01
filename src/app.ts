@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req: Request, res: Response) => {
   res.send({
-    Message: "SprachGenie server running....",
+    Message: "SprachGenie server running ...",
   });
 });
 
