@@ -20,7 +20,8 @@ const createWord = async (
     synonyms = [],
     antonyms = [],
     similarWords = [],
-  } = req.body;
+    // } = req.body;
+  } = req.body || {};
 
   if (!value || !meaning || meaning.length === 0) {
     return { message: "Word value and meaning are required" };
@@ -39,11 +40,18 @@ const createWord = async (
   }
 
   // Convert IDs to Integers
+  // const parsedIds = {
+  //   levelId: parseInt(levelId, 10),
+  //   topicId: parseInt(topicId, 10),
+  //   articleId: parseInt(articleId, 10),
+  //   partOfSpeechId: parseInt(partOfSpeechId, 10),
+  // };
+
   const parsedIds = {
     levelId: parseInt(levelId, 10),
-    topicId: parseInt(topicId, 10),
-    articleId: parseInt(articleId, 10),
-    partOfSpeechId: parseInt(partOfSpeechId, 10),
+    topicId: topicId ? parseInt(topicId, 10) : 0,
+    articleId: articleId ? parseInt(articleId, 10) : 0,
+    partOfSpeechId: partOfSpeechId ? parseInt(partOfSpeechId, 10) : 0,
   };
 
   // Insert Word Data
