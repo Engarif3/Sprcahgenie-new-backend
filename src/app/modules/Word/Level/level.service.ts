@@ -49,6 +49,9 @@ const getAllLevelsFromDB = async (): Promise<Level[]> => {
     where: {
       deletedAt: null, // Only fetch levels that are not soft-deleted
     },
+    include: {
+      topics: true,
+    },
   });
   return levels;
 };
