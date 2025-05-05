@@ -49,6 +49,9 @@ const getAllTopicsFromDB = async (): Promise<Topic[]> => {
     orderBy: {
       id: "asc",
     },
+    include: {
+      level: true, // Include level data for the topic
+    },
   });
   return topics;
 };
@@ -57,6 +60,9 @@ const getAllTopicsFromDB = async (): Promise<Topic[]> => {
 const getTopicFromDB = async (topicId: number): Promise<Topic | null> => {
   const topic = await prisma.topic.findUnique({
     where: { id: topicId },
+    include: {
+      level: true, // Include level data for the topic
+    },
   });
   return topic;
 };
