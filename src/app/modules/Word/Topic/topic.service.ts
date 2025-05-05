@@ -3,20 +3,44 @@ import prisma from "../../../../shared/prisma";
 import { Topic } from "@prisma/client";
 
 // Create a new Topic
+// const createTopic = async (
+//   req: Request
+// ): Promise<Topic | { message: string }> => {
+//   const { name } = req.body;
+
+//   if (!name) {
+//     return { message: "Topic name is required" };
+//   }
+
+//   const newTopic = await prisma.topic.create({
+//     data: { name },
+//   });
+
+//   return newTopic;
+// };
+
 const createTopic = async (
   req: Request
 ): Promise<Topic | { message: string }> => {
-  const { name } = req.body;
+  const { name, levelId } = req.body;
 
-  if (!name) {
-    return { message: "Topic name is required" };
+  if (!name || !levelId) {
+    return { message: "Topic name and levelId are required" };
   }
 
-  const newTopic = await prisma.topic.create({
-    data: { name },
-  });
+  try {
+    const newTopic = await prisma.topic.create({
+      data: {
+        name,
+        levelId,
+      },
+    });
 
-  return newTopic;
+    return newTopic;
+  } catch (error) {
+    console.error("Error creating topic:", error);
+    return { message: "Failed to create topic" };
+  }
 };
 
 // Get all Topics

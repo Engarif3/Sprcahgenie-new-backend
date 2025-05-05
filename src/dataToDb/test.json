@@ -1,0 +1,263 @@
+[
+  {
+    "value": "Anschlusszug",
+    "meaning": ["connecting train"],
+    "sentences": [
+      "Der Anschlusszug fährt in fünf Minuten.",
+      "Wir müssen den Anschlusszug erreichen."
+    ],
+    "articleId": "1",
+    "pluralForm": "Anschlusszüge",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "ausblenden",
+    "meaning": ["to fade out"],
+    "sentences": [
+      "Bitte blenden Sie das Licht aus.",
+      "Kannst du den Text ausblenden?"
+    ],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "ausfallen",
+    "meaning": ["to be cancelled"],
+    "sentences": [
+      "Der Zug fällt heute aus.",
+      "Das Konzert ist wegen Regen ausgefallen."
+    ],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "aussteigen",
+    "meaning": ["to get out"],
+    "sentences": [
+      "Wir steigen an der nächsten Haltestelle aus.",
+      "Bitte vorsichtig aussteigen!"
+    ],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "Autofahren",
+    "meaning": ["to drive a car"],
+    "sentences": [
+      "Autofahren macht mir Spaß.",
+      "Sie lernt Autofahren in der Fahrschule."
+    ],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "Automat",
+    "meaning": ["vending machine"],
+    "sentences": [
+      "Der Automat gibt kein Wechselgeld.",
+      "Kauf dir einen Kaffee am Automaten."
+    ],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "Bahnfahren",
+    "meaning": ["rail travel"],
+    "sentences": [
+      "Bahnfahren ist umweltfreundlich.",
+      "Ich mag Bahnfahren im Winter."
+    ],
+    "articleId": "3",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "Bahnsteig",
+    "meaning": ["platform"],
+    "sentences": [
+      "Der Bahnsteig 3 ist für Regionalzüge.",
+      "Wir treffen uns am Bahnsteig."
+    ],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "bitten",
+    "meaning": ["to ask"],
+    "sentences": [
+      "Darf ich dich um Hilfe bitten?",
+      "Sie bittet um eine Fahrkarte."
+    ],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "buchen",
+    "meaning": ["to book"],
+    "sentences": [
+      "Ich buche eine Zugfahrkarte online.",
+      "Wir haben ein Hotelzimmer gebucht."
+    ],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "Dauer",
+    "meaning": ["duration"],
+    "sentences": [
+      "Die Dauer der Fahrt beträgt zwei Stunden.",
+      "Wie lange ist die Dauer des Films?"
+    ],
+    "articleId": "2",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "defekt",
+    "meaning": ["defective"],
+    "sentences": ["Der Automat ist defekt.", "Mein Handy-Akku ist defekt."],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "deshalb",
+    "meaning": ["hence"],
+    "sentences": [
+      "Der Zug ist voll, deshalb stehen wir.",
+      "Es regnet, deshalb bleiben wir zu Hause."
+    ],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "drehen",
+    "meaning": ["to turn"],
+    "sentences": [
+      "Drehen Sie den Schlüssel nach rechts.",
+      "Der Film dreht sich um Abenteuer."
+    ],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "drüben",
+    "meaning": ["over there"],
+    "sentences": [
+      "Das Café ist drüben an der Ecke.",
+      "Unser Sitzplatz ist drüben."
+    ],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "Einfahrt",
+    "meaning": ["entry"],
+    "sentences": [
+      "Die Einfahrt ist für Lieferwagen verboten.",
+      "Die Einfahrt zum Bahnhof ist blockiert."
+    ],
+    "articleId": "2",
+    "pluralForm": "Einfahrten",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "einsteigen",
+    "meaning": ["to board"],
+    "sentences": [
+      "Bitte erst einsteigen, dann Türen schließen.",
+      "Wir steigen in den Bus ein."
+    ],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "erhalten",
+    "meaning": ["to receive"],
+    "sentences": [
+      "Ich habe eine Bestätigung erhalten.",
+      "Sie erhielt eine Fahrkarte per E-Mail."
+    ],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "erreichen",
+    "meaning": ["to reach"],
+    "sentences": [
+      "Wir erreichen den Bahnhof pünktlich.",
+      "Kannst du mich unter dieser Nummer erreichen?"
+    ],
+    "articleId": "",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "Fahrkartenschalter",
+    "meaning": ["ticket office"],
+    "sentences": [
+      "Der Fahrkartenschalter schließt um 20 Uhr.",
+      "Kaufen Sie die Karte am Fahrkartenschalter."
+    ],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "Fahrplan",
+    "meaning": ["schedule"],
+    "sentences": [
+      "Der Fahrplan hängt am Brett.",
+      "Prüfe den Fahrplan für Verspätungen."
+    ],
+    "articleId": "1",
+    "pluralForm": "Fahrpläne",
+    "levelId": "2",
+    "topicId": "14"
+  },
+  {
+    "value": "Grund",
+    "meaning": ["ground"],
+    "sentences": [
+      "Der Zug steht ohne Grund still.",
+      "Aus Sicherheitsgründen bleibt die Tür zu."
+    ],
+    "articleId": "1",
+    "pluralForm": "",
+    "levelId": "2",
+    "topicId": "14"
+  }
+]

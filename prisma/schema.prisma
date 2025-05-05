@@ -106,6 +106,7 @@ model Level {
   level         String         @unique
   words         Word[]         @relation("WordLevel")
   conversations Conversation[]
+  topics        Topic[]        @relation("LevelTopics") 
   deletedAt     DateTime?      @db.Timestamptz // Use Timestamptz for PostgreSQL
 
   @@map("levels")
@@ -114,6 +115,8 @@ model Level {
 model Topic {
   id    Int    @id @default(autoincrement())
   name  String @unique
+  levelId Int
+  level   Level  @relation("LevelTopics", fields: [levelId], references: [id], onDelete: Cascade)
   words Word[] @relation("WordTopic")
 
   @@map("topics")
