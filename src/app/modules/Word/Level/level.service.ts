@@ -60,6 +60,9 @@ const getAllLevelsFromDB = async (): Promise<Level[]> => {
 const getLevelFromDB = async (levelId: number): Promise<Level | null> => {
   const level = await prisma.level.findUnique({
     where: { id: levelId },
+    include: {
+      topics: true,
+    },
   });
   return level;
 };
