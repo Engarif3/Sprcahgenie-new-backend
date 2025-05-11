@@ -639,7 +639,7 @@ export const updateWordInDB = async (
       value: normalizedValue,
       meaning: normalizedMeaning,
       sentences,
-      pluralForm: pluralForm ? normalizeCasing(pluralForm) : null,
+      pluralForm: pluralForm ? normalizeCasing(pluralForm),
       levelId: parsedIds.levelId,
       topicId: parsedIds.topicId,
       articleId: parsedIds.articleId,
