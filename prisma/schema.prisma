@@ -111,13 +111,12 @@ model WordHistory {
   id         Int      @id @default(autoincrement())
   wordId     Int
   userId     String
-  value      String
-  pluralForm  String
+  value      String?
+  pluralForm  String?
   meaning    String[]
   sentences  String[]
-  oldData        Json
+  oldData        Json?
   newData        Json
-  modifiedBy  String
   modifiedAt DateTime @default(now())
   modifiedFields  String[]
 

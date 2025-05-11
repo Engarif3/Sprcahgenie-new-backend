@@ -90,6 +90,7 @@ const getSingleWordController = catchAsync(
 );
 // =============================update word ==========================================
 const updateWordController = catchAsync(async (req: Request, res: Response) => {
+  const userId = req.body?.userId;
   const { id } = req.params;
   const parsedId = parseInt(id, 10);
 
@@ -102,7 +103,7 @@ const updateWordController = catchAsync(async (req: Request, res: Response) => {
     });
   }
 
-  const result = await wordService.updateWordInDB(parsedId, req.body);
+  const result = await wordService.updateWordInDB(parsedId, req.body, userId);
 
   if ("message" in result) {
     const statusCode =

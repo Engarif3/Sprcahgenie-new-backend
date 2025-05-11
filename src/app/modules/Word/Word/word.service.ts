@@ -560,7 +560,8 @@ const handleUpdateRelations = async (
 
 export const updateWordInDB = async (
   wordId: number,
-  payload: UpdateWordPayload
+  payload: UpdateWordPayload,
+  userId: string
 ): Promise<Word | { message: string }> => {
   const {
     value,
@@ -574,7 +575,6 @@ export const updateWordInDB = async (
     synonyms,
     antonyms,
     similarWords,
-    createdBy,
   } = payload;
 
   // Validation
@@ -620,7 +620,7 @@ export const updateWordInDB = async (
       sentences,
       pluralForm: pluralForm ? normalizeCasing(pluralForm) : null,
       ...parsedIds,
-      createdBy,
+      createdBy: userId,
       modifiedFields: [
         "value",
         ...(normalizedMeaning.length ? ["meaning"] : []),
@@ -635,30 +635,32 @@ export const updateWordInDB = async (
 
   await prisma.wordHistory.create({
     data: {
+      userId: userId,
       wordId: wordId,
       value: normalizedValue,
       meaning: normalizedMeaning,
       sentences,
-      pluralForm: pluralForm ? normalizeCasing(pluralForm),
-      levelId: parsedIds.levelId,
-      topicId: parsedIds.topicId,
-      articleId: parsedIds.articleId,
-      partOfSpeechId: parsedIds.partOfSpeechId,
-      modifiedBy: createdBy,
-      modifiedFields: updatedWord.modifiedFields, // if this exists
-      updatedAt: new Date(), // if not handled automatically
+      pluralForm: pluralForm ? normalizeCasing(pluralForm) : null,
+      modifiedFields: updatedWord.modifiedFields,
+      oldData: existingWord, // optional — can be omitted if not needed
+      newData: {
+        value: normalizedValue,
+        meaning: normalizedMeaning,
+        sentences,
+        pluralForm: pluralForm ? normalizeCasing(pluralForm) : null,
+      },
     },
   });
 
   // Recreate relations
-  await handleRelations(synonyms, "synonyms", wordId, parsedIds, createdBy);
-  await handleRelations(antonyms, "antonyms", wordId, parsedIds, createdBy);
+  await handleRelations(synonyms, "synonyms", wordId, parsedIds, userId);
+  await handleRelations(antonyms, "antonyms", wordId, parsedIds, userId);
   await handleRelations(
     similarWords,
     "similarWords",
     wordId,
     parsedIds,
-    createdBy
+    userId
   );
 
   return updatedWord;
