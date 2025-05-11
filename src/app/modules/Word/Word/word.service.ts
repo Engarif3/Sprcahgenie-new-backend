@@ -31,8 +31,6 @@ const createWord = async (
   const normalizedValue = normalizeCasing(value);
   const normalizedMeaning = meaning.map(normalizeCasing);
 
-  userId;
-
   // Check if the word already exists
   const existingWord = await prisma.word.findUnique({
     where: { value: normalizedValue },
