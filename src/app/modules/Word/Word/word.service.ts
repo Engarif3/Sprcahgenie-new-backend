@@ -39,14 +39,6 @@ const createWord = async (
     return { message: `The word '${normalizedValue}' already exists` };
   }
 
-  // Convert IDs to Integers
-  // const parsedIds = {
-  //   levelId: parseInt(levelId, 10),
-  //   topicId: parseInt(topicId, 10),
-  //   articleId: parseInt(articleId, 10),
-  //   partOfSpeechId: parseInt(partOfSpeechId, 10),
-  // };
-
   const parsedIds = {
     levelId: parseInt(levelId, 10),
     topicId: topicId ? parseInt(topicId, 10) : 0,
@@ -62,6 +54,15 @@ const createWord = async (
       sentences,
       pluralForm: pluralForm ? normalizeCasing(pluralForm) : null,
       ...parsedIds,
+      modifiedFields: [
+        "value",
+        ...(normalizedMeaning.length > 0 ? ["meaning"] : []),
+        ...(sentences?.length ? ["sentences"] : []),
+        ...(pluralForm ? ["pluralForm"] : []),
+        ...(synonyms.length ? ["synonyms"] : []),
+        ...(antonyms.length ? ["antonyms"] : []),
+        ...(similarWords.length ? ["similarWords"] : []),
+      ],
     },
   });
 
