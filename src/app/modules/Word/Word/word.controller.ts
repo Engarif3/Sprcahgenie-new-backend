@@ -83,7 +83,7 @@ const getSingleWordController = catchAsync(
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: "Word retrieved successfully...",
+      message: "Word retrieved successfully",
       data: result,
     });
   }

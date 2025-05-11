@@ -559,7 +559,6 @@ export const updateWordInDB = async (
         ...(antonyms.length ? ["antonyms"] : []),
         ...(similarWords.length ? ["similarWords"] : []),
       ],
-      createdBy: userId,
     },
   });
 
