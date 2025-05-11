@@ -6,7 +6,10 @@ import sendResponse from "../../../../shared/sendResponse";
 
 // Create a new Word
 const createWordController = catchAsync(async (req: Request, res: Response) => {
-  const userId = req.user?.userId;
+  const userId = req.body?.createdBy;
+  // const userId = req.header("Authorization");
+  console.log(req.headers);
+  console.log("user", userId);
   if (!userId) {
     return sendResponse(res, {
       statusCode: httpStatus.UNAUTHORIZED,
