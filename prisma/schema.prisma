@@ -114,6 +114,8 @@ model WordHistory {
   value      String
   meaning    String[]
   sentences  String[]
+  oldData        Json
+  newData        Json
   modifiedAt DateTime @default(now())
   modifiedFields  String[]
 
