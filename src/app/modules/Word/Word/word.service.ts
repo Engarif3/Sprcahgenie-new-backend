@@ -635,7 +635,6 @@ export const updateWordInDB = async (
 
   await prisma.wordHistory.create({
     data: {
-      userId: userId,
       wordId: wordId,
       value: normalizedValue,
       meaning: normalizedMeaning,
@@ -649,6 +648,7 @@ export const updateWordInDB = async (
         sentences,
         pluralForm: pluralForm ? normalizeCasing(pluralForm) : null,
       },
+      userId: userId,
     },
   });
 
