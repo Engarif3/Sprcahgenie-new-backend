@@ -6,7 +6,16 @@ import sendResponse from "../../../../shared/sendResponse";
 
 // Create a new Word
 const createWordController = catchAsync(async (req: Request, res: Response) => {
-  const result = await wordService.createWord(req);
+  const userId = req.user?.userId;
+  if (!userId) {
+    return sendResponse(res, {
+      statusCode: httpStatus.UNAUTHORIZED,
+      success: false,
+      message: "User not authenticated",
+      data: {},
+    });
+  }
+  const result = await wordService.createWord(req, userId);
 
   if ((result as { message: string }).message) {
     return sendResponse(res, {

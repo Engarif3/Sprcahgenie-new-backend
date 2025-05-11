@@ -6,7 +6,8 @@ import { Word, Topic, Level } from "@prisma/client";
 const normalizeCasing = (str: string) => str.toLowerCase().trim();
 // Create a new word
 const createWord = async (
-  req: Request
+  req: Request,
+  userId: string
 ): Promise<Word | { message: string }> => {
   const {
     value,
@@ -29,6 +30,8 @@ const createWord = async (
 
   const normalizedValue = normalizeCasing(value);
   const normalizedMeaning = meaning.map(normalizeCasing);
+
+  userId;
 
   // Check if the word already exists
   const existingWord = await prisma.word.findUnique({
@@ -54,6 +57,7 @@ const createWord = async (
       sentences,
       pluralForm: pluralForm ? normalizeCasing(pluralForm) : null,
       ...parsedIds,
+      createdBy: userId,
       modifiedFields: [
         "value",
         ...(normalizedMeaning.length > 0 ? ["meaning"] : []),
@@ -68,13 +72,19 @@ const createWord = async (
 
   // Handle relations (synonyms, antonyms, similarWords)
   if (synonyms.length > 0) {
-    await handleRelations(synonyms, "synonyms", newWord.id, parsedIds);
+    await handleRelations(synonyms, "synonyms", newWord.id, parsedIds, userId);
   }
   if (antonyms.length > 0) {
-    await handleRelations(antonyms, "antonyms", newWord.id, parsedIds);
+    await handleRelations(antonyms, "antonyms", newWord.id, parsedIds, userId);
   }
   if (similarWords.length > 0) {
-    await handleRelations(similarWords, "similarWords", newWord.id, parsedIds);
+    await handleRelations(
+      similarWords,
+      "similarWords",
+      newWord.id,
+      parsedIds,
+      userId
+    );
   }
 
   return newWord;
@@ -90,7 +100,8 @@ const handleRelations = async (
     topicId: number;
     articleId: number;
     partOfSpeechId: number;
-  }
+  },
+  createdBy: string
 ) => {
   for (const word of words) {
     const normalizedWord = normalizeCasing(word);
@@ -102,6 +113,7 @@ const handleRelations = async (
         meaning: [],
         sentences: [],
         ...metadata,
+        createdBy,
       },
     });
 
@@ -432,10 +444,20 @@ const handleUpdateRelations = async (
     const wordEntity = await prisma.word.upsert({
       where: { value: normalizedWord },
       update: {},
+      // create: {
+      //   value: normalizedWord,
+      //   meaning: [],
+      //   sentences: [],
+      // },
       create: {
         value: normalizedWord,
         meaning: [],
         sentences: [],
+        createdBy: "system", // or pass a valid userId
+        levelId: 1, // or some default or passed value
+        topicId: 0, // if not nullable
+        articleId: 0, // if not nullable
+        partOfSpeechId: 0, // if not nullable
       },
     });
 

@@ -23,6 +23,7 @@ model User {
   basicUser          BasicUser?
 
   favoriteWords FavoriteWord[] // Many-to-many relation with words
+  words     Word[]   @relation("WordCreator")
   wordModifications  WordHistory[]
 
   @@map("users")
@@ -98,6 +99,8 @@ model Word {
   similarTo    Word[] @relation("SimilarWordRelation") // Opposite side
 
   favoritedBy FavoriteWord[]
+  createdBy      String
+  creator        User     @relation("WordCreator", fields: [createdBy], references: [id], onDelete: Cascade)
   history        WordHistory[]
   modifiedFields  String[]
 
