@@ -633,6 +633,23 @@ export const updateWordInDB = async (
     },
   });
 
+  await prisma.wordHistory.create({
+    data: {
+      wordId: wordId,
+      value: normalizedValue,
+      meaning: normalizedMeaning,
+      sentences,
+      pluralForm: pluralForm ? normalizeCasing(pluralForm) : null,
+      levelId: parsedIds.levelId,
+      topicId: parsedIds.topicId,
+      articleId: parsedIds.articleId,
+      partOfSpeechId: parsedIds.partOfSpeechId,
+      modifiedBy: createdBy,
+      modifiedFields: updatedWord.modifiedFields, // if this exists
+      updatedAt: new Date(), // if not handled automatically
+    },
+  });
+
   // Recreate relations
   await handleRelations(synonyms, "synonyms", wordId, parsedIds, createdBy);
   await handleRelations(antonyms, "antonyms", wordId, parsedIds, createdBy);

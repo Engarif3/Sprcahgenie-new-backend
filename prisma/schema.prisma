@@ -112,6 +112,7 @@ model WordHistory {
   wordId     Int
   userId     String
   value      String
+  pluralForm  String
   meaning    String[]
   sentences  String[]
   oldData        Json
