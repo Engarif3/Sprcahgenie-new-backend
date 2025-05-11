@@ -218,6 +218,16 @@ export const getWordsListFromDB = async (
           email: true,
         },
       },
+      history: {
+        include: {
+          user: {
+            select: {
+              name: true,
+              email: true,
+            },
+          },
+        },
+      },
     },
     orderBy: { value: "asc" },
   });
