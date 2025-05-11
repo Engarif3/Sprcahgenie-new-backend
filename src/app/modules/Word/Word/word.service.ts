@@ -621,7 +621,7 @@ export const updateWordInDB = async (
       sentences,
       pluralForm: pluralForm ? normalizeCasing(pluralForm) : null,
       ...parsedIds,
-      createdBy: userId,
+
       modifiedFields: [
         "value",
         ...(normalizedMeaning.length ? ["meaning"] : []),
@@ -631,6 +631,7 @@ export const updateWordInDB = async (
         ...(antonyms.length ? ["antonyms"] : []),
         ...(similarWords.length ? ["similarWords"] : []),
       ],
+      createdBy: userId,
     },
   });
 
