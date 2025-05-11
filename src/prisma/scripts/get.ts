@@ -111,6 +111,12 @@ export const getWordsList = async (req: any, res: any) => {
         antonyms: true,
         similarWords: true,
       },
+      creator: {
+        select: {
+          name: true,
+          email: true,
+        },
+      },
       orderBy: {
         value: "asc",
       },
