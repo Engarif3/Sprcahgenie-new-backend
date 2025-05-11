@@ -54,7 +54,7 @@ const createWord = async (
       sentences,
       pluralForm: pluralForm ? normalizeCasing(pluralForm) : null,
       ...parsedIds,
-      createdBy: userId,
+
       modifiedFields: [
         "value",
         ...(normalizedMeaning.length > 0 ? ["meaning"] : []),
@@ -64,6 +64,7 @@ const createWord = async (
         ...(antonyms.length ? ["antonyms"] : []),
         ...(similarWords.length ? ["similarWords"] : []),
       ],
+      createdBy: userId,
     },
   });
 
