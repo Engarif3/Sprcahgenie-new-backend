@@ -7,6 +7,8 @@ const prisma = new PrismaClient();
 const normalizeCasing = (str: string) => str.toLowerCase().trim();
 // ==============================
 
+const createdBy = "d9a98059-2f81-4cfa-a9a3-04545a677972";
+
 const handleRelations = async (
   words: string[],
   relation: string,
@@ -17,6 +19,7 @@ const handleRelations = async (
     articleId: number;
     partOfSpeechId: number;
   },
+  createdBy: string,
   removeWords: string[] = []
 ) => {
   // Handle word additions and reciprocal relations
@@ -30,6 +33,7 @@ const handleRelations = async (
         meaning: [],
         sentences: [],
         ...metadata,
+        createdBy,
       },
     });
 
@@ -118,6 +122,7 @@ export const createWord = async (req: any, res: any) => {
       synonyms = [],
       antonyms = [],
       similarWords = [],
+      createdBy,
     } = req.body;
 
     if (!value || !meaning || meaning.length === 0) {
@@ -167,6 +172,7 @@ export const createWord = async (req: any, res: any) => {
         sentences,
         ...parsedIds,
         pluralForm: pluralForm ? normalizeCasing(pluralForm) : null,
+        createdBy: "d9a98059-2f81-4cfa-a9a3-04545a677972",
       },
     });
 
@@ -176,7 +182,8 @@ export const createWord = async (req: any, res: any) => {
         filteredSynonyms,
         "synonyms",
         newWord.id,
-        parsedIds
+        parsedIds,
+        createdBy
       );
     }
     if (filteredAntonyms.length > 0) {
@@ -184,7 +191,8 @@ export const createWord = async (req: any, res: any) => {
         filteredAntonyms,
         "antonyms",
         newWord.id,
-        parsedIds
+        parsedIds,
+        createdBy
       );
     }
     if (filteredSimilarWords.length > 0) {
@@ -192,7 +200,8 @@ export const createWord = async (req: any, res: any) => {
         filteredSimilarWords,
         "similarWords",
         newWord.id,
-        parsedIds
+        parsedIds,
+        createdBy
       );
     }
 
@@ -266,21 +275,35 @@ export const createWordLogic = async (
         sentences,
         ...parsedIds,
         pluralForm: pluralForm ? normalizeCasing(pluralForm) : null,
+        createdBy,
       },
     });
 
     if (synonyms.length > 0) {
-      await handleRelations(synonyms, "synonyms", newWord.id, parsedIds);
+      await handleRelations(
+        synonyms,
+        "synonyms",
+        newWord.id,
+        parsedIds,
+        createdBy
+      );
     }
     if (antonyms.length > 0) {
-      await handleRelations(antonyms, "antonyms", newWord.id, parsedIds);
+      await handleRelations(
+        antonyms,
+        "antonyms",
+        newWord.id,
+        parsedIds,
+        createdBy
+      );
     }
     if (similarWords.length > 0) {
       await handleRelations(
         similarWords,
         "similarWords",
         newWord.id,
-        parsedIds
+        parsedIds,
+        createdBy
       );
     }
 
