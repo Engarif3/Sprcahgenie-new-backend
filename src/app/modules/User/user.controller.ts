@@ -225,10 +225,14 @@ const updateUserStatus = catchAsync(async (req: Request, res: Response) => {
   console.log("Received action request:", req.body); // Debugging step
 
   const { id } = req.params;
-  const { status } = req.body; // Example: "active", "suspended", "banned"
+  const { status, performedById } = req.body; // Example: "active", "suspended", "banned"
   const statusFormatted = status?.toUpperCase();
 
-  const result = await userService.updateUserStatus(id, statusFormatted);
+  const result = await userService.updateUserStatus(
+    id,
+    statusFormatted,
+    performedById
+  );
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -241,10 +245,14 @@ const updateUserRole = catchAsync(async (req: Request, res: Response) => {
   console.log("Received action request:", req.body); // Debugging step
 
   const { id } = req.params;
-  const { role } = req.body; // Example: "basic_user", "admin", "super_admin"
+  const { role, performedById } = req.body; // Example: "basic_user", "admin", "super_admin"
   const roleFormatted = role?.toUpperCase();
 
-  const result = await userService.updateUserRole(id, roleFormatted);
+  const result = await userService.updateUserRole(
+    id,
+    roleFormatted,
+    performedById
+  );
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -257,13 +265,15 @@ const updateUserRole = catchAsync(async (req: Request, res: Response) => {
 // ========================action on users by admins  ======================
 const updateBasicUserStatus = catchAsync(
   async (req: Request, res: Response) => {
-    console.log("Received action request:", req.body); // Debugging step
-
     const { id } = req.params;
-    const { status } = req.body; // Example: "active", "suspended", "banned"
+    const { status, performedById } = req.body; // Example: "active", "suspended", "banned"
     const statusFormatted = status?.toUpperCase();
 
-    const result = await userService.updateBasicUserStatus(id, statusFormatted);
+    const result = await userService.updateBasicUserStatus(
+      id,
+      statusFormatted,
+      performedById
+    );
 
     sendResponse(res, {
       statusCode: httpStatus.OK,

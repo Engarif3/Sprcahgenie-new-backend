@@ -439,7 +439,8 @@ const updateMyProfile = async (user: IAuthUser, req: Request) => {
 // ======================== action on users and admins by super user ======================
 const updateUserStatus = async (
   id: string,
-  status: string
+  status: string,
+  performedById: string
 ): Promise<User | null> => {
   console.log("Updating user status:", { id, status }); // Debugging step
 
@@ -472,6 +473,16 @@ const updateUserStatus = async (
     data: { status: statusFormatted as UserStatus }, // Cast status as UserStatus enum
   });
 
+  await prisma.userChangeLog.create({
+    data: {
+      targetUserId: id,
+      performedById,
+      field: "status",
+      oldValue: existingUser.status,
+      newValue: statusFormatted,
+    },
+  });
+
   return updatedUser;
 };
 
@@ -479,7 +490,8 @@ const updateUserStatus = async (
 
 const updateUserRole = async (
   id: string,
-  role: string
+  role: string,
+  performedById: string
 ): Promise<User | null> => {
   console.log("Updating user status:", { id, role }); // Debugging step
 
@@ -514,6 +526,16 @@ const updateUserRole = async (
     data: { role: roleFormatted as UserRole }, // Cast status as UserStatus enum
   });
 
+  await prisma.userChangeLog.create({
+    data: {
+      targetUserId: id,
+      performedById,
+      field: "role",
+      oldValue: existingUser.role,
+      newValue: roleFormatted,
+    },
+  });
+
   return updatedUser;
 };
 
@@ -521,7 +543,8 @@ const updateUserRole = async (
 
 const updateBasicUserStatus = async (
   id: string,
-  status: string
+  status: string,
+  performedById: string
 ): Promise<User | null> => {
   console.log("Updating user status:", { id, status }); // Debugging step
 
@@ -554,6 +577,16 @@ const updateBasicUserStatus = async (
   const updatedUser = await prisma.user.update({
     where: { id },
     data: { status: statusFormatted as UserStatus }, // Cast status as UserStatus enum
+  });
+
+  await prisma.userChangeLog.create({
+    data: {
+      targetUserId: id,
+      performedById,
+      field: "status",
+      oldValue: existingUser.status,
+      newValue: statusFormatted,
+    },
   });
 
   return updatedUser;

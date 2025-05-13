@@ -7,26 +7,40 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ================================USER================================
 model User {
-  id                 String     @id @default(uuid())
-  email              String     @unique
+  id                 String          @id @default(uuid())
+  email              String          @unique
   password           String
   name               String?
   role               UserRole
-  needPasswordChange Boolean    @default(true)
-  status             UserStatus @default(ACTIVE)
+  needPasswordChange Boolean         @default(true)
+  status             UserStatus      @default(ACTIVE)
   verificationToken  String?
-  createdAt          DateTime   @default(now())
-  updatedAt          DateTime   @updatedAt
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
   admin              Admin?
   basicUser          BasicUser?
-
-  favoriteWords FavoriteWord[] // Many-to-many relation with words
-  words     Word[]   @relation("WordCreator")
+  favoriteWords      FavoriteWord[]
+  logsAsActor        UserChangeLog[] @relation("PerformedByUser")
+  logsAsTarget       UserChangeLog[] @relation("TargetUser")
   wordModifications  WordHistory[]
+  words              Word[]          @relation("WordCreator")
 
   @@map("users")
+}
+
+model UserChangeLog {
+  id            String   @id @default(uuid())
+  targetUserId  String
+  performedById String
+  field         String
+  oldValue      String
+  newValue      String
+  changedAt     DateTime @default(now())
+  performedBy   User     @relation("PerformedByUser", fields: [performedById], references: [id], onDelete: Cascade)
+  targetUser    User     @relation("TargetUser", fields: [targetUserId], references: [id], onDelete: Cascade)
+
+  @@map("user_change_logs")
 }
 
 model Admin {
@@ -38,8 +52,7 @@ model Admin {
   isDeleted     Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-
-  user User @relation(fields: [email], references: [email])
+  user          User     @relation(fields: [email], references: [email])
 
   @@map("admins")
 }
@@ -54,74 +67,64 @@ model BasicUser {
   isDeleted     Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-
-  user User @relation(references: [email], fields: [email])
+  user          User     @relation(fields: [email], references: [email])
 
   @@map("basic_users")
 }
 
-// ================================Favorite Word================================
 model FavoriteWord {
   userId String
   wordId Int
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   word   Word   @relation(fields: [wordId], references: [id], onDelete: Cascade)
 
-  @@id([userId, wordId]) // Composite primary key
+  @@id([userId, wordId])
   @@map("favorite_words")
 }
 
-// ================================Word================================
 model Word {
-  id             Int      @id @default(autoincrement())
-  value          String   @unique
-  meaning        String[] // Mandatory
-  sentences      String[] // Optional
-  levelId        Int?
-  topicId        Int?
-  articleId      Int?
-  partOfSpeechId Int?
-  pluralForm     String? // Only for nouns (optional)
-
-  // level         Level        @relation("WordLevel", fields: [levelId], references: [id], onDelete: Cascade)
-  level        Level?        @relation("WordLevel", fields: [levelId], references: [id], map: "fk_word_level")
-  topic        Topic?        @relation("WordTopic", fields: [topicId], references: [id], map: "fk_word_topic")
-  article      Article?      @relation("WordArticle", fields: [articleId], references: [id], map: "fk_word_article")
-  partOfSpeech PartOfSpeech? @relation("WordPartOfSpeech", fields: [partOfSpeechId], references: [id], map: "fk_word_part_of_speech")
-
-  synonyms  Word[] @relation("SynonymRelation")
-  synonymOf Word[] @relation("SynonymRelation") // Opposite side
-
-  antonyms  Word[] @relation("AntonymRelation")
-  antonymOf Word[] @relation("AntonymRelation") // Opposite side
-
-  similarWords Word[] @relation("SimilarWordRelation")
-  similarTo    Word[] @relation("SimilarWordRelation") // Opposite side
-
-  favoritedBy FavoriteWord[]
-  createdBy      String
-  creator        User     @relation("WordCreator", fields: [createdBy], references: [id], onDelete: Cascade)
-  history        WordHistory[]
-  modifiedFields  String[]
+  id                                Int            @id @default(autoincrement())
+  value                             String         @unique
+  meaning                           String[]
+  sentences                         String[]
+  levelId                           Int?
+  topicId                           Int?
+  articleId                         Int?
+  partOfSpeechId                    Int?
+  pluralForm                        String?
+  modifiedFields                    String[]
+  createdBy                         String
+  favoritedBy                       FavoriteWord[]
+  history                           WordHistory[]
+  article                           Article?       @relation("WordArticle", fields: [articleId], references: [id], map: "fk_word_article")
+  level                             Level?         @relation("WordLevel", fields: [levelId], references: [id], map: "fk_word_level")
+  partOfSpeech                      PartOfSpeech?  @relation("WordPartOfSpeech", fields: [partOfSpeechId], references: [id], map: "fk_word_part_of_speech")
+  topic                             Topic?         @relation("WordTopic", fields: [topicId], references: [id], map: "fk_word_topic")
+  creator                           User           @relation("WordCreator", fields: [createdBy], references: [id], onDelete: Cascade)
+  words_table_AntonymRelation_A     Word[]         @relation("AntonymRelation")
+  words_table_AntonymRelation_B     Word[]         @relation("AntonymRelation")
+  words_table_SimilarWordRelation_A Word[]         @relation("SimilarWordRelation")
+  words_table_SimilarWordRelation_B Word[]         @relation("SimilarWordRelation")
+  words_table_SynonymRelation_A     Word[]         @relation("SynonymRelation")
+  words_table_SynonymRelation_B     Word[]         @relation("SynonymRelation")
 
   @@map("words_table")
 }
 
 model WordHistory {
-  id         Int      @id @default(autoincrement())
-  wordId     Int
-  userId     String
-  value      String?
-  pluralForm  String?
-  meaning    String[]
-  sentences  String[]
-  oldData        Json?
+  id             Int      @id @default(autoincrement())
+  wordId         Int
+  userId         String
+  value          String?
+  meaning        String[]
+  sentences      String[]
+  modifiedAt     DateTime @default(now())
+  modifiedFields String[]
   newData        Json
-  modifiedAt DateTime @default(now())
-  modifiedFields  String[]
-
-  word Word @relation(fields: [wordId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  oldData        Json?
+  pluralForm     String?
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word           Word     @relation(fields: [wordId], references: [id], onDelete: Cascade)
 
   @@map("word_history")
 }
@@ -129,20 +132,20 @@ model WordHistory {
 model Level {
   id            Int            @id @default(autoincrement())
   level         String         @unique
-  words         Word[]         @relation("WordLevel")
+  deletedAt     DateTime?      @db.Timestamptz(6)
   conversations Conversation[]
-  topics        Topic[]        @relation("LevelTopics") 
-  deletedAt     DateTime?      @db.Timestamptz // Use Timestamptz for PostgreSQL
+  topics        Topic[]        @relation("LevelTopics")
+  words         Word[]         @relation("WordLevel")
 
   @@map("levels")
 }
 
 model Topic {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
+  id      Int    @id @default(autoincrement())
+  name    String @unique
   levelId Int
   level   Level  @relation("LevelTopics", fields: [levelId], references: [id], onDelete: Cascade)
-  words Word[] @relation("WordTopic")
+  words   Word[] @relation("WordTopic")
 
   @@map("topics")
 }
@@ -163,40 +166,35 @@ model PartOfSpeech {
   @@map("parts_of_speech")
 }
 
-// ===============================Conversation====================
 model Conversation {
-  id          Int             @id @default(autoincrement())
-  topic       String
-  text        Json            // Store the text as JSON with person-based keys
-  levelId     Int
-  level       Level           @relation(fields: [levelId], references: [id])
+  id      Int    @id @default(autoincrement())
+  topic   String
+  text    Json
+  levelId Int
+  level   Level  @relation(fields: [levelId], references: [id])
 }
 
-// ========================Prefix===============================
 model PrefixType {
   id       Int      @id @default(autoincrement())
-  name     String   @unique // e.g., Separable, Inseparable, Dual
-  prefixes Prefix[] // One-to-many relationship with Prefix
+  name     String   @unique
+  prefixes Prefix[]
 
   @@map("prefix_types")
 }
 
 model Prefix {
-  id                Int        @id @default(autoincrement())
-  prefixName        String   // e.g., Er, Auf
-  prefixWord String  @unique// e.g., kennen, stehen
-  verb Boolean
-  meaning           String[] // Array of meanings for the prefix-word
-  sentences         String[] // Optional array of example sentences
-  prefixTypeId      Int
-  prefixType        PrefixType @relation(fields: [prefixTypeId], references: [id])
-
-  // Note: The `prefixWord` will still be dynamically generated in the application logic
+  id           Int        @id @default(autoincrement())
+  prefixName   String
+  meaning      String[]
+  sentences    String[]
+  prefixTypeId Int
+  prefixWord   String     @unique
+  verb         Boolean
+  prefixType   PrefixType @relation(fields: [prefixTypeId], references: [id])
 
   @@map("prefixes")
 }
 
-// =========================ENUM================================
 enum UserRole {
   SUPER_ADMIN
   ADMIN
