@@ -112,6 +112,11 @@ const deleteLevel = async (levelId: number): Promise<{ message: string }> => {
     data: { deletedAt: new Date() },
   });
 
+  // Perform permanent delete
+  // await prisma.level.delete({
+  //   where: { id: levelId },
+  // });
+
   return { message: "Level soft deleted successfully!" };
 };
 
