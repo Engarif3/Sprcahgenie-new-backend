@@ -30,6 +30,11 @@ router.post(
   }
 );
 
+// ===================================
+// This is for if basic user or admin table is empty
+// ===================================
+router.delete("/delete-any-user/:id", userController.deleteUser);
+
 router.post(
   "/register-basicUser",
   fileUploader.upload.single("file"),

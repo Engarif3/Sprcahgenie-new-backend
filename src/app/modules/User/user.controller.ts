@@ -284,6 +284,20 @@ const updateBasicUserStatus = catchAsync(
   }
 );
 
+// ================================
+const deleteUser = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const result = await userService.deleteUser(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: `User with ID ${id} deleted successfully`,
+    data: result,
+  });
+});
+
 export const userController = {
   createAdmin,
   createBasicUser,
@@ -295,4 +309,5 @@ export const userController = {
   updateUserStatus,
   updateBasicUserStatus,
   updateUserRole,
+  deleteUser,
 };

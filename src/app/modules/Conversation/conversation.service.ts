@@ -6,11 +6,11 @@ import prisma from "../../../shared/prisma";
 const createConversation = async (
   req: Request
 ): Promise<Conversation | { message: string }> => {
-  const { topic, text, levelId } = req.body;
+  const { topic, text, levelId, createdBy } = req.body;
 
   // Validate required fields
-  if (!topic || !text || !levelId) {
-    return { message: "Topic, text, and levelId are required." };
+  if (!topic || !text || !levelId || !createdBy) {
+    return { message: "Topic, text, levelId, and createdBy are required." };
   }
 
   // Check if the level exists
@@ -30,6 +30,7 @@ const createConversation = async (
       topic,
       text, // Save the text as JSON
       levelId,
+      createdBy,
     },
   });
 

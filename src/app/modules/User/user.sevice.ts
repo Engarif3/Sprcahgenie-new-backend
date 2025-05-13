@@ -592,6 +592,46 @@ const updateBasicUserStatus = async (
   return updatedUser;
 };
 
+// ===================================
+// This is for if basic user or admin table is empty
+// ===================================
+
+const deleteUser = async (id: string) => {
+  const user = await prisma.user.findUnique({
+    where: { id },
+    include: {
+      admin: true,
+      basicUser: true,
+    },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  await prisma.$transaction(async (tx) => {
+    // Delete related profile depending on role
+    if (user.role === UserRole.ADMIN && user.admin) {
+      await tx.admin.delete({
+        where: { id: user.admin.id },
+      });
+    }
+
+    if (user.role === UserRole.BASIC_USER && user.basicUser) {
+      await tx.basicUser.delete({
+        where: { id: user.basicUser.id },
+      });
+    }
+
+    // Finally, delete the user
+    await tx.user.delete({
+      where: { id },
+    });
+  });
+
+  return { message: "User deleted successfully" };
+};
+
 export const userService = {
   createAdmin,
   createBasicUser,
@@ -601,6 +641,6 @@ export const userService = {
   updateMyProfile,
   updateUserStatus,
   updateBasicUserStatus,
-
   updateUserRole,
+  deleteUser,
 };

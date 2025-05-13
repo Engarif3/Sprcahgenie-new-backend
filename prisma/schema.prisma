@@ -26,6 +26,8 @@ model User {
   wordModifications  WordHistory[]
   words              Word[]          @relation("WordCreator")
 
+  createdConversations Conversation[] @relation("UserConversations")
+
   @@map("users")
 }
 
@@ -101,12 +103,16 @@ model Word {
   partOfSpeech                      PartOfSpeech?  @relation("WordPartOfSpeech", fields: [partOfSpeechId], references: [id], map: "fk_word_part_of_speech")
   topic                             Topic?         @relation("WordTopic", fields: [topicId], references: [id], map: "fk_word_topic")
   creator                           User           @relation("WordCreator", fields: [createdBy], references: [id], onDelete: Cascade)
-  words_table_AntonymRelation_A     Word[]         @relation("AntonymRelation")
-  words_table_AntonymRelation_B     Word[]         @relation("AntonymRelation")
-  words_table_SimilarWordRelation_A Word[]         @relation("SimilarWordRelation")
-  words_table_SimilarWordRelation_B Word[]         @relation("SimilarWordRelation")
-  words_table_SynonymRelation_A     Word[]         @relation("SynonymRelation")
-  words_table_SynonymRelation_B     Word[]         @relation("SynonymRelation")
+
+
+   synonyms  Word[] @relation("SynonymRelation")
+  synonymOf Word[] @relation("SynonymRelation") // Opposite side
+
+  antonyms  Word[] @relation("AntonymRelation")
+  antonymOf Word[] @relation("AntonymRelation") // Opposite side
+
+  similarWords Word[] @relation("SimilarWordRelation")
+  similarTo    Word[] @relation("SimilarWordRelation") // Opposite side
 
   @@map("words_table")
 }
@@ -172,6 +178,9 @@ model Conversation {
   text    Json
   levelId Int
   level   Level  @relation(fields: [levelId], references: [id])
+
+ createdBy String
+ creator   User    @relation("UserConversations", fields: [createdBy], references: [id], onDelete: Cascade)
 }
 
 model PrefixType {
