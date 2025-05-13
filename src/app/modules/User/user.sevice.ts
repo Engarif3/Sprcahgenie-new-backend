@@ -488,55 +488,151 @@ const updateUserStatus = async (
 
 // ======================update user role ====================
 
+// const updateUserRole = async (
+//   id: string,
+//   role: string,
+//   performedById: string
+// ): Promise<User | null> => {
+//   console.log("Updating user status:", { id, role }); // Debugging step
+
+//   // Check if the user exists in the User table
+//   const existingUser = await prisma.user.findUnique({
+//     where: { id },
+//   });
+
+//   if (!existingUser) {
+//     throw new Error("User not found");
+//   }
+
+//   // Normalize status value to match the enum (uppercase)
+//   const roleFormatted = role?.toUpperCase();
+
+//   // Validate status values
+//   const validRoles = [
+//     UserRole.BASIC_USER,
+//     UserRole.ADMIN,
+//     UserRole.SUPER_ADMIN,
+//   ]; // Enums should be uppercase
+//   if (!validRoles.includes(roleFormatted as UserRole)) {
+//     throw new Error("Invalid role value");
+//   }
+
+//   if (roleFormatted === UserRole.SUPER_ADMIN) {
+//     throw new Error("This action cannot be possible");
+//   }
+//   // Update the user status
+//   const updatedUser = await prisma.user.update({
+//     where: { id },
+//     data: { role: roleFormatted as UserRole }, // Cast status as UserStatus enum
+//   });
+
+//   await prisma.userChangeLog.create({
+//     data: {
+//       targetUserId: id,
+//       performedById,
+//       field: "role",
+//       oldValue: existingUser.role,
+//       newValue: roleFormatted,
+//     },
+//   });
+
+//   return updatedUser;
+// };
+
 const updateUserRole = async (
   id: string,
   role: string,
   performedById: string
 ): Promise<User | null> => {
-  console.log("Updating user status:", { id, role }); // Debugging step
+  console.log("Updating user role:", { id, role });
 
-  // Check if the user exists in the User table
   const existingUser = await prisma.user.findUnique({
     where: { id },
+    include: {
+      admin: true,
+      basicUser: true,
+    },
   });
 
   if (!existingUser) {
     throw new Error("User not found");
   }
 
-  // Normalize status value to match the enum (uppercase)
-  const roleFormatted = role?.toUpperCase();
+  const roleFormatted = role?.toUpperCase() as UserRole;
 
-  // Validate status values
   const validRoles = [
     UserRole.BASIC_USER,
     UserRole.ADMIN,
     UserRole.SUPER_ADMIN,
-  ]; // Enums should be uppercase
-  if (!validRoles.includes(roleFormatted as UserRole)) {
+  ];
+
+  if (!validRoles.includes(roleFormatted)) {
     throw new Error("Invalid role value");
   }
 
   if (roleFormatted === UserRole.SUPER_ADMIN) {
     throw new Error("This action cannot be possible");
   }
-  // Update the user status
-  const updatedUser = await prisma.user.update({
-    where: { id },
-    data: { role: roleFormatted as UserRole }, // Cast status as UserStatus enum
+
+  const result = await prisma.$transaction(async (tx) => {
+    // 1. Delete old profile if role is changing
+    if (existingUser.role === UserRole.BASIC_USER && existingUser.basicUser) {
+      await tx.basicUser.delete({
+        where: { email: existingUser.email },
+      });
+    } else if (existingUser.role === UserRole.ADMIN && existingUser.admin) {
+      await tx.admin.delete({
+        where: { email: existingUser.email },
+      });
+    }
+
+    // 2. Update user role
+    const updatedUser = await tx.user.update({
+      where: { id },
+      data: {
+        role: roleFormatted,
+        updatedAt: new Date(),
+      },
+    });
+
+    // 3. Create new profile based on the new role
+    const defaultData = {
+      email: existingUser.email,
+      name: existingUser.name || "No name",
+      contactNumber: "", // Set sensible defaults or collect from request
+      profilePhoto: null,
+    };
+
+    if (roleFormatted === UserRole.ADMIN) {
+      await tx.admin.create({
+        data: {
+          ...defaultData,
+        },
+      });
+    } else if (roleFormatted === UserRole.BASIC_USER) {
+      await tx.basicUser.create({
+        data: {
+          ...defaultData,
+          address: "", // Add defaults if needed
+        },
+      });
+    }
+
+    // 4. Log the change
+    await tx.userChangeLog.create({
+      data: {
+        targetUserId: id,
+        performedById,
+        field: "role",
+        oldValue: existingUser.role,
+        newValue: roleFormatted,
+      },
+    });
+
+    return updatedUser;
   });
 
-  await prisma.userChangeLog.create({
-    data: {
-      targetUserId: id,
-      performedById,
-      field: "role",
-      oldValue: existingUser.role,
-      newValue: roleFormatted,
-    },
-  });
-
-  return updatedUser;
+  return result;
 };
 
 // ========================action on users by admins  ======================
