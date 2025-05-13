@@ -61,15 +61,17 @@ router.patch(
   }
 );
 
-//set super user middleware
+// updater user status like: blocked, pending
 router.patch(
   "/update-status/:id",
-  auth(UserRole.SUPER_ADMIN),
+  auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
   userController.updateUserStatus
 );
+
+// update user role to admin,user
 router.patch(
   "/update-role/:id",
-  // auth(UserRole.SUPER_ADMIN),
+  auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
   userController.updateUserRole
 );
 
