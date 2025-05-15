@@ -57,7 +57,7 @@ const getAllFromDB = async (
             createdAt: "desc",
           },
     include: {
-      user: { select: { id: true, status: true, role: true } },
+      user: { select: { id: true, name: true, status: true, role: true } },
     },
   });
   const total = await prisma.basicUser.count({

@@ -312,6 +312,7 @@ const getAllFromDB = async (params: any, options: IPaginationOptions) => {
           },
     select: {
       id: true,
+      name: true,
       email: true,
       role: true,
       needPasswordChange: true,
