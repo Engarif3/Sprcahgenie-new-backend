@@ -133,7 +133,8 @@ const deleteFromDB = async (id: string): Promise<BasicUser | null> => {
 
     await tx.user.delete({
       where: {
-        email: deletedBasicUser.email,
+        // email: deletedBasicUser.email,
+        id: deletedBasicUser.userId,
       },
     });
 
@@ -154,7 +155,8 @@ const softDelete = async (id: string): Promise<BasicUser | null> => {
 
     await transactionClient.user.update({
       where: {
-        email: deletedBasicUser.email,
+        // email: deletedBasicUser.email,
+        id: deletedBasicUser.userId,
       },
       data: {
         status: UserStatus.DELETED,

@@ -375,19 +375,22 @@ const getMyProfile = async (user: IAuthUser) => {
   if (userInfo.role === UserRole.SUPER_ADMIN) {
     profileInfo = await prisma.admin.findUnique({
       where: {
-        email: userInfo.email,
+        // email: userInfo.email,
+        userId: userInfo.id,
       },
     });
   } else if (userInfo.role === UserRole.ADMIN) {
     profileInfo = await prisma.admin.findUnique({
       where: {
-        email: userInfo.email,
+        // email: userInfo.email,
+        userId: userInfo.id,
       },
     });
   } else if (userInfo.role === UserRole.BASIC_USER) {
     profileInfo = await prisma.basicUser.findUnique({
       where: {
-        email: userInfo.email,
+        // email: userInfo.email,
+        userId: userInfo.id,
       },
     });
   }
@@ -414,21 +417,24 @@ const updateMyProfile = async (user: IAuthUser, req: Request) => {
   if (userInfo.role === UserRole.SUPER_ADMIN) {
     profileInfo = await prisma.admin.update({
       where: {
-        email: userInfo.email,
+        // email: userInfo.email,
+        userId: userInfo.id,
       },
       data: req.body,
     });
   } else if (userInfo.role === UserRole.ADMIN) {
     profileInfo = await prisma.admin.update({
       where: {
-        email: userInfo.email,
+        // email: userInfo.email,
+        userId: userInfo.id,
       },
       data: req.body,
     });
   } else if (userInfo.role === UserRole.BASIC_USER) {
     profileInfo = await prisma.basicUser.update({
       where: {
-        email: userInfo.email,
+        // email: userInfo.email,
+        userId: userInfo.id,
       },
       data: req.body,
     });
@@ -579,11 +585,13 @@ const updateUserRole = async (
     // 1. Delete old profile if role is changing
     if (existingUser.role === UserRole.BASIC_USER && existingUser.basicUser) {
       await tx.basicUser.delete({
-        where: { email: existingUser.email },
+        // where: { email: existingUser.email },
+        where: { userId: id },
       });
     } else if (existingUser.role === UserRole.ADMIN && existingUser.admin) {
       await tx.admin.delete({
-        where: { email: existingUser.email },
+        // where: { email: existingUser.email },
+        where: { userId: id },
       });
     }
 
@@ -598,7 +606,8 @@ const updateUserRole = async (
 
     // 3. Create new profile based on the new role
     const defaultData = {
-      email: existingUser.email,
+      // email: existingUser.email,
+      userId: id,
       name: existingUser.name || "No name",
       contactNumber: "", // Set sensible defaults or collect from request
       profilePhoto: null,

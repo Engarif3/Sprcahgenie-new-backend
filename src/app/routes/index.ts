@@ -10,7 +10,11 @@ const router = express.Router();
 
 // =======================
 
-import { createWord, importWordsFromJson } from "../../prisma/scripts/create";
+import {
+  createWord,
+  importTopicsWithLevels,
+  importWordsFromJson,
+} from "../../prisma/scripts/create";
 import {
   deleteAllWords,
   deleteLevel,
@@ -110,6 +114,9 @@ router.post("/part-of-speech", upDatePartsOfSpeech);
 // Endpoint to insert data into the Word table
 router.post("/words", createWord);
 router.put("/update-word/:id", updateWord);
+
+//inser topics from json to db
+router.post("/import-topics", importTopicsWithLevels);
 
 //insert data to db
 router.post("/insert", importWordsFromJson);

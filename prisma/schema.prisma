@@ -28,7 +28,13 @@ model User {
 
   createdConversations Conversation[] @relation("UserConversations")
 
+    // New relationships
+  subscription       Subscription?
+  notifications      Notification[]
+
   @@map("users")
+  @@index([status])
+  @@index([role])
 }
 
 model UserChangeLog {
@@ -43,46 +49,45 @@ model UserChangeLog {
   targetUser    User     @relation("TargetUser", fields: [targetUserId], references: [id], onDelete: Cascade)
 
   @@map("user_change_logs")
+  @@index([targetUserId])
+  @@index([performedById])
 }
 
 model Admin {
   id            String   @id @default(uuid())
   name          String
-  email         String   @unique
-  profilePhoto  String?
+  // email         String   @unique
   contactNumber String
+  profilePhoto  String?
   isDeleted     Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-  user          User     @relation(fields: [email], references: [email])
+  // user          User     @relation(fields: [email], references: [email])
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id])
 
   @@map("admins")
 }
 
 model BasicUser {
-  id            String   @id @unique @default(uuid())
-  email         String   @unique
+  id            String   @id @default(uuid())
+  // id            String   @id @unique @default(uuid())
+  // email         String   @unique
   name          String
-  profilePhoto  String?
   contactNumber String?
   address       String?
+  profilePhoto  String?
   isDeleted     Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-  user          User     @relation(fields: [email], references: [email])
+  // user          User     @relation(fields: [email], references: [email])
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id])
 
   @@map("basic_users")
 }
 
-model FavoriteWord {
-  userId String
-  wordId Int
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  word   Word   @relation(fields: [wordId], references: [id], onDelete: Cascade)
 
-  @@id([userId, wordId])
-  @@map("favorite_words")
-}
 
 model Word {
   id                                Int            @id @default(autoincrement())
@@ -95,13 +100,13 @@ model Word {
   partOfSpeechId                    Int?
   pluralForm                        String?
   modifiedFields                    String[]
-  createdBy                         String
   favoritedBy                       FavoriteWord[]
   history                           WordHistory[]
   article                           Article?       @relation("WordArticle", fields: [articleId], references: [id], map: "fk_word_article")
   level                             Level?         @relation("WordLevel", fields: [levelId], references: [id], map: "fk_word_level")
   partOfSpeech                      PartOfSpeech?  @relation("WordPartOfSpeech", fields: [partOfSpeechId], references: [id], map: "fk_word_part_of_speech")
   topic                             Topic?         @relation("WordTopic", fields: [topicId], references: [id], map: "fk_word_topic")
+  createdBy                         String
   creator                           User           @relation("WordCreator", fields: [createdBy], references: [id], onDelete: Cascade)
 
 
@@ -115,6 +120,19 @@ model Word {
   similarTo    Word[] @relation("SimilarWordRelation") // Opposite side
 
   @@map("words_table")
+  @@index([levelId])
+  @@index([topicId])
+
+}
+
+model FavoriteWord {
+  userId String
+  wordId Int
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word   Word   @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@id([userId, wordId])
+  @@map("favorite_words")
 }
 
 model WordHistory {
@@ -177,7 +195,8 @@ model Conversation {
   topic   String
   text    Json
   levelId Int
-  level   Level  @relation(fields: [levelId], references: [id])
+  // level   Level  @relation(fields: [levelId], references: [id])
+  level     Level    @relation(fields: [levelId], references: [id], onDelete: Cascade)
 
  createdBy String
  creator   User    @relation("UserConversations", fields: [createdBy], references: [id], onDelete: Cascade)
@@ -204,6 +223,50 @@ model Prefix {
   @@map("prefixes")
 }
 
+
+//subscription
+model Subscription {
+  id               String           @id @default(uuid())
+  userId           String           @unique
+  plan             SubscriptionPlan @default(FREE)
+  startDate        DateTime         @default(now())
+  endDate          DateTime?
+  isActive         Boolean          @default(false)
+  paymentStatus    PaymentStatus    @default(NOT_PAID)
+  paymentMethod    String?
+  transactionId    String?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("subscriptions")
+
+  // 👇 Add index here
+  @@index([paymentStatus])
+}
+
+
+
+
+// notification
+
+model Notification {
+  id         String   @id @default(uuid())
+  userId     String
+  title      String
+  message    String
+  isRead     Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+
+//Enums
+
 enum UserRole {
   SUPER_ADMIN
   ADMIN
@@ -215,4 +278,19 @@ enum UserStatus {
   BLOCKED
   DELETED
   PENDING
+}
+
+
+enum PaymentStatus {
+  NOT_PAID
+  PENDING
+  PAID
+  FAILED
+}
+
+enum SubscriptionPlan {
+  FREE
+  TRIAL
+  PREMIUM
+  PRO
 }

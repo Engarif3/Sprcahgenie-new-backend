@@ -19,6 +19,8 @@ const seedSuperAdmin = async () => {
 
     const superAdminData = await prisma.user.create({
       data: {
+        id: "d9a98059-2f81-4cfa-a9a3-04545a677972",
+        name: "Super Admin",
         email: "arif.aust.eng@gmail.com",
         password: hashedPassword,
         role: UserRole.SUPER_ADMIN,
