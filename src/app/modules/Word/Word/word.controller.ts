@@ -131,6 +131,8 @@ const updateWordController = catchAsync(async (req: Request, res: Response) => {
 const deleteWordController = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const parsedId = parseInt(id, 10);
+  // const userId = req.body?.userId;
+  const userId = (req as any).user?.id;
 
   if (isNaN(parsedId)) {
     return sendResponse(res, {
@@ -141,23 +143,40 @@ const deleteWordController = catchAsync(async (req: Request, res: Response) => {
     });
   }
 
-  const result = await wordService.deleteWordFromDB(parsedId);
+  const result = await wordService.deleteWordFromDB(parsedId, userId);
 
-  if (!result.deletedWord) {
-    return sendResponse(res, {
+  // if (!result.deletedWord) {
+  //   return sendResponse(res, {
+  //     statusCode: httpStatus.NOT_FOUND,
+  //     success: false,
+  //     message: result.message,
+  //     data: null,
+  //   });
+  // }
+
+  // sendResponse(res, {
+  //   statusCode: httpStatus.OK,
+  //   success: true,
+  //   message: result.message,
+  //   data: result.deletedWord,
+  // });
+  if ("deletedWord" in result && result.deletedWord) {
+    // success case
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: result.message,
+      data: result.deletedWord,
+    });
+  } else {
+    // error case
+    sendResponse(res, {
       statusCode: httpStatus.NOT_FOUND,
       success: false,
-      message: result.message,
+      message: result.message || "Word not found",
       data: null,
     });
   }
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: result.message,
-    data: result.deletedWord,
-  });
 });
 
 const deleteAllWordsController = catchAsync(

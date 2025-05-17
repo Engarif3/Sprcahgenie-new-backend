@@ -605,22 +605,54 @@ export const updateWordInDB = async (
   return updatedWord;
 };
 
-export const deleteWordFromDB = async (
-  wordId: number
-): Promise<{ message: string; deletedWord?: Word }> => {
-  const existingWord = await prisma.word.findUnique({
+// export const deleteWordFromDB = async (
+//   wordId: number
+// ): Promise<{ message: string; deletedWord?: Word }> => {
+//   const existingWord = await prisma.word.findUnique({
+//     where: { id: wordId },
+//   });
+
+//   if (!existingWord) {
+//     return { message: "Word not found" };
+//   }
+
+//   const deletedWord = await prisma.word.delete({
+//     where: { id: wordId },
+//   });
+
+//   return { message: "Word deleted successfully", deletedWord };
+// };
+
+export const deleteWordFromDB = async (wordId: number, userId: string) => {
+  const word = await prisma.word.findUnique({
     where: { id: wordId },
   });
 
-  if (!existingWord) {
+  if (!word) {
     return { message: "Word not found" };
   }
 
-  const deletedWord = await prisma.word.delete({
-    where: { id: wordId },
+  // Log the deletion in wordHistory
+  await prisma.wordHistory.create({
+    data: {
+      wordId: word.id,
+      userId: userId, // the user performing the deletion
+      value: word.value,
+      meaning: word.meaning,
+      sentences: word.sentences,
+      pluralForm: word.pluralForm,
+      modifiedFields: ["DELETED"],
+      oldData: word as any, // Cast for JSON type field
+      newData: {}, // Empty on deletion
+    },
   });
 
-  return { message: "Word deleted successfully", deletedWord };
+  // Delete the word
+  await prisma.word.delete({
+    where: { id: word.id },
+  });
+
+  return { message: `Word '${word.value}' deleted successfully.` };
 };
 
 export const deleteAllWordsFromDB = async (): Promise<{ message: string }> => {
