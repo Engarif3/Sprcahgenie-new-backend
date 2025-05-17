@@ -624,17 +624,39 @@ export const updateWordInDB = async (
 // };
 
 export const deleteWordFromDB = async (wordId: number, userId: string) => {
-  const userExists = await prisma.user.findUnique({ where: { id: userId } });
+  // 1. Verify user exists
+  const userExists = await prisma.user.findUnique({
+    where: { id: userId },
+  });
   if (!userExists) {
     return { message: "User not found" };
   }
 
-  const word = await prisma.word.findUnique({ where: { id: wordId } });
+  // 2. Fetch word
+  const word = await prisma.word.findUnique({
+    where: { id: wordId },
+  });
 
   if (!word) {
     return { message: "Word not found" };
   }
 
+  // 3. Prepare serializable oldData for JSON field
+  const wordDataForHistory = {
+    id: word.id,
+    value: word.value,
+    meaning: word.meaning,
+    sentences: word.sentences,
+    pluralForm: word.pluralForm,
+    levelId: word.levelId,
+    topicId: word.topicId,
+    articleId: word.articleId,
+    partOfSpeechId: word.partOfSpeechId,
+    modifiedFields: word.modifiedFields,
+    createdBy: word.createdBy,
+  };
+
+  // 4. Use transaction to create history and delete word atomically
   try {
     await prisma.$transaction(async (tx) => {
       await tx.wordHistory.create({
@@ -646,7 +668,7 @@ export const deleteWordFromDB = async (wordId: number, userId: string) => {
           sentences: word.sentences,
           pluralForm: word.pluralForm,
           modifiedFields: ["DELETED"],
-          oldData: word as any,
+          oldData: wordDataForHistory,
           newData: {},
         },
       });
@@ -661,7 +683,7 @@ export const deleteWordFromDB = async (wordId: number, userId: string) => {
       deletedWord: word,
     };
   } catch (error) {
-    console.error("Failed to delete word and log history:", error);
+    console.error("Error during deleteWordFromDB:", error);
     return {
       message: "Failed to delete word",
       deletedWord: null,
