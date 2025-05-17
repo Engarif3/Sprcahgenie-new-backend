@@ -624,36 +624,49 @@ export const updateWordInDB = async (
 // };
 
 export const deleteWordFromDB = async (wordId: number, userId: string) => {
-  const word = await prisma.word.findUnique({
-    where: { id: wordId },
-  });
+  const userExists = await prisma.user.findUnique({ where: { id: userId } });
+  if (!userExists) {
+    return { message: "User not found" };
+  }
+
+  const word = await prisma.word.findUnique({ where: { id: wordId } });
 
   if (!word) {
     return { message: "Word not found" };
   }
 
-  await prisma.wordHistory.create({
-    data: {
-      wordId: word.id,
-      userId: userId,
-      value: word.value,
-      meaning: word.meaning,
-      sentences: word.sentences,
-      pluralForm: word.pluralForm,
-      modifiedFields: ["DELETED"],
-      oldData: word as any,
-      newData: {},
-    },
-  });
+  try {
+    await prisma.$transaction(async (tx) => {
+      await tx.wordHistory.create({
+        data: {
+          wordId: word.id,
+          userId: userId,
+          value: word.value,
+          meaning: word.meaning,
+          sentences: word.sentences,
+          pluralForm: word.pluralForm,
+          modifiedFields: ["DELETED"],
+          oldData: word as any,
+          newData: {},
+        },
+      });
 
-  await prisma.word.delete({
-    where: { id: word.id },
-  });
+      await tx.word.delete({
+        where: { id: word.id },
+      });
+    });
 
-  return {
-    message: `Word '${word.value}' deleted successfully.`,
-    deletedWord: word,
-  };
+    return {
+      message: `Word '${word.value}' deleted successfully.`,
+      deletedWord: word,
+    };
+  } catch (error) {
+    console.error("Failed to delete word and log history:", error);
+    return {
+      message: "Failed to delete word",
+      deletedWord: null,
+    };
+  }
 };
 
 export const deleteAllWordsFromDB = async (): Promise<{ message: string }> => {
