@@ -449,8 +449,6 @@ const updateUserStatus = async (
   status: string,
   performedById: string
 ): Promise<User | null> => {
-  console.log("Updating user status:", { id, status }); // Debugging step
-
   // Check if the user exists in the User table
   const existingUser = await prisma.user.findUnique({
     where: { id },
@@ -551,8 +549,6 @@ const updateUserRole = async (
   role: string,
   performedById: string
 ): Promise<User | null> => {
-  console.log("Updating user role:", { id, role });
-
   const existingUser = await prisma.user.findUnique({
     where: { id },
     include: {
@@ -652,8 +648,6 @@ const updateBasicUserStatus = async (
   status: string,
   performedById: string
 ): Promise<User | null> => {
-  console.log("Updating user status:", { id, status }); // Debugging step
-
   // Check if the user exists in the User table
   const existingUser = await prisma.user.findUnique({
     where: { id: id, role: UserRole.BASIC_USER },

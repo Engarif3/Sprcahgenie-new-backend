@@ -623,25 +623,77 @@ export const updateWordInDB = async (
 //   return { message: "Word deleted successfully", deletedWord };
 // };
 
+// export const deleteWordFromDB = async (wordId: number, userId: string) => {
+//   // 1. Verify user exists
+//   const userExists = await prisma.user.findUnique({
+//     where: { id: userId },
+//   });
+//   if (!userExists) {
+//     return { message: "User not found" };
+//   }
+
+//   // 2. Fetch word
+//   const word = await prisma.word.findUnique({
+//     where: { id: wordId },
+//   });
+//   if (!word) {
+//     return { message: "Word not found" };
+//   }
+
+//   // 3. Prepare oldData for JSON
+//   const wordDataForHistory = {
+//     id: word.id,
+//     value: word.value,
+//     meaning: word.meaning,
+//     sentences: word.sentences,
+//     pluralForm: word.pluralForm,
+//     levelId: word.levelId,
+//     topicId: word.topicId,
+//     articleId: word.articleId,
+//     partOfSpeechId: word.partOfSpeechId,
+//     modifiedFields: word.modifiedFields,
+//     createdBy: word.createdBy,
+//   };
+
+//   // 4. Use transaction
+//   try {
+//     await prisma.$transaction(async (tx) => {
+//       await tx.wordHistory.create({
+//         data: {
+//           wordId: word.id,
+//           userId: userId,
+//           modifiedFields: ["DELETED"],
+//           oldData: wordDataForHistory,
+//           newData: {},
+//           modifiedAt: new Date(),
+//         },
+//       });
+
+//       await tx.word.delete({
+//         where: { id: word.id },
+//       });
+//     });
+
+//     return {
+//       message: `Word '${word.value}' deleted successfully.`,
+//       deletedWord: word,
+//     };
+//   } catch (error) {
+//     console.error("Error during deleteWordFromDB:", error);
+//     return {
+//       message: "Failed to delete word",
+//       deletedWord: null,
+//     };
+//   }
+// };
+
 export const deleteWordFromDB = async (wordId: number, userId: string) => {
-  // 1. Verify user exists
-  const userExists = await prisma.user.findUnique({
-    where: { id: userId },
-  });
-  if (!userExists) {
-    return { message: "User not found" };
-  }
+  const userExists = await prisma.user.findUnique({ where: { id: userId } });
+  if (!userExists) return { message: "User not found" };
 
-  // 2. Fetch word
-  const word = await prisma.word.findUnique({
-    where: { id: wordId },
-  });
+  const word = await prisma.word.findUnique({ where: { id: wordId } });
+  if (!word) return { message: "Word not found" };
 
-  if (!word) {
-    return { message: "Word not found" };
-  }
-
-  // 3. Prepare serializable oldData for JSON field
   const wordDataForHistory = {
     id: word.id,
     value: word.value,
@@ -656,26 +708,22 @@ export const deleteWordFromDB = async (wordId: number, userId: string) => {
     createdBy: word.createdBy,
   };
 
-  // 4. Use transaction to create history and delete word atomically
   try {
     await prisma.$transaction(async (tx) => {
-      await tx.wordHistory.create({
+      const history = await tx.wordHistory.create({
         data: {
           wordId: word.id,
-          userId: userId,
-          value: word.value,
-          meaning: word.meaning,
-          sentences: word.sentences,
-          pluralForm: word.pluralForm,
+          userId,
           modifiedFields: ["DELETED"],
           oldData: wordDataForHistory,
           newData: {},
         },
       });
+      // console.log("wordHistory insert result:", history);
 
-      await tx.word.delete({
-        where: { id: word.id },
-      });
+      // console.log("Deleting word...");
+      const deleted = await tx.word.delete({ where: { id: word.id } });
+      // console.log("Deleted word:", deleted);
     });
 
     return {
@@ -683,11 +731,8 @@ export const deleteWordFromDB = async (wordId: number, userId: string) => {
       deletedWord: word,
     };
   } catch (error) {
-    console.error("Error during deleteWordFromDB:", error);
-    return {
-      message: "Failed to delete word",
-      deletedWord: null,
-    };
+    console.error("Transaction error:", error);
+    return { message: "Failed to delete word", deletedWord: null };
   }
 };
 
