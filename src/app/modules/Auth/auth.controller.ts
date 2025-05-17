@@ -38,7 +38,8 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
 
   // Set access token in HTTP-only cookie
   res.cookie("accessToken", accessToken, {
-    secure: config.env === "production", // send only over HTTPS in production
+    // secure: config.env === "production", // send only over HTTPS in production
+    secure: false, // send only over HTTPS in production
     httpOnly: true, // inaccessible via JavaScript
     sameSite: "strict", // prevents CSRF
     maxAge: 15 * 60 * 1000, // 15 minutes (or match your JWT expiry)
