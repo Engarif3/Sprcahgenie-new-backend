@@ -57,6 +57,25 @@ const loginUser = async (payload: { email: string; password: string }) => {
   };
 };
 
+const getCurrentUser = async (userId: string) => {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      needPasswordChange: true,
+    },
+  });
+
+  if (!user) {
+    throw new Error("User not found!");
+  }
+
+  return user;
+};
+
 const refreshToken = async (token: string) => {
   let decodedData;
   try {
@@ -242,6 +261,7 @@ const verifyEmail = async (token: string) => {
 
 export const AuthServices = {
   loginUser,
+  getCurrentUser,
   refreshToken,
   changePassword,
   forgotPassword,
