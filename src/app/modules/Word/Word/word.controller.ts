@@ -133,8 +133,6 @@ const deleteWordController = catchAsync(async (req: Request, res: Response) => {
   const parsedId = parseInt(id, 10);
   const userId = req.headers["userid"] as string | undefined;
 
-  // const userId = (req as any).user?.id;
-
   if (!userId) {
     return sendResponse(res, {
       statusCode: httpStatus.UNAUTHORIZED,

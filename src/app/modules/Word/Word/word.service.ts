@@ -632,27 +632,28 @@ export const deleteWordFromDB = async (wordId: number, userId: string) => {
     return { message: "Word not found" };
   }
 
-  // Log the deletion in wordHistory
   await prisma.wordHistory.create({
     data: {
       wordId: word.id,
-      userId: userId, // the user performing the deletion
+      userId: userId,
       value: word.value,
       meaning: word.meaning,
       sentences: word.sentences,
       pluralForm: word.pluralForm,
       modifiedFields: ["DELETED"],
-      oldData: word as any, // Cast for JSON type field
-      newData: {}, // Empty on deletion
+      oldData: word as any,
+      newData: {},
     },
   });
 
-  // Delete the word
   await prisma.word.delete({
     where: { id: word.id },
   });
 
-  return { message: `Word '${word.value}' deleted successfully.` };
+  return {
+    message: `Word '${word.value}' deleted successfully.`,
+    deletedWord: word,
+  };
 };
 
 export const deleteAllWordsFromDB = async (): Promise<{ message: string }> => {
