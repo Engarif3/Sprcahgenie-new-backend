@@ -131,8 +131,18 @@ const updateWordController = catchAsync(async (req: Request, res: Response) => {
 const deleteWordController = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const parsedId = parseInt(id, 10);
-  // const userId = req.body?.userId;
-  const userId = (req as any).user?.id;
+  const userId = req.headers["userid"] as string | undefined;
+
+  // const userId = (req as any).user?.id;
+
+  if (!userId) {
+    return sendResponse(res, {
+      statusCode: httpStatus.UNAUTHORIZED,
+      success: false,
+      message: "User not authenticated",
+      data: null,
+    });
+  }
 
   if (isNaN(parsedId)) {
     return sendResponse(res, {
