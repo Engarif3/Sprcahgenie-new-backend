@@ -9,75 +9,26 @@ import config from "../../../config";
 import { Secret } from "jsonwebtoken";
 import emailSender from "./emailSender";
 
-// const loginUser = catchAsync(async (req: Request, res: Response) => {
-//   const result = await AuthServices.loginUser(req.body);
-//   console.log(result);
-//   const { refreshToken } = result;
-
-//   res.cookie("refreshToken", refreshToken, {
-//     secure: false,
-//     httpOnly: true,
-//   });
-
-//   sendResponse(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: "Logged in successfully!",
-//     data: {
-//       accessToken: result.accessToken,
-//       needPasswordChange: result.needPasswordChange,
-//     },
-//   });
-// });
-
 const loginUser = catchAsync(async (req: Request, res: Response) => {
-  const { ...loginData } = req.body;
-  const result = await AuthServices.loginUser(loginData);
+  const result = await AuthServices.loginUser(req.body);
+  console.log(result);
+  const { refreshToken } = result;
 
-  const { accessToken, refreshToken, needPasswordChange } = result;
-
-  // Set access token in HTTP-only cookie
-  res.cookie("accessToken", accessToken, {
-    // secure: config.env === "production", // send only over HTTPS in production
-    secure: false, // send only over HTTPS in production
-    httpOnly: true, // inaccessible via JavaScript
-    sameSite: "strict", // prevents CSRF
-    maxAge: 15 * 60 * 1000, // 15 minutes (or match your JWT expiry)
-  });
-
-  // Set refresh token in HTTP-only cookie
   res.cookie("refreshToken", refreshToken, {
-    secure: config.env === "production",
+    secure: false,
     httpOnly: true,
-    sameSite: "strict",
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days (or match refresh token expiry)
   });
 
-  // Send response (without accessToken if you want to hide it from frontend)
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: "Logged in successfully!",
     data: {
-      needPasswordChange,
+      accessToken: result.accessToken,
+      needPasswordChange: result.needPasswordChange,
     },
   });
 });
-
-const getCurrentUser = catchAsync(
-  async (req: Request & { user?: any }, res: Response) => {
-    const userId = req.user?.id;
-
-    const result = await AuthServices.getCurrentUser(userId);
-
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: "Current user fetched successfully!",
-      data: result,
-    });
-  }
-);
 
 const refreshToken = catchAsync(async (req: Request, res: Response) => {
   const { refreshToken } = req.cookies;
@@ -207,7 +158,6 @@ const resendVerificationEmail = async (req: Request, res: Response) => {
 
 export const AuthController = {
   loginUser,
-  getCurrentUser,
   refreshToken,
   changePassword,
   forgotPassword,

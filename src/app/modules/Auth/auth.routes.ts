@@ -7,13 +7,6 @@ const router = express.Router();
 
 router.post("/login", AuthController.loginUser);
 
-// to get user info from access token
-router.get(
-  "/my-info",
-  auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.BASIC_USER),
-  AuthController.getCurrentUser
-);
-
 router.post("/refresh-token", AuthController.refreshToken);
 
 router.post(
