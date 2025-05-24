@@ -148,6 +148,9 @@ export const getFavoriteWords = async (req: Request, res: Response) => {
             level: true, // Include the level relation
             topic: true, // Include topic if needed
             article: true, // Include article if needed
+            synonyms: true,
+            antonyms: true,
+            similarWords: true,
           },
         },
       },
@@ -174,6 +177,9 @@ export const getFavoriteWords = async (req: Request, res: Response) => {
       level: fav.word.level,
       topic: fav.word.topic,
       article: fav.word.article,
+      synonyms: fav.word.synonyms,
+      antonyms: fav.word.antonyms,
+      similarWords: fav.word.similarWords,
     }));
 
     return res.status(200).json({
