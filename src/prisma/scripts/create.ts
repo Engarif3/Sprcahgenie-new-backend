@@ -456,33 +456,58 @@ export const importTopicsWithLevels = async (req: any, res: any) => {
 
     let topicsCreated = 0;
     let topicsSkipped = 0;
+    // ============================================================
+    // this will not override topics name
+    // for (const topic of topics) {
+    //   try {
+    //     const existingTopic = await prisma.topic.findUnique({
+    //       where: { id: topic.id },
+    //     });
 
+    //     if (existingTopic) {
+    //       console.log(`Topic exists: ${topic.name} (ID: ${topic.id})`);
+    //       topicsSkipped++;
+    //       continue;
+    //     }
+
+    //     await prisma.topic.create({
+    //       data: {
+    //         id: topic.id,
+    //         name: topic.name,
+    //         levelId: topic.levelId,
+    //       },
+    //     });
+    //     console.log(`Created topic: ${topic.name} (ID: ${topic.id})`);
+    //     topicsCreated++;
+    //   } catch (error) {
+    //     console.error(`Failed to process topic: ${topic.name}`, error);
+    //   }
+    // }
+    // ============================================================
+
+    // this will override existing topics names
     for (const topic of topics) {
       try {
-        const existingTopic = await prisma.topic.findUnique({
+        await prisma.topic.upsert({
           where: { id: topic.id },
-        });
-
-        if (existingTopic) {
-          console.log(`Topic exists: ${topic.name} (ID: ${topic.id})`);
-          topicsSkipped++;
-          continue;
-        }
-
-        await prisma.topic.create({
-          data: {
+          update: {
+            name: topic.name,
+            levelId: topic.levelId,
+          },
+          create: {
             id: topic.id,
             name: topic.name,
             levelId: topic.levelId,
           },
         });
-        console.log(`Created topic: ${topic.name} (ID: ${topic.id})`);
-        topicsCreated++;
+        console.log(`Upserted topic: ${topic.name} (ID: ${topic.id})`);
+        topicsCreated++; // You can rename this to topicsUpserted if you'd like
       } catch (error) {
         console.error(`Failed to process topic: ${topic.name}`, error);
       }
     }
 
+    // ============================================================
     // 4. Reset sequences
     await prisma.$executeRaw`SELECT setval('topics_id_seq', (SELECT MAX(id) FROM topics));`;
     await prisma.$executeRaw`SELECT setval('articles_id_seq', (SELECT MAX(id) FROM articles));`;
