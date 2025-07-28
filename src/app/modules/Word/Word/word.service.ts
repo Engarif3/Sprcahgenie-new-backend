@@ -131,6 +131,8 @@ const handleRelations = async (
         ? "synonyms"
         : relation === "antonyms"
         ? "antonyms"
+        : relation === "similarWords"
+        ? "similarWords"
         : null;
     if (reverseRelation) {
       await prisma.word.update({
